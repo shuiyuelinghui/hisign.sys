@@ -1,0 +1,23 @@
+{
+  "name": "library",
+  "version": "0.0.1",
+  "authors": [
+    "meng.wang <nasawong@gmail.com>"
+  ],
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "datatables.net-fixedcolumns-dt": "~3.2.2",
+    "datatables.net-dt": "~1.10.12"
+  }
+}
