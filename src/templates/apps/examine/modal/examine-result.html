@@ -1,0 +1,40 @@
+<div
+        class="panel popup-basic panel-modal common-modal panel-modal hideBtn"
+        id="result_modal"
+        >
+    <div class="panel-heading">
+        <span class="panel-title">检验鉴定结果</span>
+    </div>
+    <div class="panel-body" style="border: none">
+        <div class="row ">
+            <div class="col-md-2 text-center">
+                <i class="fa fa-check-circle text-success fs70"></i>
+            </div>
+            <div class="col-md-10 mt5 text-left ">
+                <p><span class="text-dark fs20">恭喜您, 提交成功!</span></p>
+            </div>
+        </div>
+
+        <div class="row" ng-if="!examine.hideTime">
+            <div class="col-md-10 col-md-offset-2 text-left mt5">
+                <p>尊敬的用户,系统将在 <span style="color: #f00" class="fs16" ng-bind="examine.counter"> </span> 秒后自动跳转回 [<a ng-click="examine.commonService.skipUrl(examine.resultId)" href="#"> 个人待办事项一览 </a>] 页面</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-2 text-left mt5">
+                <p>您也可以点击下面的链接, 跳转到相应页面:</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-2 text-left mt10">
+                <!--<p class="col-sm-4"><a ui-sref="app.task.todo.personal({pageId:'ap1060'})" ng-click="examine.closePopup()">个人待办事项一览</a></p>-->
+                <p class="col-sm-4"><a  ng-click="examine.commonService.skipUrl(examine.resultId)" href="#">个人待办事项一览</a></p>
+                <p class="col-sm-4"><a ui-sref="app.task.done.personal" ng-click="examine.closePopup()">个人已办事项一览</a></p>
+                <p class="col-sm-4"><a class="cursor" href="#" ng-click="examine.doPrint(examine.commonService.docType.bookInspection)">打印检验记录</a></p>
+            </div>
+        </div>
+    </div>
+
+</div>

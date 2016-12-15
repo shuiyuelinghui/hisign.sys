@@ -1,0 +1,12 @@
+<ul class="list-unstyled" ng-cloak>
+    <li><label>案（事）件名称：</label>{{docConfirm.submissionData.caseName}}</li>
+    <li><label>文书编号：</label>{{docConfirm.submissionData.bookCodes}}</li>
+    <li><label>专业：</label>{{docConfirm.submissionData.sectionName}}</li>
+    <li><label>鉴定类别：</label>{{docConfirm.submissionData.identifyCategoryName}}</li>
+    <li><label>要求完成日期：</label>{{docConfirm.submissionData.agreedDate | date: 'yyyy-MM-dd'}}</li>
+    <li><label>检验人：</label>{{docConfirm.submissionData.jyjdrName}}</li>
+    <li><label>拟稿人：</label>{{docConfirm.submissionData.wsngrName}}</li>
+    <li class="mt20">
+        <label>确认提交吗？</label>
+    </li>
+</ul>

@@ -1,0 +1,511 @@
+<div class="ui-approve">
+    <div class="admin-form theme-primary">
+        <div class="approve-content" >
+            <form class="form-horizontal" name="approveForm" id="slideUpAnimate" novalidate>
+                <div class="form-content"  >
+                    <!--if 文书拟稿 || 文书相关 -->
+                    <div class="form-group" ng-if="(approve.resultIndex.index == 0 && approve.resultIndex.nodeType == 3) || approve.resultIndex.nodeType == 4">
+                        <label class="col-sm-2 control-label">是否认可项目：</label>
+                        <div class="col-sm-10">
+                            <div class="option-group field">
+                                <label class="option option-primary col-sm-2">
+                                    <input type="radio"
+                                           name="agree"
+                                           value="1"
+                                           ng-init="approve.formData.cnasFlag= '1'"
+                                           ng-model="approve.formData.cnasFlag"/>
+                                    <span class="radio"></span>是
+                                </label>
+                                <label class="option option-primary col-sm-2">
+                                    <input type="radio"
+                                           name="agree"
+                                           value="2"
+                                           ng-model="approve.formData.cnasFlag"/>
+                                    <span class="radio"></span>否
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--if 审批 ：审批 -->
+                    <div class="form-group" ng-if="approve.resultIndex.index == 1">
+                        <label class="col-sm-2 control-label">{{approve.formDictionary.result}}</label>
+                        <div class="col-sm-10">
+                            <div class="option-group field">
+                                <label class="option option-primary fl" style="min-width: 16.66666667%">
+                                    <input type="radio"
+                                           name="result"
+                                           value="1"
+                                           ng-init="approve.resultValue= '1'"
+                                           ng-model="approve.resultValue"
+                                           ng-change="approve.fetchApproveTpl()"
+                                           ng-disabled="approve.result=='0501' ? approve.allReject : false"
+                                          />
+                                    <span class="radio"></span>{{approve.formDictionary.success}}
+                                </label>
+                                <label class="option option-primary" style="min-width: 16.66666667%">
+                                    <input type="radio"
+                                           name="result"
+                                           value="2"
+                                           ng-model="approve.resultValue"
+                                           ng-change="approve.fetchApproveTpl()"
+                                           />
+                                    <span class="radio"></span>{{approve.formDictionary.fail}}
+                                </label>
+                        </div>
+                    </div>
+                    </div>
+                    <!--if 审批|| 预受理 ：审批时间-->
+                    <div class="form-group" ng-if="approve.resultIndex.approveType < 5 && approve.resultIndex.approveType !== 0">
+                        <label class="col-sm-2 control-label">审批时间：</label>
+                        <div class="col-sm-10">
+                            <span>{{approve.now}}</span>
+                        </div>
+                    </div>
+                    <!--if 受理 ：约定期限-->
+                    <div class="form-group"  ng-if="approve.type.isAccept && approve.resultValue == '1'" >
+                        <label class="col-sm-2 control-label">约定期限：</label>
+
+                        <div class="col-sm-2 prn">
+                            <div class="col-sm-8 pln" >
+                                <input type="text"
+                                       class="form-control input-sm text-center"
+                                       ng-model="approve.formData.agreedDay"
+                                       ng-change="approve.getDateStr()"
+                                       name="agreedDay"
+                                       required>
+                            </div>
+                            <label class="control-label">天</label>
+                        </div>
+
+                        <div class="col-sm-3 pln ">
+                            <div class="input-group input-group-sm">
+                                <input type="text"
+                                       name="agreedDateStr"
+                                       class="form-control text-center bs-datetimepicker"
+                                       style="cursor: auto;"
+                                       readonly
+                                       ng-model="approve.formData.agreedDateStr"
+                                       ng-change = "approve.getDays()"
+                                       required>
+                                <span class="input-group-addon cursor">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--if 受理 ：收检人-->
+                    <div class="form-group admin-form"  ng-if="approve.type.isAccept && approve.resultValue == '1'" >
+                        <label class="col-sm-2 control-label">任务领取人：</label>
+                        <div class="col-sm-4 ">
+                            <div class="input-wrapper w200" >
+                                <label class="select">
+                                    <select class="form-control input-sm fl"
+                                            id="pickupPerson"
+                                            ng-model="approve.formData.auditor"
+                                            required>
+                                        <option value="">请选择</option>
+                                        <option ng-repeat="item in approve.personModel" value="{{item.userId}}">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                    <i class="arrow"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--if 档案:档案意见 档案归档位置-->
+                    <div class="form-group approve-suggestion-tpl" ng-if="approve.result == '1501'">
+                        <label class="col-sm-2 control-label">档案归档位置：</label>
+                        <div class="col-sm-10">
+                            <ul class="pl15">
+                                <li class="text-center"
+                                    ng-class="{true:'active'}[approve.placeIndex === $index]"
+                                    ng-repeat="item in approve.placeData"
+                                    ng-click="approve.choosePlace($index, item.dictValue1)">
+                                    {{item.dictValue1}}
+                                </li>
+                            </ul>
+
+                            <textarea name="position"  ng-model="approve.formData.archivePosition"></textarea>
+                        </div>
+                    </div>
+                    <!--if ![文书拟稿]:意见 || 原因 || 确认文档意见-->
+                    <div class="form-group approve-suggestion-tpl mb5" ng-if="!((approve.resultIndex.nodeType==3 && approve.resultIndex.index==0) || approve.submResult == '1401')">
+                        <label class="col-sm-2 control-label">{{approve.formDictionary.opinion}}</label>
+                        <div class="col-sm-10">
+                              <ul class="pl15">
+                                    <li class="text-left tooltipster"
+                                        ng-class="{true:'active'}[approve.tplIndex === $index]"
+                                        ng-repeat="item in approve.tplData"
+                                        ng-click="approve.chooseTpl($index, item.content)"
+                                        title="{{item.content}}">
+                                        {{item.content}}
+                                    </li>
+                              </ul>
+
+                              <textarea name="opinion"
+                                        ng-model="approve.formData.opinion"
+                                        ng-required="approve.opinionRequired == 1 || (approve.opinionRequired == 2 && approve.resultValue == 2) || approve.resultValue == 0"
+                                        maxlength="100"></textarea>
+                        </div>
+                    </div>
+
+                    <!--if 延期申请 ：延期天数-->
+                    <div class="form-group"  ng-if="approve.type.isDelayApply" >
+                        <label class="col-sm-2 control-label">延期天数：</label>
+                        <div class="col-sm-2 prn">
+                            <div class="col-sm-8 pln" >
+                                    <input type="text"
+                                           class="form-control input-sm text-center"
+                                           ng-model="approve.formData.days"
+                                           ng-change="approve.getDateStr()"
+                                           name="days"
+                                           required>
+                            </div>
+                            <label class="control-label">天</label>
+                        </div>
+                        <div class="col-sm-3 pln">
+                            <div class="input-wrapper" >
+                                <div class="input-group input-group-sm ">
+                                    <input type="text"
+                                           class="form-control text-center bs-datetimepicker"
+                                           ng-model="approve.formData.endDate"
+                                           style="cursor: auto;"
+                                           readonly
+                                           ng-change = "approve.getDays()"
+                                           name="endDate"
+                                           required>
+                                <span class="input-group-addon cursor" >
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--if 申请 || 科长审核  科长审核人 主任审核人]-->
+                    <div class="form-group"  ng-if="approve.type.isApply || approve.type.isSectionChief" >
+                        <label class="col-sm-2 control-label" ng-if="approve.resultIndex.index == 2 || approve.resultIndex.approveType == 5">{{approve.formDictionary.apply_person}}</label>
+                        <div class="col-sm-4">
+                            <div class="input-wrapper" >
+                                <label class="select">
+                                    <select class="form-control input-sm fl text-center"
+                                            ng-model="approve.formData.auditor"
+                                            name="auditor"
+                                            required>
+                                        <option value="">请选择</option>
+                                        <option ng-repeat="item in approve.reviewModel" value="{{item.userId}}">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                    <i class="arrow"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--if 文书 呈批意见-->
+                    <div class="form-group"  ng-if="approve.resultIndex.nodeType == 3 && approve.resultIndex.index == 0 && approve.showReviewer">
+                        <label class="col-sm-2 control-label pt5"> 呈批意见：</label>
+                        <div class="col-sm-8">
+                            <div class="input-wrapper" >
+                                <label class="select">
+                                    <input class="form-control input-sm fl"
+                                            ng-model="approve.formData.opinion"
+                                            required>
+                                      
+                                    </input>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--if 文书 鉴定复核人-->
+                    <div class="form-group"  ng-if="approve.resultIndex.nodeType == 3 && approve.resultIndex.index == 0 && approve.showReviewer">
+                        <label class="col-sm-2 control-label pt5" >鉴定复核人：</label>
+                        <div class="col-sm-4">
+                            <div class="input-wrapper" >
+                                <label class="select">
+                                    <select class="form-control input-sm fl text-center"
+                                            name="reviewPerson"
+                                            ng-model="approve.reviewPerson"
+                                            required>
+                                        <option value="">请选择</option>
+                                        <option ng-repeat="item in approve.testUsersData"
+                                                value="{{item}}">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                    <i class="arrow"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--if 文书 负责人签字-->
+                    <div class="form-group"  ng-if="(approve.resultIndex.nodeType == 3 && approve.resultIndex.index == 0 && !approve.showReviewer) || (approve.result == '0901' && approve.resultValue == '1' && approve.isRepeatRechecked == '0')">
+                        <label class="col-sm-2 control-label pt5" ng-if="approve.submResult == '0901'" >工作转向：</label>
+                        <div class="col-sm-10  mb15">
+                                <div class="option-group ">
+                                    <label class="option option-primary fl">
+                                        <input type="radio"
+                                               name="auditorType"
+                                               ng-model="approve.formData.auditorType"
+                                               value="1"
+                                               />
+                                        <span class="radio"></span>指定授权人签字
+                                    </label>
+                                </div>
+                                <div class="col-sm-3 input-wrapper">
+                                    <label class="select">
+                                        <select class="form-control input-sm fl text-center"
+                                                name="appointAuditor"
+                                                ng-model="approve.appointAuditor"
+                                                ng-disabled="approve.formData.auditorType != 1"
+                                                ng-required="approve.formData.auditorType == 1">
+                                            <option value="">请选择</option>
+                                            <option ng-repeat="item in approve.grantPersonnelData"
+                                                    value="{{item}}">
+                                                {{item.name}}
+                                            </option>
+                                        </select>
+                                        <i class="arrow"></i>
+                                    </label>
+                                </div>
+                        </div>
+
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <div class="option-group">
+                                <label class="option option-primary fl">
+                                    <input type="radio"
+                                           name="auditorType"
+                                           value="2"
+                                           ng-model="approve.formData.auditorType"/>
+                                    <span class="radio"></span>指定技术负责人
+                                </label>
+                            </div>
+                            <div class="col-sm-3 input-wrapper">
+                                <label class="select">
+                                    <select class="form-control input-sm fl text-center"
+                                            name="techAuditor"
+                                            ng-model="approve.techAuditor"
+                                            ng-disabled="approve.formData.auditorType != 2"
+                                            ng-required="approve.formData.auditorType == 2">
+                                        <option value="">请选择</option>
+                                        <option ng-repeat="item in approve.techPersonnelData"
+                                                value="{{item}}">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                    <i class="arrow"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--if 鉴定复核 重新复核-->
+                    <section ng-if="(approve.result == '0901' && approve.resultValue == '1' && approve.isRepeatRechecked == '1')">
+                        <div class="form-group mbn">
+                            <label class="col-sm-2 control-label">工作转向：</label>
+                            <div class="col-sm-10  mb15">
+                                <div class="option-group field">
+                                    <label class="option option-primary col-sm-2">
+                                        <input type="radio"
+                                               name="repeatRechecked"
+                                               ng-model="approve.workHandOver"
+                                               value="1"
+                                                />
+                                        <span class="radio"></span>继续复核
+                                    </label>
+                                    <label class="option option-primary col-sm-2">
+                                        <input type="radio"
+                                               name="repeatRechecked"
+                                               ng-model="approve.workHandOver"
+                                               value="2"
+                                               ng-click="approve.formData.auditorType='1'"
+                                                />
+                                        <span class="radio"></span>提交审批
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mbn" ng-if="approve.workHandOver=='1'" >
+                            <label class="col-sm-2 control-label pt5">复核人：</label>
+                            <div class="col-sm-4">
+                                <div class="input-wrapper" >
+                                    <label class="select">
+                                        <select class="form-control input-sm fl text-center"
+                                                name="reviewPerson"
+                                                ng-model="approve.reviewPerson"
+                                                required>
+                                            <option value="">请选择</option>
+                                            <option ng-repeat="item in approve.repeatRecheckedList"
+                                                    value="{{item}}">
+                                                {{item.name}}
+                                            </option>
+                                        </select>
+                                        <i class="arrow"></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mbn" ng-if="approve.workHandOver=='2'" >
+                            <div class="col-sm-10 col-sm-offset-2 mb15" >
+                                <div class="option-group">
+                                    <label class="option option-primary fl">
+                                        <input type="radio"
+                                               name="auditorType"
+                                               ng-model="approve.formData.auditorType"
+                                               value="1"
+                                                />
+                                        <span class="radio"></span>指定授权人签字
+                                    </label>
+                                </div>
+                                <div class="col-sm-3 input-wrapper">
+                                    <label class="select">
+                                        <select class="form-control input-sm fl text-center"
+                                                name="appointAuditor"
+                                                ng-model="approve.appointAuditor"
+                                                ng-disabled="approve.formData.auditorType != 1"
+                                                ng-required="approve.formData.auditorType == 1">
+                                            <option value="">请选择</option>
+                                            <option ng-repeat="item in approve.grantPersonnelData"
+                                                    value="{{item}}">
+                                                {{item.name}}
+                                            </option>
+                                        </select>
+                                        <i class="arrow"></i>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <div class="option-group ">
+                                    <label class="option option-primary fl">
+                                        <input type="radio"
+                                               name="auditorType"
+                                               value="2"
+                                               ng-model="approve.formData.auditorType"/>
+                                        <span class="radio"></span>指定技术负责人
+                                    </label>
+                                </div>
+                                <div class="col-sm-3 input-wrapper">
+                                    <label class="select">
+                                        <select class="form-control input-sm fl text-center"
+                                                name="techAuditor"
+                                                ng-model="approve.techAuditor"
+                                                ng-disabled="approve.formData.auditorType != 2"
+                                                ng-required="approve.formData.auditorType == 2">
+                                            <option value="">请选择</option>
+                                            <option ng-repeat="item in approve.techPersonnelData"
+                                                    value="{{item}}">
+                                                {{item.name}}
+                                            </option>
+                                        </select>
+                                        <i class="arrow"></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--if 文书相关 是否领导审批-->
+                    <div class="form-group" ng-if="approve.submResult == '1101' && approve.resultValue == '1'">
+                        <label class="col-sm-2 control-label">是否领导审批：</label>
+                        <div class="col-sm-10">
+                            <div class="option-group field">
+                                <label class="option option-primary">
+                                    <input type="radio"
+                                           name="leader"
+                                           value="1"
+                                           ng-init="approve.leaderApprove= '2'"
+                                           ng-change="approve.getFormResult()"
+                                           ng-model="approve.leaderApprove"/>
+                                    <span class="radio"></span>是
+                                </label>
+                                <div class="input-wrapper" ng-if="approve.showLeader" style="width: 130px; display: inline-block">
+                                    <label class="select">
+                                        <select class="form-control input-sm fl text-center"
+                                                name="leaderPerson"
+                                                ng-model="approve.leaderPerson"
+                                                required>
+                                            <option value="">请选择</option>
+                                            <option ng-repeat="item in approve.leaderPersonnelData"
+                                                    value="{{item}}">
+                                                {{item.name}}
+                                            </option>
+                                        </select>
+                                        <i class="arrow"></i>
+                                    </label>
+                                </div>
+                                <label class="option option-primary" style="margin-left: 55px">
+                                    <input type="radio"
+                                           name="leader"
+                                           value="2"
+                                           ng-change="approve.getFormResult()"
+                                           ng-model="approve.leaderApprove"
+                                           required/>
+                                    <span class="radio"></span>否
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--if 提交文档 -->
+                    <section ng-if="approve.submResult == '1401'">
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label">归档日期: </label>
+                            <div class="col-sm-10">
+                                <span>{{approve.fileData.fileDateStr}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label">是否发放: </label>
+
+                            <div class="col-sm-10">
+                                <div class="option-group field">
+                                    <label class="option option-primary" ng-repeat="item in approve.dictData.IsNoIssueModel">
+                                        <input type="radio" name="inlineRadioOptions" value="{{item.dictKey}}" checked class="mr5"
+                                               ng-model="approve.fileData.archivesEndFlag"
+                                                ng-init="approve.fileData.archivesEndFlag = approve.dictData.IsNoIssueModel[0].dictKey">
+                                        <span class="radio"></span>{{item.dictValue1}}
+
+                                        <span ng-if="$index === 0">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <a type="button" class="close" ng-click="approve.toggleApproveFrom($event)" >
+                    <span class="fa fa-times"></span>
+                </a>
+            </form>
+        </div>
+        <!--提交按钮-->
+        <div class="ui-dropup-trigger"
+             ng-click="approve.toggleApproveFrom($event)">
+
+            <div class="form-group mbn text-center">
+                <div class="mr20 btn-relative" style="display: inline-block">
+                    <button class="btn btn-lg w100 btn-warning   "
+                            ng-disabled="(approve.result=='1401'||approve.result=='0802') ?
+                                        (!approve.isActive && (!approve.dataService.archiveInfo.insDate ||approveForm.$invalid)):
+                                        (approve.result=='0501' ?
+                                        (approve.dcService.entrustForm.$invalid || approve.dcService.caseForm.$invalid ||approve.dcService.containerForm.$invalid ||approveForm.$invalid)&& !approve.isActive:
+                                        (approveForm.$invalid && !approve.isActive))"
+                            ng-click="approve.popupConfirm($event)">
+                        {{approve.formDictionary.submit}}
+                    </button>
+                    <img ng-src="{{approve.formDictionary.imageUrl}}" alt="#">
+                </div>
+
+                <button
+                        class="btn btn-lg btn-default"
+                        ng-click="approve.goback($event)"
+                >返回</button>
+
+            </div>
+        </div>
+    </div>
+
+</div>

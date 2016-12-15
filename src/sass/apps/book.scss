@@ -1,0 +1,250 @@
+.doccontainer{
+    width: 100%;
+    height: 100%;
+    //doc title
+    .docContainerTitle{
+        .panel-heading{
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            position: fixed;
+            z-index: 10;
+            .panel-title{
+                font-size: 15px;
+            }
+            i{
+                position: absolute;
+                right: 10px;
+                padding-top: 15px;
+                cursor: pointer;
+            }
+        }
+    }
+    //doc content
+    .docs-container{
+        position: relative;
+        border: 0px;
+        .row{
+            margin-right: 0px;
+            margin-left: 0px;
+        }
+        .doc-left-sibebar{
+            height: 100%;
+            border: 0px;
+            float: left;
+            background-color:#f7f7f7;
+            position: absolute;
+            height: 100%;
+            .left-col-toggle{
+                width: 20px;
+                height: 40px;
+                color: #AAA;
+                font-size: 21px;
+                display: block;
+                line-height: 40px;
+                padding: 0px;
+                margin: 0px;
+                cursor: pointer;
+            }
+            .sidebarlist{
+                border: 1px solid #c9cccf;
+                .panel-heading{
+                    border-top: 0px;
+                    border-right: 0px;
+                    border-left: 0px;
+                    i{
+                        right: 0px;
+                        display: inline-block;
+                        height: 100%;
+                        line-height: 40px;
+                        text-align: center;
+                        position: absolute;
+                        padding-right: 5px;
+                    }
+                }
+                .panel-body{
+                    padding: 0px;
+                    border: 0px;
+                    //table
+                    table td[class*="col-"], table th[class*="col-"]{
+                        padding: 0px;
+                        margin: 0px;
+                    }
+                    table{
+                        width: 100%;
+                    }
+                    table tr{
+                        height: 40px;
+                        border: 0px;
+                        td{
+                            height: 40px;
+                            text-align: center;
+                        }
+                        td.col-sm-3{
+                            border-right: 1px solid #e7e7e7;
+                            color: #676767;
+                        }
+                        td.col-sm-9{
+                            width: 100%;
+                            color: #999999;
+                        }
+                    }
+                    table tr.hasborder{
+                        border-bottom: 1px solid #e7e7e7;
+                    }
+                }
+                //docrecoderItem
+                .docrecoderWrapper{
+                    max-height: 227px;
+                    overflow: auto;
+                    .docrecoderItem{
+                        border-bottom: 1px solid #e7e7e7;
+                        span.itemtitle{
+                            color: #666666;
+                            font-size: 13px;
+                        }
+                        span:not(.itemtitle){
+                            color: #a8a8a8;
+                            display: block;
+                            font-size: 12px;
+                            i{
+                                font-style: normal;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        #page1{
+            width: 100%;
+            padding: 0px;
+        }
+        .docLeftSidebarHidden {
+            width: 50px;
+            padding-left: 0px;
+            .left-col-toggle{
+                width: 50px;
+                text-align: center;
+            }
+            .isshowdiv{
+                display: none;
+            }
+        }
+        .docLeftSidebarShow{
+            width: 300px;
+            padding: 0px 10px;
+            .left-col-toggle{
+                width: 100%;
+                text-align: right;
+            }
+            .isshowdiv{
+                display: block;
+            }
+        }
+
+        .doc-normal {
+            width: auto;
+            margin-left: 300px;
+            margin-right: 40px;
+            height: 100%;
+        }
+        .doc-doc-menu-hide {
+            margin-left: 50px;
+        }
+        .doc-resource-menu-show{
+            margin-right: 390px;
+        }
+    }
+    .active{
+        background-color: #4a89dc;
+        td{
+            color: #ffffff !important;
+        }
+        color: #ffffff !important;
+    }
+    .panel-heading{
+        a.book-full{
+            padding-top: 1px;
+            display: inline-block;
+            opacity: 0.7;
+            width: 30px;
+            color: #999;
+            font-size: 14px;
+            font-weight: normal;
+            text-align: center;
+            float: right;
+            &:after{
+                font-family: "FontAwesome";
+                content: "\f066";
+            }
+            &:hover{
+               color: #4a89dc;
+            }
+        }
+    }
+}
+
+
+.inspection-doc {
+    border: 1px solid #c9cccf;
+       .panel-heading{
+           border-top: 0px;
+           .panel-title{
+               padding-left: 0px;
+               font-size: 14px;
+           }
+           i{
+               right: 0px;
+                display: inline-block;
+                height: 100%;
+                line-height: 40px;
+                text-align: center;
+                position: absolute;
+                padding-right: 5px;
+           }
+       }
+    .panel-body{
+        padding: 0px;
+        border: 0px;
+        .list-group-item {
+            padding: 0px;
+            margin: 0px;
+        }
+        .list-group-item{
+            border: 0px;
+        }
+        div{
+            padding: 0px;
+            border: 0px;
+            span.second-doc{
+                background-color: #fafafa;
+                display: block;
+                height: 40px;
+                line-height: 36px;
+                position: relative;
+                line-height: 36px;
+                color: #666666;
+                padding: 0px 8px;
+                border-bottom: 1px solid #e7e7e7;
+                margin: 0px;
+                font-size: 12px !important;
+                font-weight: bold;
+            }
+            p.list-group-item-text{
+                height: 40px;
+                border-bottom: 1px solid #e7e7e7;
+                margin: 0px;
+                color: #999999;
+                font-size: 12px;
+                display: block;
+                width: 278px;
+                line-height: 40px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space:nowrap;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+    }
+}

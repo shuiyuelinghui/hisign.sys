@@ -1,0 +1,76 @@
+<div class="form-content">
+    <!-- 原因:-->
+    <div class="form-group approve-suggestion-tpl mb5">
+        <label class="col-sm-2 control-label">{{submitComp.configData.resultMapping.reason}}</label>
+        <div class="col-sm-10">
+            <ul class="tplScroller">
+                <li class="text-left tooltipster"
+                    ng-class="{true:'active'}[submitComp.configData.tplIndex === $index]"
+                    ng-repeat="item in submitComp.configData.tplData"
+                    ng-click="submitComp.chooseTpl($index, item.content)"
+                    title="{{item.content}}">
+                    {{item.content}}
+                </li>
+            </ul>
+            <textarea name="opinion"
+                    ng-model="submitComp.configData.formData.reason"
+                    required
+                    maxlength="100">
+            </textarea>
+        </div>
+    </div>
+    <!--if 延期申请 ：延期天数-->
+    <div class="form-group"  ng-if="submitComp.configData.resultMapping.delay" >
+        <label class="col-sm-2 control-label">延期天数：</label>
+        <div class="col-sm-2 prn">
+            <div class="col-sm-8 pln" >
+                <input type="text"
+                       class="form-control input-sm text-center"
+                       ng-model="submitComp.configData.formData.days"
+                       ng-change="submitComp.configData.resultMapping.getDateStr()"
+                       name="days"
+                       required>
+            </div>
+            <label class="control-label">天</label>
+        </div>
+        <div class="col-sm-3 pln">
+            <div class="input-wrapper" >
+                <div class="input-group input-group-sm ">
+                    <input type="text"
+                           class="form-control text-center bs-datetimepicker"
+                           ng-model="submitComp.configData.formData.endDate"
+                           style="cursor: auto;"
+                           readonly
+                           ng-change = "submitComp.configData.resultMapping.getDays()"
+                           name="endDate"
+                           required>
+                                <span class="input-group-addon cursor" >
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--审核人]-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">{{submitComp.configData.resultMapping.auditor}}</label>
+        <div class="col-sm-4">
+            <div class="input-wrapper" >
+                <label class="select">
+                    <select class="form-control input-sm fl text-center"
+                            ng-model="submitComp.configData.formData.auditor"
+                            name="auditor"
+                            required>
+                        <option value="">请选择</option>
+                        <option ng-repeat="item in submitComp.configData.reviewModel" value="{{item.userId}}">
+                            {{item.name}}
+                        </option>
+                    </select>
+                    <i class="arrow"></i>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+

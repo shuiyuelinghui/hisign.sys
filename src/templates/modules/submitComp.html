@@ -1,0 +1,41 @@
+<div class="ui-approve">
+    <div class="admin-form theme-primary">
+        <div class="approve-content" >
+            <form class="form-horizontal" name="approveForm" id="slideUpAnimate" novalidate>
+                <ng-include src="submitComp.configData.tplUrl"></ng-include>
+                <!--右上角X按钮-->
+                <a type="button" class="close" ng-click="submitComp.toggleApproveFrom($event)" >
+                    <span class="fa fa-times"></span>
+                </a>
+            </form>
+        </div>
+        <!--提交按钮-->
+        <div class="ui-dropup-trigger"
+             ng-click="submitComp.toggleApproveFrom($event)">
+
+            <div class="form-group mbn text-center">
+                <div class="mr20 btn-relative" style="display: inline-block">
+                    <button class="btn btn-lg w100 btn-warning"
+                            ng-if="!submitComp.isSlideDown"
+                            ng-click="submitComp.toggleApproveFrom($event)">
+                        {{submitComp.configData.approveName}}
+                    </button>
+                    <button class="btn btn-lg w100 btn-warning"
+                            ng-if="submitComp.isSlideDown"
+                            ng-disabled="submitComp.checkValid()"
+                            ng-click="submitComp.emitPopupEvent($event)">
+                        {{submitComp.configData.submitName}}
+                    </button>
+                    <img ng-src="{{submitComp.configData.imageUrl}}" alt="#">
+                </div>
+
+                <button
+                        class="btn btn-lg btn-default"
+                        ng-click="submitComp.configData.goBack($event)"
+                >返回</button>
+
+            </div>
+        </div>
+    </div>
+
+</div>

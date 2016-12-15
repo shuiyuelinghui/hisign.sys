@@ -1,0 +1,204 @@
+<span class="fa fa-navicon left-col-toggle" ng-click="book.toggleDocMenu()"></span>
+<div class="isshowdiv">
+	<!--鉴定文书-->
+	<div class="admin-panels">
+		<div class="panel sidebarlist"
+			 data-panel-remove="false" 
+		 	 data-panel-title="false"
+			 data-panel-color="false"
+			 data-panel-fullscreen="false">
+			<div class="panel-heading">
+				<span class="panel-tile">鉴定文书</span>
+			</div>
+			<div class="panel-body">
+				<table>
+					<tbody>
+						<tr ng-class="{true:'active'}[item.id ==                 book.currentDocId && 
+							book.currentDocType == book.commonService.docType.bookAppraisal &&  book.panelType == 'bookAppraisal'] "
+							ng-click="book.getPageContent(book.commonService.panelType[0], book.commonService.docType.bookAppraisal, item.id, item.path, item.type)"
+							class="col-sm-12 pln prn cursor" ng-repeat="item in book.docListData">
+							<td class="col-sm-3 pln prn">{{$index + 1}}</td>
+							<td class="col-sm-9 pl5 prn">{{item.code}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="panel sidebarlist"
+			 data-panel-remove="false" 
+		 	 data-panel-title="false"
+			 data-panel-color="false"
+			 data-panel-fullscreen="false">
+			<div class="panel-heading">
+				<span class="panel-tile">文书附件</span>
+			</div>
+			<div class="panel-body">
+				<table>
+					<tbody>
+						<tr ng-class="{true:'active'}[(item.id == book.currentDocId&&book.currentDocType == book.commonService.docType.bookAttachment) && book.panelType == 'bookAttachment']"
+							ng-click="book.getPageContent(book.commonService.panelType[4], book.commonService.docType.bookAttachment, item.id, item.documentFilePath, item.type)"
+							class="col-sm-12 pln prn cursor" ng-repeat="item in book.docListData">
+							<td class="col-sm-3 pln prn">{{$index + 1}}</td>
+							<td class="col-sm-9 pl5 prn">{{item.code}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!--文书审批稿-->
+		<div class="panel sidebarlist" 
+			 data-panel-remove="false" 
+		 	 data-panel-title="false"
+			 data-panel-color="false"
+			 data-panel-fullscreen="false"
+			 ng-if="book.docHistoryData != ''"
+			 >
+			<div class="panel-heading">
+				<span class="panel-tile">文书审批稿</span>
+			</div>
+			<div class="panel-body">
+				<table>
+					<tbody>
+						<tr class="col-sm-12 pln prn hasborder cursor" 
+							ng-class="{true:'active'}[book.panelType == 'bookHistory']" 
+							ng-click="book.getPageContent(book.commonService.panelType[1], book.commonService.docType.bookAppraisal, item.id, item.path, item.type)"
+							ng-repeat="item in book.docHistoryData">
+							<td class="col-sm-3 pln prn">{{$index + 1}}</td>
+							<td class="col-sm-9 pl5 prn"> {{item.insDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!--文书审批记录-->
+		<div class="panel sidebarlist"
+			 data-panel-remove="false" 
+		 	 data-panel-title="false"
+			 data-panel-color="false"
+			 data-panel-fullscreen="false"
+			 ng-if="book.recordsData != ''">
+			<div class="panel-heading">
+				<span class="panel-tile">文书审批记录</span>
+				<a class="book-full" ng-click="book.openFootPrintPopup()"></a>
+			</div>
+			<div class="panel-body docrecoderWrapper">
+				<div class="docrecoderItem pt10 pb10 pl10" 
+					 ng-repeat="item in book.recordsData"
+					 >
+					<span class="itemtitle">{{item.submStateName}}</span>
+					<span>{{item.operatorName}}&nbsp<i>{{item.operateDate|date:'yyyy-MM-dd HH:mm:ss'}}</i></span>
+				</div>
+			</div>
+		</div>
+
+		<!--鉴定文书审批单-->
+		<div class="panel sidebarlist"
+			 data-panel-remove="false" 
+		 	 data-panel-title="false"
+			 data-panel-color="false"
+			 data-panel-fullscreen="false"
+			 ng-if="book.submInfo.submState > '0800'">
+			<div class="panel-heading">
+				<span class="panel-tile">鉴定文书审批单</span>
+
+			</div>
+			<div class="panel-body docrecoderWrapper">
+				<div class="docrecoderItem pt10 pb10 pl10 cursor" 
+					 ng-class="{true:'active'}[book.panelType == 'bookApproval'] "
+					 ng-repeat="item in book.defaultDocuments[book.commonService.bookApproval]" 
+					 >
+					<span 
+					      ng-click="book.getPageContent(book.commonService.panelType[2], book.commonService.docType.bookApproval, item.objectId, item.path)">{{item.name}}</span>
+				</div>
+			</div>
+		</div>
+
+		<!--附件-->
+		<div class="panel sidebarlist inspection-doc" 
+			 data-panel-remove="false" 
+			 data-panel-title="false" 
+			 data-panel-color="false"
+			 ng-if="book.documentList.documentTypeList != null">
+			<div class="panel-heading">
+				<span class="panel-title">案件附件</span>
+			</div>
+			<div class="panel-body" 
+				 ng-repeat="item in book.documentList.documentTypeList">
+				<div class="list-group mbn">
+					<div class="list-group-item">
+						<span class="list-group-item-heading second-doc"
+							  ng-class="{true: 'cursor'}[item.documentType == '4' || 
+							  item.documentType == '5' || item.documentType == '6' || item.documentType == '7']"
+							  ng-click="book.getImageData(item.objects)">{{item.documentTypeName}}</span>
+						<p class="list-group-item-text"
+						   ng-class="{true: 'cursor'}[item.documentType == '1' || 
+							  item.documentType == '2' || item.documentType == '3']"
+						   ng-click="book.getPageContent(book.commonService.panelType[5], item.documentType, sub.objectId, sub.path, '', sub.flag)"
+						   ng-repeat="sub in item.objects">{{sub.name}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!--案件文档默认预览-->
+		<div class="panel sidebarlist inspection-doc" 
+			 ng-if="book.documentList.documentTypeList == null"
+			 data-panel-remove="false" 
+			 data-panel-title="false" 
+			 data-panel-color="false">
+			<div class="panel-heading">
+				<span class="panel-title">案件文档预览</span>
+			</div>
+
+			<div class="panel-body">
+				<div class="list-group mbn">
+					<div class="list-group-item">
+						<span class="list-group-item-heading second-doc">委托书 (介绍信)</span>
+						<p class="list-group-item-text cursor" ng-class="{true: 'active'}[book.commonService.docType.bookProxy == book.currentType]" 
+
+						ng-click="book.getPageContent(book.commonService.panelType[3], book.commonService.docType.bookProxy, item.objectId, item.path)"
+						ng-repeat="item in book.defaultDocuments[book.commonService.defaultDocuments.bookProxy]">{{item.name}}.pdf</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel-body">
+				<div class="list-group mbn">
+					<div class="list-group-item">
+						<span class="list-group-item-heading second-doc">鉴定受理登记表</span>
+						<p class="list-group-item-text cursor" ng-class="{true: 'active'}[book.commonService.docType.bookConfirmation == book.currentType]"
+						ng-click="book.getPageContent(book.commonService.panelType[3], book.commonService.docType.bookConfirmation, item.objectId, item.path)"
+					    ng-repeat="item in book.defaultDocuments[book.commonService.defaultDocuments.bookAccept]">{{item.name}}.pdf</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel-body">
+				<div class="list-group mbn">
+					<div class="list-group-item">
+						<span class="list-group-item-heading second-doc">检验记录</span>
+						<p class="list-group-item-text cursor" 
+						   ng-class="{true: 'active'}[book.commonService.docType.bookInspection==book.currentType&&book.currentDocId==item.objectId] " 
+						   ng-click="book.getPageContent(book.commonService.panelType[3], book.commonService.docType.bookInspection, item.objectId, item.path)"
+						   ng-repeat="item in book.defaultDocuments[book.commonService.defaultDocuments.bookRecord]">{{item.name}}.pdf</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel-body">
+				<div class="list-group mbn">
+					<div class="list-group-item">
+						<span class="list-group-item-heading second-doc cursor">图谱</span>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+		
+	</div>
+</div>

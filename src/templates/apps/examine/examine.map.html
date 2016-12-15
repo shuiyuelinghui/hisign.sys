@@ -1,0 +1,84 @@
+<div class="panel">
+    <div class="panel-heading">
+            <span class="panel-title fs14 text-dark-darker">
+                <span class="fa fa-table"></span>
+                案件信息
+            </span>
+    </div>
+    <div class="panel-body pn">
+        <!--基本信息-->
+        <dl >
+            <div class="row mb20">
+                <div class="col-xs-5 col-xs-offset-1">
+                    <dt >受理编号：</dt>
+                    <dd>{{review.basicInfo.acceptCode}}</dd>
+                </div>
+                <div class="col-xs-5">
+                    <dt >受理时间：</dt>
+                    <dd >{{review.basicInfo.slsj}}</dd>
+                </div>
+            </div>
+
+            <div class="row mb20">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <dt >案（事）件名称：</dt>
+                    <dd> {{review.basicInfo.caseName}}</dd>
+                </div>
+            </div>
+
+            <div class="row mb20">
+                <div class="col-xs-5 col-xs-offset-1">
+                    <dt >专业：</dt>
+                    <dd >{{review.basicInfo.section}}</dd>
+                </div>
+                <div class="col-xs-5">
+                    <dt >鉴定类别：</dt>
+                    <dd >{{review.basicInfo.identifyCategory}}</dd>
+                </div>
+            </div>
+
+            <div class="row mb20">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <dt >鉴定要求：</dt>
+                    <dd >{{review.basicInfo.methodRequest}}</dd>
+                </div>
+            </div>
+
+            <div class="row mb20">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <dt >委托单位：</dt>
+                    <dd >{{review.basicInfo.departmentDetailName}}</dd>
+                </div>
+            </div>
+
+            <div class="row mb20">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <dt >要求完成日期：</dt>
+                    <dd >{{review.basicInfo.agreedDate}}</dd>
+                </div>
+            </div>
+        </dl>
+    </div>
+</div>
+
+
+<div class="panel">
+    <div class="panel-heading">
+        <span class="panel-title fs14 text-dark-darker">
+            <span class="fa fa-table"></span>
+            检验照片</span>
+    </div>
+    <div class="panel-body">
+        <div class="sample-item" ng-repeat="item in examineMap.dataService.fileSlideMappingDataList track by $index">
+            <div class="tb-header">
+                <nav>{{$index+1}}</nav>
+                <span>检材编号：{{item.sampleId}}</span>
+                <span>检材名称：{{item.name}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-footer text-center">
+        <button class="btn btn-default btn-sm" type="button" ng-click="examineMap.closeMagnificPopup()">关闭</button>
+    </div>
+</div>

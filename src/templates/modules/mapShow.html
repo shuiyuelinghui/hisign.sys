@@ -1,0 +1,58 @@
+<div class="ui-examine-map">
+    <!--案件照片/图谱列表-->
+    <div class="panel" >
+        <div class="panel-body">
+            <div class="fs18 text-dark-darker fw600 pb20">
+                {{mapShow.staticData.caseTitle}}
+            </div>
+            <div class="sample-item">
+                <div class="tb-header" id="mappingList">
+                    <span class="ml30">
+                        <label class="mr5">{{mapShow.staticData.caseName}}</label>
+                        <label>{{mapShow.dataService.submissionData.caseName}}</label>
+                    </span>
+
+                    <div class="panel-icon-group pull-right mr10" ng-if="mapShow.showDownload">
+                        <a href="javascript:;" ng-click="mapShow.download()" class="panel-icon">
+                            <span class="fa fa-download"></span>
+                            下载
+                        </a>
+                    </div>
+                </div>
+
+                <file-slide-comp flag="5" dc-service="mapShow.dataService"></file-slide-comp>
+            </div>
+
+        </div>
+    </div>
+    <!--检材样本照片/图谱列表-->
+    <div class="panel" >
+        <div class="panel-body">
+            <div class="fs18 text-dark-darker fw600 pb20">
+                {{mapShow.staticData.sampleTitle}}
+            </div>
+            <div class="sample-item" ng-repeat="item in mapShow.dataService.fileSlideSampleList track by $index">
+                <div class="tb-header" id="{{'sampleList' + $index}}">
+                    <nav>{{$index+1}}</nav>
+                    <span >
+                        <label class="mr5">{{mapShow.staticData.sampleTitle}}</label>
+                        <label>{{item.sampleAcceptCode}}</label>
+                    </span>
+                    <span>
+                        <label class="mr5">{{mapShow.staticData.sampleName}}</label>
+                        <label>{{item.name}}</label>
+                    </span>
+
+                    <div class="panel-icon-group pull-right mr10" ng-if="mapShow.showDownload">
+                        <a href="javascript:;" ng-click="mapShow.download()" class="panel-icon">
+                            <span class="fa fa-download"></span>
+                            下载
+                        </a>
+                    </div>
+                </div>
+
+                <file-slide-comp flag="4" dc-service="mapShow.dataService" sample-id="{{item.sampleId}}" class="mb20"></file-slide-comp>
+            </div>
+        </div>
+    </div>
+</div>

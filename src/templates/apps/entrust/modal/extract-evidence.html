@@ -1,0 +1,437 @@
+<div
+        class="panel popup-basic popup-lg panel-modal mnw1000"
+        id="extract_evidence_modal"
+        style="max-width:900px"
+        data-panel-color="false"
+        data-panel-remove="false"
+        data-panel-title="false"
+        data-panel-collapse="false"
+        ng-cloak
+        ng-controller="ExtractEvidenceController as extractEvidence"
+>
+    <div class="panel-heading">
+        <span class="panel-title" ng-if="extractEvidence.dcService.mode === 'display'">提取检材/样本</span>
+        <span class="panel-title" ng-if="extractEvidence.dcService.mode === 'edit'">编辑检材/样本</span>
+    </div>
+    <div class="panel-body">
+
+        <div class="modal-top-bar">
+            <h1>专业</h1>
+            <upload-comp
+                    class="ui-file-upload"
+                    viewport="#extract_evidence_modal"
+                    flag="4"
+            ></upload-comp>
+        </div>
+
+        <pro-comp></pro-comp>
+
+        <form name="modalForm" class="entrust-form-container admin-form theme-primary">
+
+            <h1 class="sample-dna-title">基本信息</h1>
+            <div class="entrust-form-container basic-info-list">
+                <div class="form-inline">
+                    <div class="col-sm-3">
+                        <div class="section">
+                            <div class="option option-group field">
+                                <label  class="option option-primary"
+                                        ng-repeat="item in extractEvidence.dcService.dictData.SampleFlagModel">
+                                    <input
+                                            type="radio"
+                                            value="{{item.dictKey}}"
+                                            ng-model="extractEvidence.dcService.sampleListItem.sampleFlag"
+                                            ng-click="extractEvidence.changePlaceholder(item.dictKey)"
+                                            ng-init="extractEvidence.dcService.sampleListItem.sampleFlag = extractEvidence.dcService.dictData.SampleFlagModel[0].dictKey"
+                                            />
+                                    <span class="radio"></span>
+                                    {{item.dictValue1}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="radio" style="margin-left:20px">-->
+                        <!-- -->
+                    <!--</div>-->
+                </div>
+
+				<div class="form-inline" ng-if="addDNA.dcService.activeState === 'app.accept' ">
+					<div class="form-group col-sm-3">
+                        <label>处置方法：</label>
+                        <div class="input-wrapper ">
+                            <div class="section">
+                                <label class="field select mtn">
+                                    <select
+                                            class="form-control input-sm fl"
+                                            required
+                                            ng-model="extractEvidence.dcService.sampleListItem.dispostMethod"
+                                            ng-options="item.dictKey as item.dictValue1 for item in extractEvidence.dcService.dictData.DispostMethodModel"
+                                            >
+                                        <option value="">请选择</option>
+                                    </select>
+                                    <i class="arrow"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+				
+                <div class="form-inline">
+
+                    <div class="form-group col-sm-3">
+                        <label >名称：</label>
+                        <div class="input-wrapper">
+                            <input
+                                    type="text"
+                                    class="gui-input"
+                                    placeholder="{{extractEvidence.dnaPlaceholder}}"
+                                    required
+                                    ng-model="extractEvidence.dcService.sampleListItem.sampleName"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label >数量/单位：</label>
+                        <input
+                                type="number"
+                                class="gui-input fl"
+                                placeholder=""
+                                style="width:60px"
+                                ng-pattern="extractEvidence.patterIsPositiveFloat"
+                                required
+                                ng-model="extractEvidence.dcService.sampleListItem.amount"
+                        />
+                        <div
+                                class="input-wrapper ui-input-select"
+                                style="margin-left:150px"
+                                input-select
+                                dict="extractEvidence.dcService.dictData.MeaUnitModel"
+                        >
+                            <input
+                                type="text"
+                                class="gui-input"
+                                placeholder=""
+                                required
+                                ng-model="extractEvidence.dcService.sampleListItem.measuringUnit"
+                            />
+
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3 form-icon-suffix">
+                        <label >提取时间：</label>
+                        <div class="input-wrapper">
+                            <input
+                                    readonly
+                                    type="text"
+                                    class="gui-input bs-datetimepicker"
+                                    placeholder=""
+                                    required
+                                    ng-model="extractEvidence.dcService.sampleListItem.collectTimeStr"
+                            />
+                            <span class="fa fa-calendar form-control-icon"></span>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label >提取人：</label>
+                        <div class="input-wrapper">
+                            <input
+                                    type="text"
+                                    class="gui-input"
+                                    placeholder=""
+                                    required
+                                    ng-model="extractEvidence.dcService.sampleListItem.collector"
+                            />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-inline">
+
+
+
+                    <div class="form-group col-sm-3">
+                        <label >提取部位：</label>
+                        <div class="input-wrapper">
+                            <input
+                                    type="text"
+                                    class="gui-input"
+                                    placeholder=""
+                                    ng-model="extractEvidence.dcService.sampleListItem.collectPart"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label >提取方法：</label>
+                        <div
+                                class="input-wrapper ui-input-select"
+                                input-select
+                                dict="extractEvidence.dcService.dictData.CollectMethodModel"
+                        >
+                            <input
+                                    type="text"
+                                    class="gui-input"
+                                    placeholder=""
+                                    ng-model="extractEvidence.dcService.sampleListItem.collectMethod"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label >性状/属性：</label>
+                        <div
+                                class="input-wrapper ui-input-select"
+                                input-select
+                                dict="extractEvidence.dcService.dictData.CharacterModel"
+                        >
+                            <input
+                                    type="text"
+                                    class="form-control input-sm"
+                                    placeholder=""
+                                    ng-model="extractEvidence.dcService.sampleListItem.characters"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label >包装情况：</label>
+                        <div
+                                class="input-wrapper ui-input-select"
+                                input-select
+                                dict="extractEvidence.dcService.dictData.PackSituModel"
+                        >
+                            <input
+                                type="text"
+                                class="form-control input-sm"
+                                placeholder=""
+                                ng-model="extractEvidence.dcService.sampleListItem.packingSituation"
+                            />
+                        </div>
+                    </div>
+
+                </div>
+
+               <!-- <div class="form-inline">
+
+                </div>-->
+
+                <div class="form-inline">
+                    <div class="form-group col-sm-12">
+                        <label >描述：</label>
+
+
+                        <div class="input-wrapper ui-textarea-select"
+                             dict="extractEvidence.dcService.dictData.PackSituModel">
+                            <textarea
+                                    class="gui-textarea"
+                                    ng-model="extractEvidence.dcService.sampleListItem.sampleDesc"
+                                    placeholder="{{extractEvidence.placeholderModel}}"
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <h1 class="sample-dna-title"
+                ng-if="extractEvidence.findDNAProfession() || extractEvidence.dcService.editSubKey === 'sampleDNAList'"
+            >DNA专用信息</h1>
+            <div
+                    class="entrust-form-container sample-dna-list"
+                    ng-if="extractEvidence.findDNAProfession() || extractEvidence.dcService.editSubKey === 'sampleDNAList'"
+            >
+
+                <div class="form-inline">
+                    <div class="form-group col-sm-4">
+                        <label >物证样本类型：</label>
+                        <div class="input-wrapper">
+                            <div class="section">
+                                <label class="field select mtn">
+                                    <select
+                                            class="form-control input-sm fl"
+                                            required
+                                            ng-model="extractEvidence.dcService.sampleDNAListItem.sampleType"
+                                            ng-options="item.dictKey as item.dictValue1 for item in extractEvidence.dcService.dictData.SampleTypeModel"
+                                            >
+                                        <option value="">请选择</option>
+                                    </select>
+                                    <i class="arrow"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        <label >是否FTA卡：</label>
+                        <div class="input-wrapper">
+                            <div class="section">
+                                <label class="field select mtn">
+                                    <select
+                                            class="form-control input-sm fl"
+                                            required
+                                            ng-model="extractEvidence.dcService.sampleDNAListItem.isFta"
+                                            ng-options="item.dictKey as item.dictValue1 for item in extractEvidence.dcService.dictData.IsNoModel"
+                                            >
+                                        <option value="">请选择</option>
+                                    </select>
+                                    <i class="arrow"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        <label >物证来源类型：</label>
+                        <div
+                                class="input-wrapper ui-input-select "
+                                input-select
+                                dict="extractEvidence.dcService.dictData.SourceTypeModel"
+                        >
+
+                            <input
+                                type="text"
+                                class="gui-input"
+                                placeholder=""
+                                ng-model="extractEvidence.dcService.sampleDNAListItem.sourceType"
+                            />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-inline">
+                    <div class="form-group col-sm-4">
+                        <label >承载物类型：</label>
+                        <div
+                                class="input-wrapper ui-input-select "
+                                input-select
+                                dict="extractEvidence.dcService.dictData.CarryTypeModel"
+                        >
+                            <input
+                                type="text"
+                                class="form-control input-sm"
+                                placeholder=""
+                                ng-model="extractEvidence.dcService.sampleDNAListItem.carryingType"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        <label >承载物描述：</label>
+                        <div class="input-wrapper">
+                            <input
+                                    type="text"
+                                    class="form-control input-sm"
+                                    placeholder=""
+                                    ng-model="extractEvidence.dcService.sampleDNAListItem.carryingDescription"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        <label >特殊标记：</label>
+                        <div class="input-wrapper">
+                            <input
+                                    type="text"
+                                    class="form-control input-sm"
+                                    placeholder=""
+                                    ng-model="extractEvidence.dcService.sampleDNAListItem.specialMark"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-inline">
+                    <div class="form-group col-sm-4">
+                        <label >是否补送：</label>
+                        <div class="input-wrapper">
+                            <select
+                                    class="form-control input-sm fl"
+                                    ng-model="extractEvidence.dcService.sampleDNAListItem.isAppend"
+                                    ng-options="item.dictKey as item.dictValue1 for item in extractEvidence.dcService.dictData.IsNoModel"
+                            >
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        <label >包装方法：</label>
+                        <div class="input-wrapper">
+                            <input
+                                    type="text"
+                                    class="form-control input-sm"
+                                    placeholder=""
+                                    ng-model="extractEvidence.dcService.sampleDNAListItem.packingMethod"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        <label >送检目的：</label>
+                        <div class="input-wrapper">
+                            <input
+                                    type="text"
+                                    class="form-control input-sm"
+                                    placeholder=""
+                                    ng-model="extractEvidence.dcService.sampleDNAListItem.testPurpose"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-inline">
+                    <div class="form-group col-sm-12">
+                        <label >预实验描述：</label>
+                        <div class="input-wrapper">
+                            <textarea
+                                    class="gui-textarea"
+                                    ng-model="extractEvidence.dcService.sampleDNAListItem.testDescription"
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-inline">
+                    <div class="form-group col-sm-12">
+                        <label >备注：</label>
+                        <div class="input-wrapper">
+                            <textarea
+                                    class="gui-textarea"
+                                    ng-model="extractEvidence.dcService.sampleDNAListItem.comments"
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+
+        <file-slide-comp flag="4"></file-slide-comp>
+
+    </div>
+
+    <div class="panel-footer text-center">
+        <button
+                type="button"
+                class="btn btn-warning dark"
+                ng-click="extractEvidence.addExtract(extractEvidence.activePickupIndex)"
+                ng-disabled="modalForm.$invalid || !extractEvidence.dcService.professionList.length"
+        >保存</button>
+
+        <button
+                type="button"
+                class="btn btn-default"
+                ng-click="extractEvidence.addExtract(extractEvidence.activePickupIndex, true)"
+                ng-if="extractEvidence.dcService.mode === 'display'"
+                ng-disabled="modalForm.$invalid"
+        >保存并新增</button>
+
+        <button
+                type="button"
+                class="btn btn-default"
+                ng-click="extractEvidence.closeMagnificPopup()"
+        >取消</button>
+    </div>
+
+</div>

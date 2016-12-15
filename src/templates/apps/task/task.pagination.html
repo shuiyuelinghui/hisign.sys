@@ -1,0 +1,30 @@
+<div class="text-center admin-form theme-primary">
+    <div class="row mv20">
+        <div class="pull-left ml20">
+            <span class="text-muted" style="line-height: 30px">每页显示 </span>
+            <label class="select mtn w50">
+                <select class="input-sm" ng-model="task.pageSize" ng-change="task.changeToPageSize()"
+                        ng-init="task.pageSize = '10'">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                <i class="arrow"></i>
+            </label>
+            <span class="text-muted mt5" style="line-height: 30px"> 条数据</span>
+        </div>
+
+        <ul id="datatable_pagination" class="pagination mn"></ul>
+
+        <div class="pull-right mr20">
+                        <span class="text-muted" style="line-height: 30px">
+                            共{{task.totalPages}}页 到第
+                            <input class="gui-input text-center w50" ng-model="task.tmpPageNum"/>
+                            页
+                             <button class="btn btn-primary btn-xs fs14 ml10" style="height: 30px"
+                                     ng-click="task.goToPage()">确认</button>
+                        </span>
+        </div>
+    </div>
+</div>

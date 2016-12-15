@@ -1,0 +1,77 @@
+<div id="entrust_sidebar" class="entrust-sidebar">
+
+    <ol class="timeline-list pb10 pt5">
+        <li class="timeline-item mb10">
+            <div>
+                <a class="timeline-icon bg-success"
+                   href="#panel_institution" class="">鉴</a>
+            </div>
+        </li>
+        <li class="timeline-item mb10">
+            <div>
+                <a  class="timeline-icon light"
+                    ng-class="{true:'bg-danger', false:'bg-success'}[(entrust || accept).dcService.entrustForm.$invalid]"
+                    href="#panel_entrust" class="">委</a>
+            </div>
+        </li>
+        <li class="timeline-item mb10">
+            <div>
+                <a  class="timeline-icon light"
+                    ng-class="{true:'bg-danger', false:'bg-success'}[(entrust || accept).dcService.caseForm.$invalid]"
+                    href="#panel_case" class="">案</a>
+            </div>
+        </li>
+        <li class="timeline-item mb10">
+            <div
+            >
+                <a class="timeline-icon light"
+                   ng-class="{true:'bg-success', false:'bg-danger'}[
+                        (entrust || accept).dcService.memberList.length > 0 ||
+                        (entrust || accept).dcService.memberDNAList.length > 0 ||
+                        (entrust || accept).dcService.relativesRelationList.length > 0 ||
+                        (entrust || accept).dcService.nameLessCorpseList.length > 0
+                    ]"
+                   href="#panel_member" class="">人</a>
+            </div>
+        </li>
+        <li class="timeline-item mb10">
+            <div>
+                <a class="timeline-icon light"
+                   ng-class="{true:'bg-success', false:'bg-danger'}[(entrust || accept).dcService.evidenceList.length > 0]"
+                   href="#panel_evidence" class="">物</a>
+            </div>
+        </li>
+
+        <li>
+            <hr class="mv20">
+        </li>
+        <li class="text-center mb10" ng-click="(entrust || accept).admindesignsService.scrollTop()">
+            <span class="fa fa-arrow-up fs18"></span>
+        </li>
+        <li class="text-center mb10" ng-click="(entrust || accept).admindesignsService.scrollBottom()">
+            <span class="fa fa-arrow-down fs18"></span>
+        </li>
+        <li>
+            <hr class="mv20">
+        </li>
+        <li
+                class="text-center mb10"
+                ng-click="entrust.saveTemporaryData()"
+                ng-if="(entrust || accept).dcService.activeState !== 'app.accept'"
+        >
+            <span class="fa fa-save fs18"></span>
+        </li>
+        <!--<li class="text-center">-->
+            <!--<button-->
+                    <!--class="glyphicon glyphicon-save fs18"-->
+                    <!--ng-click="entrust.checkDataCompleteness()"-->
+                    <!--ng-disabled="-->
+                        <!--entrust.dcService.entrustForm.$invalid ||-->
+                        <!--entrust.dcService.caseForm.$invalid ||-->
+                        <!--entrust.dcService.containerForm.$invalid-->
+                    <!--"-->
+            <!--&gt;</button>-->
+        <!--</li>-->
+    </ol>
+
+</div>

@@ -1,0 +1,48 @@
+
+
+    <!-- Documentation Content -->
+      
+    	<div class="col-xs-12 center-col admin-form theme-primary">
+	        <div class="panel">
+	          	
+
+	          	<div class="panel-body">
+
+	          		<form class="form-horizontal">
+
+			          	<div class="row mb20">
+				          
+				          	<span class="col-xs-2">转交工作职工：</span>
+				        	
+				            <span class="col-xs-3">显示当前登录用户姓名</span>
+
+			          	</div>
+
+			          	<div class="row mb20">
+				          	
+				          	<span class="col-xs-2">接受工作职工：</span>
+
+				          	<div class="col-xs-3">
+				          		<select id="receiver" class="form-control input-sm" ng-model="workHandover.receiver"
+                             	ng-init="workHandover.receiver = '-1'">
+                                <option value="-1">请选择</option>
+                                <option ng-repeat="item in workHandover.handoverUserData" value="{{item.id}}">
+                                    {{item.name}}
+                                </option>
+                            </select>
+				          	</div>
+
+			          	</div>
+
+		          	</form>
+
+	          	</div>
+
+	          	<div class="panel-footer text-center">
+			        <button type="button" class="btn btn-sm btn-primary" ng-click="workHandover.save()">保存</button>
+			        <button type="reset" class="btn btn-sm"> 关闭</button>
+    			</div>
+	    	</div>
+
+	    </div>
+      

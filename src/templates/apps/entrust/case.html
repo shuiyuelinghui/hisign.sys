@@ -1,0 +1,209 @@
+<div id="panel_case"></div>
+<div class="panel panel-default" ng-controller="CaseInfoController as caseInfo">
+    <div class="panel-body">
+        <div class="fs18 text-dark-darker fw600 pb20">案件信息
+            <div class="action-menu fs12 fw400">
+                <span class="fa fa-files-o"></span>
+                <span>复用现勘信息系统</span>
+                <em>&nbsp;|&nbsp;</em>
+                <span class="fa fa-floppy-o"></span>
+                <span>复用物证信息系统</span>
+            </div>
+        </div>
+        <form name="caseInfo.form" id="form_case" class="admin-form theme-primary">
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12 pln prn">
+                    <label for="">案件名称：</label>
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            class="gui-input"
+                            placeholder="示例：鼓楼 2014年12月2日 张某某被抢劫案"
+                            ng-disabled="caseInfo.dcService.isAppend"
+                            required
+                            ng-model="caseInfo.dcService.caseInfo.caseName"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-4 pln">
+                    <label for="">现勘编号：</label>
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            class="gui-input"
+                            ng-disabled="caseInfo.dcService.isAppend"
+                            placeholder=""
+                            required
+                            ng-model="caseInfo.dcService.caseInfo.investigationCode"
+                        />
+                    </div>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="">警情编号：</label>
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            class="gui-input"
+                            ng-disabled="caseInfo.dcService.isAppend"
+                            placeholder=""
+                            required
+                            ng-model="caseInfo.dcService.caseInfo.policeCode"
+                        />
+                    </div>
+                </div>
+                <div class="form-group col-sm-4 prn">
+                    <label for="">案件编号：</label>
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            class="gui-input"
+                            ng-disabled="caseInfo.dcService.isAppend"
+                            placeholder=""
+                            required
+                            ng-model="caseInfo.dcService.caseInfo.caseCode"
+                        />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-4 pln">
+                    <label for="">案件性质：</label>
+                    <div class="input-wrapper">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        required
+                                        ng-disabled="caseInfo.dcService.isAppend"
+                                        ng-model="caseInfo.dcService.caseInfo.category"
+                                        ng-options="item.dictKey as item.dictValue1 for item in caseInfo.dcService.dictData.CaseCateModel"
+                                >
+                                    <option value="">请选择</option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4 form-icon-suffix">
+                    <label for="">案发时间：</label>
+                    <div class="input-wrapper">
+                        <input
+                            readonly
+                            type="text"
+                            class="gui-input bs-datetimepicker"
+                            ng-disabled="caseInfo.dcService.isAppend"
+                            data-options='{"maxDate": true}'
+                            placeholder=""
+                            required
+                            ng-model="caseInfo.dcService.caseInfo.offenseDateStr"
+                        />
+                        <span class="fa fa-calendar form-control-icon"></span>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4 prn">
+                    <label for="">案件类型：</label>
+                    <div class="input-wrapper">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        required
+                                        ng-disabled="caseInfo.dcService.isAppend"
+                                        ng-model="caseInfo.dcService.caseInfo.caseType"
+                                        ng-options="item.dictKey as item.dictValue1 for item in caseInfo.dcService.dictData.CaseTypeModel"
+                                >
+                                    <option value="">请选择</option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-4 pln">
+                    <label for="">紧急程度：</label>
+                    <div class="input-wrapper">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        required
+                                        ng-disabled="caseInfo.dcService.isAppend"
+                                        ng-model="caseInfo.dcService.caseInfo.priority"
+                                        ng-options="item.dictKey as item.dictValue1 for item in caseInfo.dcService.dictData.CasePriorityModel"
+                                >
+                                    <option value="">请选择</option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="">案件归属：</label>
+                    <div class="input-wrapper">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        required
+                                        ng-disabled="caseInfo.dcService.isAppend"
+                                        ng-model="caseInfo.dcService.caseInfo.caseAscription"
+                                        ng-options="item.dictKey as item.dictValue1 for item in caseInfo.dcService.dictData.CaseAscrModel"
+                                >
+                                    <option value="">请选择</option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12 pln prn">
+                    <label for="">案发地点：</label>
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            class="gui-input"
+                            ng-disabled="caseInfo.dcService.isAppend"
+                            required
+                            placeholder=""
+                            ng-model="caseInfo.dcService.caseInfo.offensePlace"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12 pln prn">
+                    <label for="">简要案情：</label>
+                    <div class="input-wrapper">
+                        <div class="section">
+
+                                <textarea
+                                    class="gui-textarea"
+                                    required
+                                    ng-model="caseInfo.dcService.caseInfo.caseBrief"
+                                ></textarea>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

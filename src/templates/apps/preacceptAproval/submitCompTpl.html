@@ -1,0 +1,56 @@
+<div class="form-content">
+        <!-- 审批结果:-->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">审批结果：</label>
+            <div class="col-sm-10">
+                <div class="option-group field">
+                    <label class="option option-primary fl" style="min-width: 16.66666667%">
+                        <input type="radio"
+                               name="result"
+                               value="1"
+                               ng-model="submitComp.configData.resultValue"
+                               ng-change="submitComp.configData.fetchApproveTpl(submitComp.configData.resultValue)"
+                                />
+                        <span class="radio"></span>同意预受理意见，不予受理此案件
+                    </label>
+                    <label class="option option-primary" style="min-width: 16.66666667%">
+                        <input type="radio"
+                               name="result"
+                               value="2"
+                               ng-model="submitComp.configData.resultValue"
+                               ng-change="submitComp.configData.fetchApproveTpl(submitComp.configData.resultValue)"
+                                />
+                        <span class="radio"></span>不同意预受理意见，受理此案件
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- 审批时间:-->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">审批时间: </label>
+            <div class="col-sm-10">
+                <span>{{submitComp.now}}</span>
+            </div>
+        </div>
+        <!-- 意见:-->
+        <div class="form-group approve-suggestion-tpl mb5">
+            <label class="col-sm-2 control-label">审批意见：</label>
+            <div class="col-sm-10">
+                <ul class="tplScroller">
+                    <li class="text-left tooltipster"
+                        ng-class="{true:'active'}[submitComp.configData.tplIndex === $index]"
+                        ng-repeat="item in submitComp.configData.tplData"
+                        ng-click="submitComp.chooseTpl($index, item.content)"
+                        title="{{item.content}}">
+                        {{item.content}}
+                    </li>
+                </ul>
+                <textarea name="opinion"
+                        ng-model="submitComp.configData.formData.opinion"
+                        ng-required="submitComp.configData.exaOpinionWriteRule == 1 || (submitComp.configData.exaOpinionWriteRule == 2 && submitComp.configData.resultValue == 2)"
+                        maxlength="100">
+                </textarea>
+            </div>
+        </div>
+    </div>
+

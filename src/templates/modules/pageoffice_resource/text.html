@@ -1,0 +1,84 @@
+<div class="ui-pageoffice-container admin-form theme-primary">
+    <h1 ng-if="pageofficeResource.activeState === 'method'">选择检验方法</h1>
+    <h1 ng-if="pageofficeResource.activeState === 'appliance'">选择仪器</h1>
+
+    <div>
+        <div class="search-bar">
+            <label class="field select mtn fl">
+                <select
+                        class="form-control input-sm fl"
+                        ng-model="pageofficeResource.searchTextCategory"
+                        ng-init="pageofficeResource.searchTextCategory = 'testmethodName'"
+                >
+                    <option value="testmethodName">名称</option>
+                    <option value="testmethodCode">编号</option>
+                </select>
+                <i class="arrow"></i>
+            </label>
+
+            <label class="field append-icon fl">
+                <input
+                        type="text"
+                        class="gui-input"
+                        placeholder="请按回车键进行搜索"
+                        ng-model="pageofficeResource.searchTextContent"
+                        ng-keydown="pageofficeResource.handleSearchOnEnter($event)"
+                />
+                <label class="field-icon">
+                    <i class="fa fa-search"></i>
+                </label>
+            </label>
+        </div>
+
+        <div class="resource-list">
+            <h2>共找到<span>{{pageofficeResource.textData.total}}</span>符合的记录</h2>
+            <table class="table table-bordered table-striped" ng-if="pageofficeResource.textData.total > 0">
+                <tr>
+                    <th style="width:5%">
+                        <label class="option option-primary">
+                            <input
+                                    type="checkbox"
+                                    ng-checked="pageofficeResource.allChecked"
+                                    ng-click="pageofficeResource.toggleAllCheckbox($event)"
+                            />
+                            <span class="checkbox"></span>
+                        </label>
+                    </th>
+                    <th style="width:35%">编号</th>
+                    <th style="width:60%">名称</th>
+                </tr>
+                <tr ng-repeat="item in pageofficeResource.textData.testmethods || pageofficeResource.textData.sysTestdevices">
+                    <td>
+                        <label class="option option-primary">
+                            <input
+                                    type="checkbox"
+                                    data-name="{{item.name}}"
+                                    ng-checked="pageofficeResource.insertData.indexOf(item.name) >= 0"
+                                    ng-click="pageofficeResource.toggleInsertData($event, item.name)"
+                            />
+                            <span class="checkbox"></span>
+                        </label>
+                    </td>
+                    <td>{{item.code}}</td>
+                    <td>{{item.name}}</td>
+                </tr>
+            </table>
+            <div class="tc">
+                <ul id="po_pagination" class="pagination"></ul>
+            </div>
+            <h2 ng-if="pageofficeResource.textData.total > 0">已选择{{pageofficeResource.insertData.length}}条记录</h2>
+        </div>
+
+        <div class="tc bottom-bar" ng-if="pageofficeResource.textData.total > 0">
+            <button
+                    class="btn btn-warning"
+                    ng-disabled="!pageofficeResource.insertData.length"
+                    ng-click="pageofficeResource.insert()"
+            >插入</button>
+            <button
+                    class="btn btn-default"
+                    ng-click="pageofficeResource.setActiveState(pageofficeResource.activeState)"
+            >取消</button>
+        </div>
+    </div>
+</div>

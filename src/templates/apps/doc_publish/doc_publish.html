@@ -1,0 +1,278 @@
+<div class="panel panel-default">
+
+    <div class="panel-heading">发放信息</div>
+
+    <div class="panel-body">
+
+        <form class="admin-form theme-primary doc-publish-form" name="docPublishForm">
+
+            <div class="form-inline">
+                <div class="form-group">
+                    <span class="label-span">文书编号：</span>
+                    <span class="form-control-static">{{docPublish.initData.bookCodes}}</span>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group">
+                    <span class="label-span">案件名称：</span>
+                    <span class="form-control-static">{{docPublish.initData.caseName}}</span>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group">
+                    <span class="label-span">委托单位：</span>
+                    <span class="form-control-static">{{docPublish.initData.departmentDetailName}}</span>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group">
+                    <span class="label-span"><sup>*</sup>发放形式：</span>
+                    <label class="field select">
+                        <select
+                                required
+                                ng-options="item.dictKey as item.dictValue1 for item in docPublish.dictData.IdenBookSendTypeModel"
+                                ng-model="formData.issue.category"
+                        >
+                            <option value="">请选择</option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 凭回执领取 Start -->
+            <div ng-if="formData.issue.category === '1'">
+            <div class="form-inline">
+                <div class="form-group has-feedback">
+                    <span class="label-span"><sup>*</sup>发放时间：</span>
+                    <label class="field append-icon">
+                        <input
+                                readonly
+                                type="text"
+                                class="gui-input bs-datetimepicker"
+                                required
+                                ng-model="formData.issue.issueDateStr"
+                        />
+                        <label class="field-icon">
+                            <i class="fa fa-calendar"></i>
+                        </label>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <span class="label-span"><sup>*</sup>邮寄领取单位：</span>
+                    <input
+                            type="text"
+                            class="gui-input form-control long"
+                            required
+                            ng-model="formData.issue.unit"
+                    />
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group">
+                    <span class="label-span"><sup>*</sup>领取人：</span>
+                    <input
+                            type="text"
+                            class="gui-input"
+                            required
+                            ng-model="formData.issue.receiptor"
+                    />
+                </div>
+
+                <div class="form-group">
+                    <span class="label-span"><sup>*</sup>联系电话：</span>
+                    <input
+                            type="text"
+                            class="gui-input long"
+                            required
+                            ng-model="formData.issue.phone"
+                    />
+                </div>
+            </div>
+            </div>
+            <!-- 凭回执领取 End -->
+
+
+            <!-- 机要通讯寄出 Start -->
+            <div ng-if="formData.issue.category === '2'">
+            <div class="form-inline">
+                <div class="form-group">
+                    <span class="label-span"><sup>*</sup>交寄情况：</span>
+                    <label
+                            class="option option-primary"
+                            ng-repeat="item in docPublish.dictData.SendSituationModel"
+                    >
+                        <input type="radio"
+                               name="postingStatus"
+                               value="{{item.dictKey}}"
+                               ng-model="formData.issue.postingStatus"
+                               ng-init="formData.issue.postingStatus = docPublish.dictData.SendSituationModel[0].dictKey"
+                        />
+                        <span class="radio"></span>{{item.dictValue1}}
+                    </label>
+                </div>
+            </div>
+
+            <div ng-if="formData.issue.postingStatus === '1'">
+            <div class="form-inline">
+                <div class="form-group has-feedback">
+                    <span class="label-span"><sup>*</sup>发文日期：</span>
+                    <label class="field append-icon">
+                        <input
+                                readonly
+                                type="text"
+                                class="gui-input bs-datetimepicker"
+                                required
+                                ng-model="formData.confidential.sendDateStr"
+                        />
+                        <span class="field-icon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <span class="label-span"><sup>*</sup>发文份数：</span>
+                    <input
+                            type="text"
+                            class="gui-input long"
+                            required
+                            ng-model="formData.confidential.servings"
+                    />
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group">
+                    <span class="label-span"><sup>*</sup>内容摘要：</span>
+                    <textarea
+                            class="gui-textarea ex-long"
+                            required
+                            ng-model="formData.confidential.content"
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group">
+                    <span class="label-span"><sup>*</sup>密级：</span>
+                    <label class="option option-primary" ng-repeat="item in docPublish.dictData.DeclassifiedModel">
+                        <input type="radio"
+                               name="declassified"
+                               value="{{item.dictKey}}"
+                               ng-model="formData.confidential.declassified"
+                               ng-init="formData.confidential.declassified = docPublish.dictData.DeclassifiedModel[0].dictKey"
+                        />
+                        <span class="radio"></span>{{item.dictValue1}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group">
+                    <span class="label-span">发文编号：</span>
+                    <input
+                            type="text"
+                            class="gui-input"
+                            ng-model="formData.confidential.postingCode"
+                    />
+                </div>
+
+                <div class="form-group">
+                    <span class="label-span"><sup>*</sup>机要邮寄号：</span>
+                    <input
+                            type="text"
+                            class="gui-input long"
+                            required
+                            ng-model="formData.confidential.confidentialCode"
+                    />
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group">
+                    <span class="label-span"><sup>*</sup>经办单位：</span>
+                    <input
+                            type="text"
+                            class="gui-input ex-long"
+                            required
+                            readonly
+                            ng-model="formData.confidential.unitCode"
+                    />
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group">
+                    <span class="label-span"><sup>*</sup>收件人：</span>
+                    <input
+                            type="text"
+                            class="gui-input"
+                            required
+                            ng-model="formData.confidential.recipients"
+                    />
+                </div>
+
+                <div class="form-group">
+                    <span class="label-span"><sup>*</sup>收件单位：</span>
+                    <input
+                            type="text"
+                            class="gui-input long"
+                            required
+                            ng-model="formData.confidential.receivingUnitName"
+                    />
+                </div>
+            </div>
+            </div>
+
+            </div>
+            <!-- 机要通讯寄出 End -->
+
+            <div class="form-inline">
+                <div class="form-group">
+                    <span class="label-span"><sup>*</sup>是否处理检材：</span>
+                    <label class="option option-primary" ng-repeat="item in docPublish.dictData.IsNoModel">
+                        <input type="radio"
+                               name="receiveSampleStatus"
+                               value="{{item.dictKey}}"
+                               ng-model="formData.issue.receiveSampleStatus"
+                        />
+                        <span class="radio"></span>{{item.dictValue1}}
+                    </label>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<form name="docPublishTableForm" id="docPublishTableForm">
+    <div
+        class="panel sort-disable mb50"
+        ng-show="formData.issue.receiveSampleStatus === '1'"
+    >
+        <div class="panel-heading">检材样本流转登记</div>
+        <div class="panel-body dt-doc-publish admin-form theme-primary">
+            <table id="datatable" class="table table-striped table-bordered admin-form" cellspacing="0" width="100%"></table>
+        </div>
+    </div>
+</form>
+
+
+<div class="tc">
+    <button
+            class="btn btn-primary"
+            ng-click="docPublish.submit()"
+            ng-disabled="
+                docPublishForm.$invalid ||
+                (docPublishTableForm.$invalid && formData.issue.receiveSampleStatus === '1')
+            "
+    >文书发放</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-primary" ng-click="docPublish.goBack()">返回</button>
+</div>

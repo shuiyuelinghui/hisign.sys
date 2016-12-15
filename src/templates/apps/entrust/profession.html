@@ -1,0 +1,12 @@
+<div class="ui-profession">
+    <div
+        id="add_pro"
+        ng-if="pro.isShowAddProfessionBtn()"
+    >+</div>
+
+    <div
+            id="pro_slide"
+            class="pro-slide"
+            ng-class="{true:'edit'}[!pro.isShowAddProfessionBtn()]"
+    ></div>
+</div>

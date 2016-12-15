@@ -1,0 +1,80 @@
+<aside id="sidebar_left" class="nano nano-primary affix">
+
+    <div class="sidebar-left-content nano-content">
+
+        <header class="sidebar-header">
+
+            <div class="sidebar-widget avatar-widget">
+                <div class="media">
+                    <a class="media-left" href="#">
+                        <img src="{{sidebar.userInfo.avatar}}" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+            <div class="sidebar-widget author-widget mt30 mb10">
+                <div class="media">
+                    <div class="media-body">
+                        <div class="media-author fs14">{{sidebar.userInfo.userName}}</div>
+                        <div class="media-links">
+                            <span class="text-muted fs10">{{sidebar.userInfo.departmentName}} {{sidebar.userInfo.roleName}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-body">
+                        <button class="btn btn-dark btn-sm">
+                            <i class="fa fa-user fs14"></i>  个人中心
+                        </button>
+                        <button class="btn btn-dark btn-sm">
+                            <i class="fa fa-gear fs14"></i>  系统设置
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+        <ul class="nav sidebar-menu">
+
+            <li ng-show="!sidebar.isHome" ng-repeat="menu in sidebar.menuItems">
+
+                <a ui-sref="{{menu.state}}||app.home" ng-if="menu.children==null">
+                    <span class="glyphicon glyphicon-home"></span>
+                    <span class="sidebar-title">{{menu.name}}</span>
+                </a>
+
+                <a
+                        class="accordion-toggle"
+                        href="#"
+                        ng-if="menu.children!=null"
+                        ng-class="{true:'menu-open'}[sidebar.$state.includes(menu.state)]"
+                >
+
+                    <span class="{{menu.icon}}"></span>
+                    <span class="sidebar-title">{{menu.name}}</span>
+                    <span class="caret" ng-if="menu.children"></span>
+                </a>
+                <ul class="nav sub-nav">
+                    <li ng-repeat="subMenu in menu.children">
+                        <a
+                                class="accordion-toggle"
+                                href="#"
+                                ng-class="{'menu-open':sidebar.$state.includes(subMenu.state)}"
+                        >
+                            <span class="{{subMenu.icon}}"></span> {{subMenu.name}}
+                            <span class="caret" ng-if="subMenu.children"></span>
+                        </a>
+                        <ul class="nav sub-nav">
+                            <li ui-sref-active="active" ng-repeat="item in subMenu.children">
+                                <a ui-sref="{{item.state}}" ng-if="item.state">{{item.name}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+
+</aside>

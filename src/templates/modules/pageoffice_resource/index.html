@@ -1,0 +1,34 @@
+<div class="ui-docright-sidebar">
+	<!--右边侧边栏的内容-->
+    <ol class="timeline-list pb10 docrightlist pt20">
+    	<li
+				class="items"
+				ng-click="pageofficeResource.setActiveState('method')"
+				ng-class="{true:'active'}[pageofficeResource.activeState === 'method']"
+		>
+    		<span class="fa fa-book fs20"></span>
+    	</li>
+    	<li class="linebottom"></li>
+    	<li
+				class="items"
+				ng-click="pageofficeResource.setActiveState('appliance')"
+				ng-class="{true:'active'}[pageofficeResource.activeState === 'appliance']"
+		>
+    		<span class="fa fa-balance-scale fs20"></span>
+    	</li>
+    	<li class="linebottom"></li>
+    	<li
+				class="items"
+				ng-click="pageofficeResource.setActiveState('document')"
+				ng-class="{true:'active'}[pageofficeResource.activeState === 'document']"
+		>
+    		<span class="fa fa-sitemap fs20"></span>
+    	</li>
+    </ol>
+    <span class="fa fa-arrow-up fs20 up"></span>
+</div>
+
+<div class="ui-pageoffice-wrapper" ng-if="pageofficeResource.activeState !== ''">
+	<ng-include ng-if="pageofficeResource.activeState === 'method' || pageofficeResource.activeState === 'appliance'" src="'./templates/modules/pageoffice_resource/text.html'"></ng-include>
+	<ng-include ng-if="pageofficeResource.activeState === 'document'" src="'./templates/modules/pageoffice_resource/image.html'"></ng-include>
+</div>

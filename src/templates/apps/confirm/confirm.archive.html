@@ -1,0 +1,222 @@
+
+<div class="ph10">
+	<div class="row">
+		<!-- Documentation Content -->
+
+		<div class="panel">
+
+			<div class="panel-body pv30">
+
+				<button class="btn btn-primary ph15 mr10 pull-right" type="button" ng-click="submitArchive.generate()">生成档案</button>
+				<button class="btn btn-primary ph15 mr10 pull-right" type="button" ng-click="submitArchive.openMagnificPopup('submit-archive-result.html')">提交归档</button>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row admin-form theme-primary">
+		<form name="docDraftForm">
+			<div class="panel">
+
+				<div class="panel-body pv10">
+					<div class="fs18 mv20"><span>目录信息</span></div>
+
+					<div class="row mb20">
+						<div class="col-md-1"></div>
+						<div class="col-md-2"><span class="fs16">目录名称</span></div>
+						<div class="col-md-2 text-center"><span class="fs16">页数</span></div>
+						<div class="col-md-2 text-center"><span class="fs16">起止页数</span></div>
+						<div class="col-md-3"></div>
+
+					</div>
+
+					<div class="row mb5" ng-repeat="items in submitArchive.dictData.FiledTypeModel">
+						<div class="col-md-1">
+							<div class="option-group field pull-right">
+								<label class="option option-primary">
+									<input type="checkbox" name="checked" value="{{items.dictKey}}" checked="">
+									<span class="checkbox"></span></label>
+							</div>
+						</div>
+						<div class="col-md-2">{{items.dictValue1}}</div>
+						<div class="col-md-2">
+							<input type="text" name="" class="gui-input" placeholder="">
+						</div>
+						<div class="col-md-2">
+							<input type="text" name="" class="gui-input" placeholder="">
+						</div>
+						<div class="col-md-3"></div>
+					</div>
+					<div class="row mb5 mt10">
+						<div class="col-md-"></div>
+						<div class="col-md-3">
+							<label class="pull-left mt5">总页数:</label>
+							<div class="section" style="margin-left:70px">
+
+								<input type="text" class="gui-input"/>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<label class="pull-left mt5">总件数:</label>
+							<div class="section" style="margin-left:70px">
+
+								<input type="text" class="gui-input"/>
+							</div>
+
+						</div>
+
+						<div class="col-md-3"></div>
+					</div>
+
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="row admin-form theme-primary">
+		<form name="docDraftForm">
+			<div class="panel">
+
+				<div class="panel-body pv10">
+					<div class="fs18 mv20"><span>归档信息</span></div>
+
+					<div class="row mb20">
+						<div class="col-md-4">
+							<label class="mt5">档案类型: 鉴定书</label>
+
+						</div>
+						<div class="col-md-4">
+							<label class="mt5">档案类型: 鉴定类型1</label>
+						</div>
+
+					</div>
+					<div class="row mb20">
+						<div class="col-md-4">
+							<label class="mt5 pull-left">归档科室:</label>
+							<div class="section ml90">
+								<label class="field select mtn">
+									<select class="form-control input-sm"
+											ng-options="items.id as items.name for items in submitArchive.confirArchive"
+											ng-model="formData.acceptLab">
+										<option value="">请选择</option>
+
+									</select>
+									<i class="arrow"></i>
+								</label>
+							</div>
+
+						</div>
+						<div class="col-md-4">
+							<label class="mt5 pull-left">归档人:</label>
+							<div class="section ml70">
+								<label class="field select mtn">
+									<select class="form-control input-sm"
+											ng-options="items.id as items.name for items in submitArchive.confirArchive"
+											ng-model="formData.acceptLab">
+										<option value="">请选择</option>
+
+									</select>
+									<i class="arrow"></i>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<label class="mt5 pull-left">归档日期:</label>
+							<div class="section ml70">
+								<input
+										readonly
+										type="text"
+										class="gui-input bs-datetimepicker"
+										placeholder=""
+										required
+										ng-model="entrustInfo.dcService.submission.cityIdentifiedDateStr"
+								/>
+								<span class="fa fa-calendar form-control-icon"></span>
+							</div>
+						</div>
+
+					</div>
+					<div class="row mb20">
+						<div class="col-md-4">
+							<label class="mt5 pull-left">档案保存期限:</label>
+							<div class="section ml90">
+								<label class="field select mtn">
+									<select class="form-control input-sm"
+											ng-options="items.dictKey as items.dictValue1  for items  in submitArchive.dictData.ArchRetentionPeriodModel"
+											ng-model="formData.archiveTerm">
+										<option value="">请选择</option>
+									</select>
+									<i class="arrow"></i>
+								</label>
+							</div>
+
+
+
+						</div>
+						<div class="col-md-4">
+							<label class="mt5 pull-left">是否发放:</label>
+							<div class="section ml70">
+								<div class="option-group field">
+									<label class="option option-primary" ng-repeat="item in submitArchive.dictData.IsNoIssueModel">
+										<input type="radio" name="inlineRadioOptions" value="{{item.dictKey}}" checked class="mr5"
+											   ng-model="formData.archivesEndFlag">
+										<span class="radio"></span>{{item.dictValue1}}
+
+										<span ng-if="$index === 0">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									</label>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="row">
+
+
+		<div class="panel">
+			<div class="panel-heading">
+                        <span class="panel-title">
+                            <span class="fa fa-table"></span>
+							档案信息
+                        </span>
+			</div>
+			<div class="panel-body pn">
+				<div class="bs-component">
+					<table class="table table-bordered mbn table-hover table-striped">
+						<thead>
+						<tr>
+							<th class="text-center" style="width: 30%">文书</th>
+							<th class="text-center" style="width: 20%">生成时间</th>
+							<th class="text-center" style="width: 20%">归档人</th>
+							<th class="text-center">操作</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr class="text-center" ng-repeat="item in docDraft.docListData">
+							<td>{{$index+1}}</td>
+							<td>{{item.code}}</td>
+							<td>{{item.insDate|date:'yyyy-MM-dd'}}</td>
+							<td class="text-left">
+
+								<span class="fa fa-edit cursor fs16 tooltipster mr5" title="修改" ng-click="docDraft.bulidIframeData(item.type)"></span>
+
+								<span class="fa fa-trash-o cursor fs16 tooltipster mr5" title="删除" ng-click="docDraft.docDel(item.id)"></span>
+								<span class="fa fa-cloud-upload cursor fs16 tooltipster mr5"
+									  title="上传鉴定文书"></span>
+								<span class="fa fa-stack-exchange cursor fs16 tooltipster mr5"
+									  title="鉴定文书审批单"></span>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>

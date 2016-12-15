@@ -1,0 +1,40 @@
+<!-- 确认文档 -->
+<div class="form-content">
+    <!--档案归档位置-->
+    <div class="form-group approve-suggestion-tpl">
+        <label class="col-sm-2 control-label">档案归档位置：</label>
+        <div class="col-sm-10">
+            <ul class="tplScroller">
+                <li class="text-center"
+                    ng-class="{true:'active'}[submitComp.configData.placeIndex === $index]"
+                    ng-repeat="item in submitComp.configData.placeData"
+                    ng-click="submitComp.choosePlace($index, item.dictValue1)">
+                    {{item.dictValue1}}
+                </li>
+            </ul>
+
+            <textarea name="position"  ng-model="submitComp.configData.formData.archivePosition"></textarea>
+        </div>
+    </div>
+    <!--确认归档意见-->
+    <div class="form-group approve-suggestion-tpl">
+        <label class="col-sm-2 control-label pt5"> 确认归档意见：</label>
+        <div class="col-sm-10">
+            <ul class="tplScroller">
+                <li class="text-left tooltipster"
+                    ng-class="{true:'active'}[submitComp.configData.tplIndex === $index]"
+                    ng-repeat="item in submitComp.configData.tplData"
+                    ng-click="submitComp.chooseTpl($index, item.content)"
+                    title="{{item.content}}">
+                    {{item.content}}
+                </li>
+            </ul>
+
+            <textarea name="opinion"
+                ng-model="submitComp.configData.formData.opinion"
+                required
+                maxlength="100">
+            </textarea>
+        </div>
+    </div>
+</div>

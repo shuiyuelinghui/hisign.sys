@@ -1,0 +1,116 @@
+<div class="panel">
+    <div class="panel-heading">
+        <ul class="nav panel-tabs-border panel-tabs panel-tabs-left">
+            <li ng-if="doc.isShow('bookCover')"
+                ng-class="{true:'active'}[doc.type==doc.commonService.docType.bookCover]">
+                <a ng-click="doc.goToState(doc.commonService.docType.bookCover)">封面</a>
+            </li>
+            <li ng-if="doc.isShow('bookDirectory')"
+                ng-class="{true:'active'}[doc.type==doc.commonService.docType.bookDirectory]">
+                <a ng-click="doc.goToState(doc.commonService.docType.bookDirectory)">目录</a>
+            </li>
+            <li ng-if="doc.isShow('bookAppraisal')"
+            ng-class="{true:'active'}[doc.type==doc.commonService.docType.bookAppraisal]">
+                <a ng-click="doc.goToState(doc.commonService.docType.bookAppraisal)">鉴定文书</a>
+            </li>
+
+            <li ng-if="doc.isShow('bookDraft')"
+            ng-class="{true:'active'}[doc.type==doc.commonService.docType.bookDraft]">
+                <a ng-click="doc.goToState(doc.commonService.docType.bookDraft)">鉴定文书草稿</a>
+            </li>
+            <li ng-if="doc.isShow('bookApproval')"
+                ng-class="{true:'active'}[doc.type==doc.commonService.docType.bookApproval]">
+                <a ng-click="doc.goToState(doc.commonService.docType.bookApproval)">审批单</a>
+            </li>
+
+            <li ng-if="doc.isShow('bookRefusedAcceptance')"
+                ng-class="{true:'active'}[doc.type==doc.commonService.docType.bookRefusedAcceptance]">
+                <a ng-click="doc.goToState(doc.commonService.docType.bookRefusedAcceptance)">拒绝受理回执单</a>
+            </li>
+
+            <li ng-if="doc.isShow('bookInspection')"
+                ng-class="{true:'active'}[doc.type==doc.commonService.docType.bookInspection]">
+                <a ng-click="doc.goToState(doc.commonService.docType.bookInspection)">检验记录单</a>
+            </li>
+
+            <li ng-if="doc.isShow('examineRecord')"
+                ng-class="{true:'active'}[doc.type==doc.commonService.docType.examineRecord]">
+                <a ng-click="doc.goToState(doc.commonService.docType.examineRecord)">检验记录</a>
+            </li>
+
+            <li ng-if="doc.isShow('bookConfirmation')"
+                ng-class="{true:'active'}[doc.type==doc.commonService.docType.bookConfirmation]">
+                <a ng-click="doc.goToState(doc.commonService.docType.bookConfirmation)">鉴定受理登记表</a>
+            </li>
+
+            <li ng-if="doc.isShow('bookProxy')"
+                ng-class="{true:'active'}[doc.type==doc.commonService.docType.bookProxy]">
+                <a ng-click="doc.goToState(doc.commonService.docType.bookProxy)">鉴定委托书</a>
+            </li>
+
+            <li ng-if="doc.isShow('bookSatisfaction')"
+                class="hide" ng-class="{true:'active'}[doc.type==doc.commonService.docType.bookSatisfaction]">
+                <a ng-click="doc.goToState(doc.commonService.docType.bookSatisfaction)">满意度调查表</a>
+            </li>
+
+            <li ng-if="doc.isShow('bookCorrection')"
+                class="hide" ng-class="{true:'active'}[doc.type==doc.commonService.docType.bookCorrection]">
+                <a ng-click="doc.goToState(doc.commonService.docType.bookCorrection)">鉴定文书更正函</a>
+            </li>
+
+            <li ng-if="doc.isShow('sampleInfo')"
+                ng-class="{true:'active'}[doc.type==doc.commonService.docType.sampleInfo]">
+                <a ng-click="doc.goToState(doc.commonService.docType.sampleInfo)">检材、样本人员信息</a>
+            </li>
+
+            <li ng-if="doc.isShow('acceptCode')"
+                ng-class="{true:'active'}[doc.type==doc.commonService.docType.acceptCode]">
+                <a ng-click="doc.goToState(doc.commonService.docType.acceptCode)">受理编号条码</a>
+            </li>
+
+            <li ng-if="doc.isShow('sampleTag')"
+                ng-class="{true:'active'}[doc.type==doc.commonService.docType.sampleTag]">
+                <a ng-click="doc.goToState(doc.commonService.docType.sampleTag)">检材样本标签</a>
+            </li>
+
+            <li ng-if="doc.isShow('registration')"
+                ng-class="{true:'active'}[doc.type==doc.commonService.docType.registration]">
+                <a ng-click="doc.goToState(doc.commonService.docType.registration)">流转登记表</a>
+            </li>
+
+            <li ng-if="doc.isShow('picture')"
+                ng-class="{true:'active'}[doc.type==doc.commonService.docType.picture]">
+                <a ng-click="doc.goToState(doc.commonService.docType.picture)">图谱</a>
+            </li>
+            <li ng-if="doc.isShow('footprint')">
+                <a ng-click="doc.openFootPrintPopup()">留痕</a>
+            </li>
+
+        </ul>
+    </div>
+    <div class="panel-body">
+        <iframe style="width:100%;height:1350px;" 
+                class="br-n" ng-src="{{doc.source}}"
+                ng-if="doc.needIframe() != -1"
+         ></iframe>
+
+        <div id="viewerContainer" ng-if="doc.type==doc.commonService.docType.bookProxy">
+            <div id="viewer" class="pdfViewer mv40"></div>
+        </div>
+
+        <div  ng-if="doc.type==doc.commonService.docType.sampleInfo">
+            <entrust-evidence-info-comp ds="doc.dcService"></entrust-evidence-info-comp>
+            <entrust-member-info-comp ds="doc.dcService"></entrust-member-info-comp>
+        </div>
+
+        <div  ng-if="doc.type==doc.commonService.docType.examineRecord">
+            <ng-include src=" './templates/modules/doc/examine.html' "></ng-include>
+        </div>
+
+        <div  ng-if="doc.type==doc.commonService.docType.picture">
+            <map-show-comp show-download="true" subm-id="doc.id"></map-show-comp>
+        </div>
+      
+
+    </div>
+</div>

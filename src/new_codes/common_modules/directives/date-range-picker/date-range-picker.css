@@ -1,0 +1,3 @@
+.datetimepicker.form-control[readonly] {
+    cursor: pointer;
+}

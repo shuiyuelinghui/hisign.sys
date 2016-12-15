@@ -1,0 +1,91 @@
+<!--<div class="panel">-->
+        <!--<div class="panel-heading">
+            <ul class="nav panel-tabs-border panel-tabs panel-tabs-left ">
+                <li class="active">
+                    <a herf="javascript:;" class="ph50 fs16" data-toggle="tab">收检</a>
+                </li>
+            </ul>
+        </div>-->
+    <div class="ph10">
+            <!-- Documentation Content -->
+        <div class="row admin-form theme-primary">
+        	<div class="panel">
+        		<div class="panel-body pv30">
+	                <section class="ui-basic-info">
+	                	<div class="fs18 text-dark-darker fw600 pb30">案件信息</div>
+	                    <dl class="mtn mbn">
+	                        <div class="row mb10">
+	                            <div class="col-md-6">
+	                                <dt >受理编号：</dt>
+	                                <dd>{{pickup.basicInfo.acceptCode}}</dd>
+	                            </div>
+	                            <div class="col-md-6">
+	                                <dt >受理时间：</dt>
+	                                <dd >{{pickup.basicInfo.slsj|date:'yyyy-MM-dd'}}</dd>
+	                            </div>
+	                        </div>
+	
+	                        <div class="row mb10">
+	                            <div class="col-md-6">
+	                                <dt >专业：</dt>
+	                                <dd >{{pickup.basicInfo.sectionName}}</dd>
+	                            </div>
+	                            <div class="col-md-6">
+	                                <dt >鉴定类别：</dt>
+	                                <dd >{{pickup.basicInfo.identifyCategoryName}}</dd>
+	                            </div>
+	                        </div>
+	
+	
+	                        <div class="row mb10">
+	                            <div class="col-md-10">
+	                                <dt >案（事）件名称：</dt>
+	                                <dd> {{pickup.basicInfo.caseName}}</dd>
+	                            </div>
+	                        </div>
+	
+	                        <div class="row">
+	                            <div class="col-md-10">
+	                                <dt >案情简要：</dt>
+	                                <dd >{{pickup.basicInfo.caseBrief}}</dd>
+	                            </div>
+	                        </div>
+	                    </dl>
+	                </section>
+        		</div>
+        	</div>
+        </div>
+
+            <div class="row" id="dt_container" style="z-index: 1">
+                <div class="panel-heading">
+                    <span class="panel-title">
+                        <span class="fa fa-table"></span>
+                        检材样本列表
+                    </span>
+
+                    <span class="panel-icon pull-right mr10">
+                        <a href="#">
+                            <i
+                                class="fa fa-gears fs16 tooltipster cursor"
+                                title="自定义列"
+                                ng-click="pickup.showCustomSettingPopup('dt-custom-setting.html')"
+                            ></i>
+                        </a>
+                    </span>
+                </div>
+                <div class="panel-body pn br-n admin-form theme-primary">
+                    <form name="pickupForm" id="pickupForm">
+
+                    <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%"></table>
+                </form>
+                 </div>
+
+                <div class="panel-footer text-center ">
+                    <button type="button" class="btn btn-primary" ng-click="pickup.showConfirmPopup('pickup.html')" ng-disabled="pickupForm.$invalid">保存</button>
+                    <button type="button" class="btn btn-default" ng-click="pickup.goback()">返回</button>
+                </div>
+            </div>
+
+    </div>
+<!--</div>  --><!--endof panel-->
+

@@ -1,0 +1,239 @@
+
+<div class="ph10">
+
+	<div class="row admin-form theme-primary">
+		<form name="archiveForm">
+			<div class="panel">
+
+				<div class="panel-body pv10">
+					<div class="fs18 mv20"><span>目录信息</span></div>
+
+					<div class="row mb20">
+						<div class="col-md-1"></div>
+						<div class="col-md-2"><span class="fs16">目录名称</span></div>
+						<div class="col-md-2 text-center"><span class="fs16">页数</span></div>
+						<div class="col-md-2 text-center"><span class="fs16">起止页数</span></div>
+						<div class="col-md-3"></div>
+
+					</div>
+
+					<div class="row mb5" ng-repeat="items in submitArchive.dictData.FiledTypeModel">
+						<div class="col-md-1">
+							<div class="option-group field pull-right">
+								<label class="option option-primary">
+									<input ng-model="submitArchive.list[$index].checked" 
+										   type="checkbox"
+									>
+									<span class="checkbox"></span></label>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<sup ng-if="items.dictValue2 == 1">*</sup>
+							{{items.dictValue1}}
+						</div>
+						<div class="col-md-2">
+							<input type="number" ng-if="items.dictValue2 == 1"
+								   max="100"
+								   required 
+								   ng-readonly = "!submitArchive.list[$index].checked" 
+								   class="gui-input" 
+								   ng-change="submitArchive.calculatePageNumber($index)"
+								   ng-model="submitArchive.formData.filedCatalogList[$index].page"
+							>
+
+							<input  type="number" ng-if="items.dictValue2 != 1" 
+									ng-readonly = "!submitArchive.list[$index].checked"
+									class="gui-input" 
+									max="100"
+									ng-change="submitArchive.calculatePageNumber($index)"
+									ng-model="submitArchive.formData.filedCatalogList[$index].page"
+							>
+						</div>
+						<div class="col-md-2">
+							<input type="text" 
+							       required
+							       ng-if="items.dictValue2 == 1" 
+							       readonly 
+							       class="gui-input" 
+							       ng-model="submitArchive.formData.filedCatalogList[$index].pageNumber">
+
+							<input type="text"
+								   ng-if="items.dictValue2 != 1" 
+							       readonly 
+							       class="gui-input" 
+							       ng-model="submitArchive.formData.filedCatalogList[$index].pageNumber">
+						</div>
+						<div class="col-md-3"></div>
+					</div>
+					<div class="row mb5 mt10">
+						<div class="col-md-"></div>
+						<div class="col-md-3">
+							<label class="pull-left mt5">总页数:</label>
+							<div class="section" style="margin-left:70px">
+
+								<input type="text" readonly class="gui-input" ng-model="submitArchive.formData.pages"/>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<label class="pull-left mt5">总件数:</label>
+							<div class="section" style="margin-left:70px">
+
+								<input type="text" readonly class="gui-input" ng-model="submitArchive.formData.numbers"/>
+							</div>
+						</div>
+
+						<div class="col-md-3"></div>
+					</div>
+
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="row admin-form theme-primary">
+		<form name="archiveInfoForm">
+			<div class="panel">
+
+				<div class="panel-body pv10">
+					<div class="fs18 mv20"><span>归档信息</span></div>
+
+					<div class="row mb20" ng-if="!submitArchive.isTerminate">
+						<div class="col-md-6">
+							<label class="mt5 fl"><sup>*</sup>档案类型:</label>
+							<div class="section ml90">
+								<label class="field select mtn">
+									<select
+											multiple="multiple"
+											class="gui-input input-sm"
+											ng-model="submitArchive.formData.archiveType"
+											select2
+											required
+											list="submitArchive.dictData.BookTypeModel"
+											>
+										<option
+												ng-repeat="require in submitArchive.dictData.BookTypeModel"
+												value="{{require.dictKey}}"
+												>
+											{{require.dictValue1}}
+										</option>
+									</select>
+								</label>
+							</div>
+
+						</div>
+						<div class="col-md-6">
+							<label class="mt5 pull-left"><sup>*</sup>保存期限:</label>
+							<div class="section ml90">
+								<label class="field select mtn">
+									<select class="form-control input-sm"
+											required
+											ng-options="items.dictKey as items.dictValue1  for items  in submitArchive.dictData.ArchRetentionPeriodModel"
+											ng-model="submitArchive.formData.archiveTerm">
+										<option value="">请选择</option>
+									</select>
+									<i class="arrow"></i>
+								</label>
+							</div>
+
+						</div>
+					</div>
+					<div class="row mb20">
+						<div class="col-md-6">
+							<label class="mt5 pull-left"><sup>*</sup>归档科室:</label>
+							<div class="section ml90">
+								<label class="field select mtn">
+									<select class="form-control input-sm"
+											required 
+											ng-options="item.id as item.name for item in submitArchive.sysLabData"
+											ng-change="submitArchive.getLabUsers(submitArchive.formData.acceptLab)"
+											ng-model="submitArchive.formData.acceptLab">
+										<option value="">请选择</option>
+
+									</select>
+									<i class="arrow"></i>
+								</label>
+							</div>
+
+						</div>
+						<div class="col-md-6">
+							<label class="mt5 pull-left text-right" style="width:64.8438px"><sup>*</sup> 归档人:</label>
+							<div class="section ml90">
+								<label class="field select mtn">
+									<select class="form-control input-sm"
+											required
+											ng-options="item.userId as item.name for item in submitArchive.labUsesData"
+											ng-model="submitArchive.formData.filePerson"
+											input-sm>
+										<option value="">请选择</option>
+
+									</select>
+									<i class="arrow"></i>
+								</label>
+							</div>
+						</div>
+
+
+					</div>
+
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="row" ng-if="submitArchive.archiveInfo.insDate">
+
+		<div class="panel">
+			<div class="panel-heading">
+                        <span class="panel-title">
+                            <span class="fa fa-table"></span>
+							档案信息
+                        </span>
+			</div>
+			<div class="panel-body pn">
+				<div class="bs-component">
+					<table class="table table-bordered mbn table-hover table-striped">
+						<thead>
+						<tr>
+							<th class="text-center" style="width: 25%">编号</th>
+							<th class="text-center" style="width: 35%">案(事)件名称</th>
+							<th class="text-center" style="width: 10%">生成时间</th>
+							<th class="text-center" style="width: 10%">归档人</th>
+							<th class="text-center">操作</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr class="text-center">
+							<td>{{submitArchive.archiveInfo.bookCodes}}</td>
+							<td>{{submitArchive.submissionData.caseName}}</td>
+							<td>{{submitArchive.archiveInfo.insDate|date:'yyyy-MM-dd'}}</td>
+							<td>{{submitArchive.archiveInfo.filePersonName}}</td>
+							<td class="text-center">
+
+								<span class="fa fa-photo cursor fs16 tooltipster mr10" title="预览"></span>
+
+								<span class="fa fa-trash-o cursor fs16 tooltipster mr10" title="删除" ng-click="submitArchive.deleteArchive(submitArchive.archiveInfo.id)"></span>
+								<span class="fa fa-print cursor fs16 tooltipster mr10"
+									  title="打印"></span>
+								<span class="fa fa-download cursor fs16 tooltipster mr10"
+									  title="下载"></span>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row admin-form theme-primary text-center mb25">
+		<button class="btn btn-primary" type="button"
+				ng-click="submitArchive.createArchive()"
+				ng-disabled="(archiveForm.$invalid||archiveInfoForm.$invalid)||submitArchive.archiveInfo.insDate"
+				>
+			生成档案
+		</button>
+
+	</div>
+
+</div>
+<!--<approve-comp ></approve-comp>-->
+<submit-comp config-data="submitArchive.configData"></submit-comp>

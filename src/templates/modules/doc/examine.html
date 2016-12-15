@@ -1,0 +1,76 @@
+ <!--检验记录-->
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title">
+                <span class="fa fa-table"></span>
+                检验记录
+            </span>
+        </div>
+        
+        <div class="panel-body pn">
+            <div class="bs-component">
+                <table class="table table-bordered mbn table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 10%">序号</th>
+                            <th class="text-center" style="width: 25%">记录模板</th>
+                            <th class="text-center" style="width: 25%">生成时间</th>
+                            <th class="text-center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center"
+                        ng-repeat="record in doc.recordList track by $index">
+                            <td>{{$index+1}}</td>
+                            <td>{{record.typeName}}</td>
+                            <td>{{record.insDate |date:'yyyy-MM-dd'}}</td>
+                            <td class="text-left pl30" >
+                        
+                                <span ng-click="doc.bulidIframeData(doc.commonService.docType.bookInspection)" class="mr5 text-primary">
+                                    <i class="fa fa-search fs16 cursor tooltipster tooltipstered mr5" title="预览"></i>
+                                </span>
+
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--检材样本鉴定结果-->
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title">
+                <span class="fa fa-table"></span>
+                检材样本鉴定结果
+            </span>
+    </div>
+        <div class="panel-body pn">
+            <div class="admin-form theme-primary">
+                <form action="#" name="examineResult" novalidate>
+                    <div class="bs-component commission-form-container">
+                        <table class="table table-bordered mbn table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="width: 10%">序号</th>
+                                    <th class="text-center" style="width: 25%">检材样本编号</th>
+                                    <th class="text-center" style="width: 25%">名称</th>
+                                    <th class="text-center">鉴定结果</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center"
+                                    ng-repeat="sample in doc.sampleResult track by $index">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{sample.acceptCode}}</td>
+                                    <td>{{sample.name}}</td>
+                                    <td class="pn">{{sample.result}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

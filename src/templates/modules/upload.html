@@ -1,0 +1,45 @@
+<h1>添加附件</h1>
+<button class="btn btn-success" ng-click="upload.triggerUpload()">上传文件</button>
+<input
+        type="file"
+        multiple="multiple"
+        id="file_{{upload.compId}}"
+/>
+<ul>
+    <li ng-if="!upload.fileData.length" class="no-file">还没有上传文件！</li>
+
+    <li ng-repeat="file in upload.fileData">
+        <span
+                class="fa fa-minus-circle fs18"
+                ng-if="file.progress >= 100"
+                ng-click="upload.delete($index)"
+        ></span>
+        <figure>
+            <img src="{{file.source}}" ng-if="file.imgType" />
+            <span class="fa fa-file-text-o fs30" ng-if="!file.imgType"></span>
+        </figure>
+        <div>
+            <h2>{{file.name}}</h2>
+            <div class="progress-con">
+                <div class="progress progress-bar-sm ml10 mbn mt5" ng-if="file.progress < 100">
+                    <div class="progress-bar progress-bar-success" style="width: {{file.progress}}%">
+                        <span class="sr-only">{{file.progress}}%</span>
+                    </div>
+                </div>
+                <span ng-if="file.progress < 100">正在上传...</span>
+                <span class="upload-complete" ng-if="file.progress >= 100">上传完毕</span>
+                <span>&nbsp;&nbsp;({{upload.utilityService.calculateFileSize(file.size)}})</span>
+            </div>
+        </div>
+    </li>
+</ul>
+
+<div class="tc">
+    <button
+            class="btn btn-warning"
+            ng-disabled="!upload.fileData.length || upload.utilityService.findArrayIndexByValue(upload.resultData, '') >= 0"
+            ng-click="upload.save($event)"
+    >保存</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-default" ng-click="upload.closePopover($event)">取消</button>
+</div>

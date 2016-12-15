@@ -1,0 +1,37 @@
+<div class="panel popup-basic common-modal panel-modal" id="confirm_modal">
+    <div class="panel-heading">
+        <span class="panel-title">提示</span>
+    </div>
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-2 text-center">
+                <i class="fa fa-info-circle text-warning fs70"></i>
+            </div>
+            <div class="col-md-10">
+                <ul class="list-unstyled" ng-cloak>
+                    <li><label>案（事）件名称：</label>{{docPrint.docPrintDetailData.caseName}}</li>
+                    <li><label>专业：</label>{{docPrint.docPrintDetailData.sectionName}}</li>
+                    <li><label>鉴定类别：</label>{{docPrint.docPrintDetailData.identifyCategoryName}}</li>
+
+                    <li class="mt20">
+                        <label>确认提交吗？</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="panel-footer">
+        <button
+                type="button"
+                class="btn btn-primary"
+                ng-click="docPrint.printSubmit()"
+                >确认</button>
+        <button
+                type="button"
+                class="btn btn-default"
+                ng-click="docPrint.closePopup()"
+                >取消</button>
+    </div>
+</div>

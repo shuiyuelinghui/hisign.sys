@@ -1,0 +1,77 @@
+<div class="panel heading-border panel-success">
+    <div class="panel-body bg-light">
+
+        <div class="row mb15">
+
+            <div class="col-md-2">
+                <span>审批结果：</span>
+            </div>
+            <div class="col-md-10">
+                <div class="option-group field">
+                    <label class="option option-primary">
+                        <input type="radio" name="status" checked>
+                        <span class="radio"></span>审批通过</label>
+                    <label class="option option-primary">
+                        <input type="radio" name="status">
+                        <span class="radio"></span>审批不通过</label>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mb15">
+            <div class="col-md-2">
+                <span>审批意见：</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="panel listgroup-widget panel-scroller scroller-sm br-n">
+                    <div class="section btn-dimmer pr10">
+                        <a class="btn btn-success btn-gradient btn-alt btn-block item-active text-dark" ng-click="docConfirm.changeApprovalContent($event)">
+                            <span class="text-muted-dark">审批通过意见模板1</span>
+                        </a>
+                        <a class="btn btn-success btn-gradient btn-alt btn-block" ng-click="docConfirm.changeApprovalContent($event)">
+                            <span class="text-muted-dark">审批通过意见模板2</span>
+                        </a>
+                        <a class="btn btn-success btn-gradient btn-alt btn-block" ng-click="docConfirm.changeApprovalContent($event)">
+                            <span class="text-muted-dark">审批通过意见模板3</span>
+                        </a>
+                        <button class="btn btn-success btn-gradient btn-alt btn-block" ng-click="docConfirm.changeApprovalContent($event)">
+                            <span class="text-muted-dark">审批通过意见模板4</span>
+                        </button>
+                        <a class="btn btn-success btn-gradient btn-alt btn-block" ng-click="docConfirm.changeApprovalContent($event)">
+                            <span class="text-muted-dark">审批通过意见模板6</span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+             <div class="col-md-8">
+                <div class="section">
+                    <label class="field prepend-icon">
+                        <textarea class="gui-textarea  h-150" id="comment" name="comment"
+                                  placeholder="审批意见">审批通过意见模板1
+                        </textarea>
+                        <label for="comment" class="field-icon">
+                            <i class="fa fa-comments"></i>
+                        </label>
+                      <!--   <span class="input-footer">
+                            <strong>提示:</strong>选择意见模板或手动输入审批意见
+                        </span> -->
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="panel-footer text-center">
+        <button type="button" class="button btn-primary" ng-click="docStopDirector.openMagnificPopup('doc-stop-director.html')"> 提交</button>
+        <button type="reset" class="button"> 返回</button>
+    </div>
+    <!-- end .form-footer section -->
+</div>

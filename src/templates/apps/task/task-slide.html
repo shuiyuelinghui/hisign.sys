@@ -1,0 +1,19 @@
+<div id="task_slide" class="task-slide">
+    <div class="slide"
+         ng-repeat="menu in task.taskMenuData"
+         ng-class="{true:'active'}[$index == task.activeMenuIndex]"
+         ng-click="task.gotoNode(menu.nodeCode)"
+    >
+        <div class="slide-content">
+            <span class="{{ task.nodeIconMapping[menu.nodeCode]}}"></span>
+            <div>
+                <h1>{{menu.nodeName}}</h1>
+                <p>
+                    <span ng-if="menu.soonCount&&menu.soonCount!=0 ">即将到期：{{menu.soonCount}}条<br /></span>
+                    <span ng-if="menu.taskCount.toString()">待办：{{menu.taskCount}}条</span>
+                    <span ng-if="menu.expireCount&&menu.expireCount != 0">超期：{{menu.expireCount}}条</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

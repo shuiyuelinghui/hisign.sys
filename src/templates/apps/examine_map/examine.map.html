@@ -1,0 +1,121 @@
+<div class="ui-examine-map">
+    <div class="panel ui-basic-info">
+        <div class="panel-body">
+            <div class="fs18 text-dark-darker fw600 pb20">
+                案件信息
+            </div>
+            <!--基本信息-->
+            <dl class="mn">
+                <div class="row mb20">
+                    <div class="col-xs-4 ">
+                        <dt >委托单位：</dt>
+                        <dd >{{examineMap.dataService.submissionData.departmentDetailName}}</dd>
+                    </div>
+                    <div class="col-xs-4 ">
+                        <dt >委托时间：</dt>
+                        <dd >{{examineMap.dataService.submissionData.submitDate | date:'yyyy-MM-dd'}}</dd>
+                    </div>
+                    <div class="col-xs-4 ">
+                        <dt >预约编号：</dt>
+                        <dd >{{examineMap.dataService.submissionData.submCode}}</dd>
+                    </div>
+                </div>
+
+                <div class="row mb20">
+                    <div class="col-xs-4 ">
+                        <dt >案件名称：</dt>
+                        <dd> {{examineMap.dataService.submissionData.caseName}}</dd>
+                    </div>
+                    <div class="col-xs-4 ">
+                        <dt >鉴定专业：</dt>
+                        <dd >{{examineMap.dataService.submissionData.sectionName}}</dd>
+                    </div>
+                    <div class="col-xs-4 ">
+                        <dt >受理编号：</dt>
+                        <dd>{{examineMap.dataService.submissionData.acceptCode}}</dd>
+                    </div>
+                </div>
+
+                <div class="row mb20">
+                    <div class="col-xs-12">
+                        <dt >简要案情：</dt>
+                        <dd >{{examineMap.dataService.submissionData.caseBrief}}</dd>
+                    </div>
+                </div>
+            </dl>
+        </div>
+    </div>
+     <!--案件照片/图谱列表-->
+    <div class="panel" >
+        <div class="panel-body">
+            <div class="fs18 text-dark-darker fw600 pb20">
+                案件照片/图谱列表
+            </div>
+            <div class="sample-item">
+                <div class="tb-header" id="mappingList">
+                    <span class="ml30"><label class="mr5">案件名称：</label><label>{{examineMap.dataService.submissionData.caseName}}</label></span>
+                    <div class="panel-icon-group pull-right mr10">
+                        <upload-comp
+                                class="ui-file-upload"
+                                viewport="#mappingList"
+                                flag="5"
+                                >
+                        </upload-comp>
+                        <span style="color: #ccc">|</span>
+                        <a href="javascript:;" ng-click="examineMap.takePhoto()" class="panel-icon">
+                            <span class="fa fa-camera"></span>
+                            拍照
+                        </a>
+                        <span style="color: #ccc">|</span>
+                        <a href="javascript:;" ng-click="examineMap.download()" class="panel-icon">
+                            <span class="fa fa-download"></span>
+                            下载
+                        </a>
+                    </div>
+                </div>
+                <file-slide-comp flag="5" dc-service="examineMap.dataService"></file-slide-comp>
+            </div>
+
+        </div>
+    </div>
+    <!--检材样本照片/图谱列表-->
+    <div class="panel" >
+        <div class="panel-body">
+            <div class="fs18 text-dark-darker fw600 pb20">
+                检材样本照片/图谱列表
+            </div>
+            <div class="sample-item" ng-repeat="item in examineMap.dataService.fileSlideSampleList track by $index">
+                <div class="tb-header" id="{{'sampleList' + $index}}">
+                    <nav>{{$index+1}}</nav>
+                    <span ><label class="mr5">检材编号：</label><label>{{item.sampleAcceptCode}}</label></span>
+                    <span><label class="mr5">检材名称：</label><label>{{item.name}}</label></span>
+                    <div class="panel-icon-group pull-right mr10">
+                        <upload-comp
+                                class="ui-file-upload"
+                                viewport="#{{'sampleList' + $index}}"
+                                flag="4"
+                                >
+                        </upload-comp>
+                        <span style="color: #ccc">|</span>
+                        <a href="javascript:;" ng-click="examineMap.takePhoto()" class="panel-icon">
+                            <span class="fa fa-camera"></span>
+                            拍照
+                        </a>
+                        <span style="color: #ccc">|</span>
+                        <a href="javascript:;" ng-click="examineMap.download()" class="panel-icon">
+                            <span class="fa fa-download"></span>
+                            下载
+                        </a>
+                    </div>
+                </div>
+                <file-slide-comp flag="4" dc-service="examineMap.dataService" sample-id="{{item.sampleId}}" class="mb20"></file-slide-comp>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <button class="btn btn-warning mr20 w100 h-35 pn text-center"
+                ng-click="examineMap.popupConfirm('map_confirm.html')"
+                ng-disabled="examineMap.verifyEmpty()">保存</button>
+        <button class="btn bg-light light h-35 pn w50 text-center" ng-click="examineMap.verifyEmpty() ? examineMap.goBack() : examineMap.popupConfirm('map_cancel.html')">取消</button>
+    </div>
+</div>

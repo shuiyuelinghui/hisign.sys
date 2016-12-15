@@ -1,0 +1,33 @@
+.panel-title {
+  em {
+    font-style:normal;
+    font-size:1.2rem;
+    margin-left:5px;
+    i {
+      color:#f60;
+      font-style:normal;
+    }
+  }
+}
+
+.saved-condition-panel {
+  height:250px;
+  overflow-y:auto;
+}
+
+#ztree_comp {
+  position:relative;
+
+  span {
+    margin:0;
+    padding:0;
+    left:178px;
+    top:1px;
+  }
+}
+
+#sub_dt_container {
+  .dataTables_wrapper {
+    margin-bottom:20px;
+  }
+}

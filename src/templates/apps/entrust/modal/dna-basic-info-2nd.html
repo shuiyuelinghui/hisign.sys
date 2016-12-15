@@ -1,0 +1,302 @@
+<h1 class="sample-dna-title">基本信息</h1>
+
+<div class="basic-info-list">
+	<div class="form-inline" ng-if="addDNA.dcService.activeState === 'app.accept' ">
+		 <div class="form-group col-sm-3">
+            <label for="">处置方法：</label>
+            <div class="input-wrapper">
+                <div class="section">
+                    <label class="field select mtn">
+                        <select
+                                class="form-control input-sm fl"
+                                required
+                                ng-model="addDNA.dcService.relativesList2ndItem.dispostMethod"
+                                ng-options="item.dictKey as item.dictValue1 for item in addDNA.dcService.dictData.DispostMethodModel"
+                                >
+                            <option value="">请选择</option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+	</div>
+	
+    <div class="form-inline">
+        <div class="form-group col-sm-3" ng-if="addDNA.activeType === 'memberDNA'">
+            <label for="">类别：</label>
+            <div class="input-wrapper">
+                <div class="section">
+                    <label class="field select mtn">
+                        <select
+                                class="form-control input-sm fl"
+                                required
+                                ng-model="addDNA.dcService.relativesList2ndItem.involvedRelationship"
+                                ng-options="item.dictKey as item.dictValue1 for item in addDNA.dcService.dictData.DnaInvolvedRelModel"
+                                >
+                            <option value="">请选择</option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-3" ng-if="addDNA.activeType === 'relativesRelation'">
+            <label for="">目标关系：</label>
+            <div class="input-wrapper">
+                <div class="section">
+                    <label class="field select mtn">
+                        <select
+                                class="form-control input-sm fl"
+                                required
+                                ng-model="addDNA.dcService.relativesList2ndItem.targetRel"
+                                ng-options="item.dictKey as item.dictValue1 for item in addDNA.dcService.dictData.TargetRelModel"
+                                >
+                            <option value="">请选择</option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group"ng-class="{'col-sm-3':addDNA.activeType !== 'nameLessCorpse','col-sm-4':addDNA.activeType === 'nameLessCorpse'}">
+            <label for="">姓名：</label>
+            <div class="input-wrapper">
+                <input
+                        type="text"
+                        class="gui-input"
+                        placeholder=""
+                        required
+                        ng-model="addDNA.dcService.relativesList2ndItem.name"
+                />
+            </div>
+        </div>
+
+        <div class="form-group"ng-class="{'col-sm-3':addDNA.activeType !== 'nameLessCorpse','col-sm-4':addDNA.activeType === 'nameLessCorpse'}">
+            <label for="">别名/绰号：</label>
+
+            <div class="input-wrapper">
+                <input
+                        type="text"
+                        class="gui-input"
+                        placeholder=""
+                        ng-model="addDNA.dcService.relativesList2ndItem.alias"
+                />
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="">人员类型：</label>
+            <div class="input-wrapper">
+                <div class="section">
+                    <label class="field select mtn">
+                        <select
+                                class="form-control input-sm fl"
+                                ng-model="addDNA.dcService.relativesList2ndItem.memberType"
+                                ng-options="item.dictKey as item.dictValue1 for item in addDNA.dcService.dictData.MemberTypeModel"
+                                >
+                            <option value="">请选择</option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="form-inline">
+
+        <div class="form-group col-sm-3">
+            <label for="">国籍：</label>
+            <div class="input-wrapper">
+                <div class="section">
+                    <label class="field select mtn">
+                        <select
+                                class="form-control input-sm fl"
+                                required
+                                ng-model="addDNA.dcService.relativesList2ndItem.nationality"
+                                ng-options="item.dictKey as item.dictValue1 for item in addDNA.dcService.dictData.NationalityModel"
+                                >
+                            <option value="">请选择</option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-3">
+            <label for="">证件类型：</label>
+            <div class="input-wrapper">
+                <div class="section">
+                    <label class="field select mtn">
+                        <select
+                                class="form-control input-sm fl"
+                                required
+                                ng-model="addDNA.dcService.relativesList2ndItem.credentialType"
+                                ng-options="item.dictKey as item.dictValue1 for item in addDNA.dcService.dictData.PersonCreTypeModel"
+                                >
+                            <option value="">请选择</option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label for="">证件号码：</label>
+            <div class="input-wrapper">
+                <input
+                        type="text"
+                        class="gui-input"
+                        placeholder=""
+                        required
+                        ng-model="addDNA.dcService.relativesList2ndItem.identityCardNumber"
+                        ng-pattern="addDNA.entrustAcceptUtilService.isIdType(addDNA.dcService.relativesList2ndItem.credentialType)"
+                        idcard
+                        id-vale="{{addDNA.dcService.relativesList2ndItem.identityCardNumber}}"
+                        key-str="relativesList2ndItem"
+                />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group col-sm-3 form-icon-suffix" ng-if="addDNA.activeType !== 'nameLessCorpse'">
+            <label for="">出生日期：</label>
+            <div class="input-wrapper">
+                <input
+                        readonly
+                        type="text"
+                        class="gui-input bs-datetimepicker"
+                        placeholder=""
+                        required
+                        ng-model="addDNA.dcService.relativesList2ndItem.birthStr"
+                />
+                <span class="fa fa-calendar form-control-icon"></span>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-3">
+            <label for="" ng-if="addDNA.activeType !== 'nameLessCorpse'">年龄：</label>
+            <label for="" ng-if="addDNA.activeType === 'nameLessCorpse'">大致年龄：</label>
+            <div class="input-wrapper">
+                <input
+                        type="number"
+                        class="gui-input"
+                        placeholder=""
+                        required
+                        ng-pattern="addDNA.patterisPositiveInteger"
+                        ng-model="addDNA.dcService.relativesList2ndItem.age"
+                />
+            </div>
+        </div>
+
+        <div class="form-group col-sm-3">
+            <label for="">性别：</label>
+            <div class="input-wrapper">
+                <div class="section">
+                    <label class="field select mtn">
+                        <select
+                                class="form-control input-sm fl"
+                                required
+                                ng-model="addDNA.dcService.relativesList2ndItem.sex"
+                                ng-options="item.dictKey as item.dictValue1 for item in addDNA.dcService.dictData.SexModel"
+                                >
+                            <option value="">请选择</option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-3">
+            <label for="">民族：</label>
+            <div class="input-wrapper">
+                <div class="section">
+                    <label class="field select mtn">
+                        <select
+                                class="form-control input-sm fl"
+                                ng-model="addDNA.dcService.relativesList2ndItem.race"
+                                ng-options="item.dictKey as item.dictValue1 for item in addDNA.dcService.dictData.NationModel"
+                                >
+                            <option value="">请选择</option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" ng-if="addDNA.activeType !== 'nameLessCorpse'">
+
+        <div class="form-group col-sm-4" ng-if="addDNA.activeType !== 'nameLessCorpse'">
+            <label for="">文化程度：</label>
+            <div class="input-wrapper">
+                <div class="section">
+                    <label class="field select mtn">
+                        <select
+                                class="form-control input-sm fl"
+                                ng-model="addDNA.dcService.relativesList2ndItem.education"
+                                ng-options="item.dictKey as item.dictValue1 for item in addDNA.dcService.dictData.EduDegreeModel"
+                                >
+                            <option value="">请选择</option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-4">
+            <label for="">户籍地：</label>
+            <div class="input-wrapper">
+                <input  type="text"
+                        class="gui-input"
+                        placeholder=""
+                        ng-model="addDNA.dcService.relativesList2ndItem.pob"
+                />
+            </div>
+        </div>
+
+        <div class="form-group col-sm-4">
+            <label for="">身份：</label>
+            <div class="input-wrapper">
+                <div class="section">
+                    <label class="field select mtn">
+                        <select
+                                class="form-control input-sm fl"
+                                ng-model="addDNA.dcService.relativesList2ndItem.identity"
+                                ng-options="item.dictKey as item.dictValue1 for item in addDNA.dcService.dictData.IdentityModel"
+                                >
+                            <option value="">请选择</option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-inline" ng-if="addDNA.activeType !== 'nameLessCorpse'">
+        <div class="form-group col-sm-12">
+            <label for="">现住址：</label>
+            <div class="input-wrapper">
+                <input
+                        type="text"
+                        class="gui-input"
+                        placeholder=""
+                        ng-model="addDNA.dcService.relativesList2ndItem.addressDetail"
+                />
+            </div>
+        </div>
+    </div>
+
+</div>

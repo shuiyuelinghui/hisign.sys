@@ -1,0 +1,60 @@
+.doc-draft-list {
+    span.doclist {
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+        color: #666;
+        font-size: 14px;
+        font-weight: 600;
+        padding-left: 6px;
+        margin-top: 0;
+        margin-bottom: 0;
+        display: block;
+    }
+    .panel-body{
+        border: 1px solid #c9cccf;
+        .docontent {
+            background-color: #fff;
+            .slick-slide {
+              p span {
+                width:85%;
+              }
+            }
+        }
+        .doctitle{
+          background-color: #fafafa;
+          .ui-upload-trigger {
+            margin-right:10px;
+            margin-top:4px;
+          }
+        }
+        .admin-form{
+            border-bottom: 1px solid #e7e7e7;
+            > label {
+                margin-right: 50px;
+                height: 21px;
+                line-height: 21px;
+//              margin-bottom: 10px;
+//              white-space:nowrap; 
+//              overflow:hidden; 
+//              text-overflow:ellipsis;
+            }
+        }
+    }
+}
+
+.photodoc {
+  .docontent {
+    .ui-slide-file {
+      border-top:none;
+      margin-top:0;
+      .checkbox {
+        background-color:transparent;
+        border-color:#00da9f;
+        &:before {
+          border-color:#00da9f;
+        }
+      }
+    }
+  }
+}

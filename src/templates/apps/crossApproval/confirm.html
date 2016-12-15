@@ -1,0 +1,11 @@
+<ul class="list-unstyled" ng-cloak>
+    <li><label class="text-dark-darker">委托单位：</label>{{crossApproval.submissionData.departmentDetailName}}</li>
+    <li><label class="text-dark-darker">鉴定机构：</label>{{crossApproval.submissionData.serverName}}</li>
+    <li><label>案（事）件名称：</label>{{crossApproval.submissionData.caseName}}</li>
+    <li><label>专业：</label>{{crossApproval.submissionData.sectionName}}</li>
+    <li><label>鉴定类别：</label>{{crossApproval.submissionData.identifyCategoryName}}</li>
+    <li><label>送检材料：</label>检材{{crossApproval.approveDetailData.sampleCount}}项，样本{{crossApproval.approveDetailData.exampleCount}}项, 被鉴定人{{crossApproval.approveDetailData.memberCount}}项</li>
+    <li class="mt20">
+        <label>确认提交吗？</label>
+    </li>
+</ul>

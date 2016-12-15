@@ -1,0 +1,98 @@
+<div class="panel heading-border panel-success">
+    <div class="panel-body bg-light">
+
+        <div class="row mb15">
+            <div class="col-md-2">
+                <span>延期原因：</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="panel listgroup-widget panel-scroller scroller-sm br-n">
+                    <div class="section btn-dimmer pr10">
+                        <a class="btn btn-success btn-gradient btn-alt btn-block item-active text-dark" ng-click="docConfirm.changeApprovalContent($event)">
+                            <span class="text-muted-dark">常用延期原因1</span>
+                        </a>
+                        <a class="btn btn-success btn-gradient btn-alt btn-block" ng-click="docConfirm.changeApprovalContent($event)">
+                            <span class="text-muted-dark">常用延期原因2</span>
+                        </a>
+                        <a class="btn btn-success btn-gradient btn-alt btn-block" ng-click="docConfirm.changeApprovalContent($event)">
+                            <span class="text-muted-dark">常用延期原因3</span>
+                        </a>
+                        <button class="btn btn-success btn-gradient btn-alt btn-block" ng-click="docConfirm.changeApprovalContent($event)">
+                            <span class="text-muted-dark">常用延期原因4</span>
+                        </button>
+                        <a class="btn btn-success btn-gradient btn-alt btn-block" ng-click="docConfirm.changeApprovalContent($event)">
+                            <span class="text-muted-dark">常用延期原因6</span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+             <div class="col-md-8">
+                <div class="section">
+                    <label class="field prepend-icon">
+                        <textarea class="gui-textarea  h-150" id="comment" name="comment"
+                                  placeholder="审批意见">常用延期原因1
+                        </textarea>
+                        <label for="comment" class="field-icon">
+                            <i class="fa fa-comments"></i>
+                        </label>
+                      <!--   <span class="input-footer">
+                            <strong>提示:</strong>选择意见模板或手动输入审批意见
+                        </span> -->
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb15">
+
+            <div class="col-md-2 mt10">
+                <span>延期天数：</span>
+            </div>
+            <div class="col-md-1">
+                <div class="option-group field">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+             <div class="col-md-4">
+                <div class="input-group date" id="datetimepicker2">
+                    <span class="input-group-addon cursor">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb15">
+
+            <div class="col-md-2 mt10">
+                <span>科长审核人：</span>
+            </div>
+            <div class="col-md-4">
+                <div class="option-group field">
+                    <select class="form-control input-sm">
+                        <option value=""></option>
+                    </select>
+                   
+                </div>
+            </div>
+
+             <div class="col-md-2">
+                 <button class="btn btn-primary ph15" type="button">选择</button>
+            </div>
+        </div>
+      
+    </div>
+    <div class="panel-footer text-center">
+        <button type="button" class="button btn-primary" ng-click="docDelayApply.openMagnificPopup('doc-delay-apply-result.html')"> 提交</button>
+        <button type="reset" class="button"> 返回</button>
+    </div>
+    <!-- end .form-footer section -->
+</div>

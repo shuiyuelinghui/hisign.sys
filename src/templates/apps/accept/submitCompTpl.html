@@ -1,0 +1,110 @@
+<div class="form-content" ng-controller="AcceptSubmitCompController as acceptSubmitComp">
+    <!-- 结果:-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">受理结果：</label>
+        <div class="col-sm-10">
+            <div class="option-group field">
+                <label class="option option-primary fl" style="min-width: 16.66666667%">
+                    <input type="radio"
+                           name="result"
+                           value="1"
+                           ng-model="acceptSubmitComp.resultValue"
+                           ng-change="acceptSubmitComp.fetchApproveTpl(acceptSubmitComp.resultValue)"
+                           ng-disabled="configData.allReject"
+                            />
+                    <span class="radio"></span>受理通过
+                </label>
+                <label class="option option-primary" style="min-width: 16.66666667%">
+                    <input type="radio"
+                           name="result"
+                           value="2"
+                           ng-model="acceptSubmitComp.resultValue"
+                           ng-change="acceptSubmitComp.fetchApproveTpl()"
+                            />
+                    <span class="radio"></span>受理不通过
+                </label>
+            </div>
+        </div>
+    </div>
+    <!-- 审批时间:-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">审批时间: </label>
+        <div class="col-sm-10">
+            <span>{{acceptSubmitComp.now}}</span>
+        </div>
+    </div>
+    <section ng-if="acceptSubmitComp.resultValue == '1'">
+        <!--约定期限-->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">约定期限：</label>
+
+            <div class="col-sm-2 prn">
+                <div class="col-sm-8 pln" >
+                    <input type="text"
+                           class="form-control input-sm text-center"
+                           ng-model="acceptSubmitComp.formData.agreedDay"
+                           ng-change="acceptSubmitComp.getDateStr()"
+                           name="agreedDay"
+                           required>
+                </div>
+                <label class="control-label">天</label>
+            </div>
+
+            <div class="col-sm-3 pln ">
+                <div class="input-group input-group-sm">
+                    <input type="text"
+                           name="agreedDateStr"
+                           class="form-control text-center bs-datetimepicker"
+                           style="cursor: auto;"
+                           readonly
+                           ng-model="acceptSubmitComp.formData.agreedDateStr"
+                           ng-change = "acceptSubmitComp.getDays()"
+                           required>
+                            <span class="input-group-addon cursor">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                </div>
+            </div>
+        </div>
+        <!--收检人-->
+        <div class="form-group admin-form" >
+            <label class="col-sm-2 control-label">任务领取人：</label>
+            <div class="col-sm-4 ">
+                <div class="input-wrapper w200" >
+                    <label class="select">
+                        <select class="form-control input-sm fl"
+                                id="pickupPerson"
+                                ng-model="acceptSubmitComp.formData.auditor"
+                                required>
+                            <option value="">请选择</option>
+                            <option ng-repeat="item in acceptSubmitComp.personModel" value="{{item.userId}}">
+                                {{item.name}}
+                            </option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 意见:-->
+    <div class="form-group approve-suggestion-tpl mb5">
+        <label class="col-sm-2 control-label">受理意见：</label>
+        <div class="col-sm-10">
+            <ul class="tplScroller">
+                <li class="text-left tooltipster"
+                    ng-class="{true:'active'}[acceptSubmitComp.tplIndex === $index]"
+                    ng-repeat="item in acceptSubmitComp.tplData"
+                    ng-click="acceptSubmitComp.chooseTpl($index, item.content)"
+                    title="{{item.content}}">
+                    {{item.content}}
+                </li>
+            </ul>
+            <textarea name="opinion"
+                    ng-model="acceptSubmitComp.formData.opinion"
+                    ng-required="acceptSubmitComp.exaOpinionWriteRule == 1 || (acceptSubmitComp.exaOpinionWriteRule == 2 && acceptSubmitComp.resultValue == 2)"
+                    maxlength="100">
+            </textarea>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="admin-form-dt">
+    <label class="switch switch-primary fl">
+        <input
+                type="checkbox"
+                id="acceptState_{{uuid}}"
+                ng-checked="modelBaseName['acceptState'] === '1'"
+                ng-click="resolveRejectDispostMethod($event)"
+        />
+        <label for="acceptState_{{uuid}}" data-on="收" data-off="拒"></label>
+    </label>
+    <div class="section fl">
+        <label class="field select mtn" ng-if="!modelBaseName['acceptState'] || modelBaseName['acceptState'] === '1'">
+            <select
+                    class="form-control input-sm w100"
+                    ng-required="required"
+                    ng-model="modelBaseName['dispostMethod']"
+                    ng-options="item.dictKey as item.dictValue1 for item in dcs.dictData.DispostMethodModel"
+            >
+                <option value="">请选择</option>
+            </select>
+            <i class="arrow"></i>
+        </label>
+
+        <label class="field select mtn" ng-if="modelBaseName['acceptState'] === '2'">
+            <input
+                    type="text"
+                    class="gui-input"
+                    ng-model="modelBaseName['rejectOpinion']"
+            />
+        </label>
+    </div>
+
+    <span
+            class="fa fa-arrow-circle-o-down"
+            title="下同"
+            ng-click="markUnderneathSame()"
+    ></span>
+</div>

@@ -1,0 +1,64 @@
+  <span id="left-col-toggle" class="fa fa-navicon" ng-click="doc.toggleDocMenu()"></span>
+
+            <div ng-if="doc.nodeCode != 0700">
+                <div class="panel mt30" id="inspection-file">
+                    <div class="panel-heading">
+                        <span class="panel-title">鉴定文书</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group mbn">
+                            <a ng-click="doc.reloadData(item.id)" 
+                               class="list-group-item"
+                               ng-class="{true:'active'}[item.id == doc.currentDocId]"  ng-repeat="item in doc.docListData">
+                               {{item.code}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel mt30" id="inspection-history">
+                    <div class="panel-heading">
+                        <span class="panel-title">历史版本</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group mbn br-n">
+                            <a href="#" class="list-group-item" ng-repeat="item in doc.docHistoryData">
+                                {{item.insDate|date:'yyyy-MM-dd HH:mm:ss'}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel mt30" id="inspection">
+                    <div class="panel-heading">
+                        <span class="panel-title">文书审批记录</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group mbn">
+                            <a href="#" class="list-group-item" ng-repeat="item in doc.recordsData">
+                                <span class="list-group-item-heading fs14">{{item.submStateName}}</span>
+                                <p class="list-group-item-text">{{item.operatorName}}
+                                </p>
+                                <p>{{item.operateDate|date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                                
+            </div>
+
+            <div ng-if="doc.nodeCode == 0700">
+                <div class="panel mt30" id="inspection-file">
+                    <div class="panel-heading">
+                        <span class="panel-title">检验记录</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group mbn">
+                            <a ng-click="doc.reloadData(item.id)" class="list-group-item" ng-class="{true:'active'}[item.id == doc.currentDocId]" ng-repeat="item in doc.docListData">
+                               {{item.typeName}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>

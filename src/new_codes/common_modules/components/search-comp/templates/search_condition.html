@@ -1,0 +1,80 @@
+<section class="search-condition admin-form theme-primary">
+    <dl class="dl-horizontal search-list">
+        <div ng-repeat="searchItem in search.searchData" class="searchItem">
+            <dt>{{searchItem.name}}</dt>
+            <dd>
+                <!--输入文本框-->
+                <div ng-if="searchItem.type == 'input'" class="clearfix">
+                    <input type="text"
+                            class="form-control input-sm w200"
+                            placeholder="{{searchItem.placeholder}}"
+                            ng-model="search.activeCondition[searchItem.category]"
+                            ng-blur="search.inputItem(searchItem)"/>
+                </div>
+                <!--选择时间范围-->
+                <div ng-if="searchItem.type == 'time'" class="clearfix">
+                    <!--选择项：不限|今天|本周-->
+                    <div class="fl optionItem">
+                        <span   ng-repeat="item in searchItem.dateRange"
+                                ng-class="{true: 'active'}[$index == searchItem.index]"
+                                ng-click="search.chooseItem($index, searchItem, item)"
+                        >{{item.name}}</span>
+                    </div>
+                    <!--dateRangePick控件-->
+                    <date-range-picker active-condition="search.activeCondition"
+                                       selected-condition="search.selectedCondition"
+                                       search-item="searchItem"
+                                       placeholder="{{searchItem.placeholder}}">
+                    </date-range-picker>
+                </div>
+                <!--文本选择-->
+                <div ng-if="searchItem.type == 'text'" class="clearfix optionItem" >
+                    <span   ng-repeat="item in searchItem.textOption"
+                            high-light
+                            single-check="{{!searchItem.multi}}"
+                            index="{{$index}}"
+                            ng-class="{true: 'active'}[$index == 0]"
+                            ng-click="search.chooseItem($index, searchItem, item)"
+                    >{{item.name}}</span>
+                </div>
+                <!--下拉框选择-->
+                <div ng-if="searchItem.type == 'select'" class="clearfix mtn5">
+                    <div class="input-wrapper w200" >
+                        <label class="select">
+                            <select class="form-control input-sm fl"
+                                    ng-model="search.activeCondition[searchItem.category]"
+                                    ng-change="search.selectItem(searchItem)">
+                                <option value="">请选择</option>
+                                <option ng-repeat="item in searchItem.textOption" value="{{item.value}}">
+                                    {{item.name}}
+                                </option>
+                            </select>
+                            <i class="arrow"></i>
+                        </label>
+                    </div>
+                </div>
+            </dd>
+        </div>
+    </dl>
+
+    <div class="active-search-list clearfix" ng-show="search.selectedCondition.length > 0">
+        <label class="fl">已选条件：</label>
+        <section class="col-sm-11 pn">
+            <span class="active-search mb5" ng-repeat="item in search.selectedCondition track by $index">
+                <span>{{item.name}}</span>
+                <span>{{item.value}}</span>
+                <em class="fa fa-times ui-btn-delete"
+                    ng-click="search.deleteSelectCondition($index, search.searchData)">
+                </em>
+            </span>
+            <span class="btn-save" style="white-space: nowrap;" ng-click="search.save('savedActiveCondition')">
+                <em class="fa fa-save"></em>
+                <a href="#">保存该条件</a>
+            </span>
+        </section>
+    </div>
+    <div>
+        <button class="btn btn-sm btn-warning dark w75" ng-click="search.search('historyActiveCondition')">查询</button>
+        <button class="btn btn-default light btn-sm w75" ng-click="search.reset()">重置</button>
+    </div>
+</section>

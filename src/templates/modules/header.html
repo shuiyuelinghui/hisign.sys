@@ -1,0 +1,32 @@
+<header class="navbar navbar-fixed-top navbar-shadow bg-white">
+
+    <div class="navbar-branding dark bg-primary">
+
+        <span id="toggle_sidemenu_l" class="ad ad-lines" ng-click="header.sidebarLeftToggle()"></span>
+    </div>
+
+    <div class="nav navbar-nav navbar-left ui-main-logo">
+        <img src="./assets/images/national-emblem.png" />
+        <div style="margin-top:7px;">
+            <span class="fs20">{{header.fullName}}</span>
+        </div>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right">
+
+        <li>
+            <a class="request-fullscreen toggle-active" href="#" ng-click="header.fullScreen()">
+                <span class="ad ad-screen-full fs18 text-dark"></span>
+            </a>
+        </li>
+
+        <li>
+
+            <a href="#" class="topbar-menu-toggle" ng-click="header.openMagnificPopup()">
+                <span class="fa fa-power-off fs18 text-dark"></span>
+            </a>
+
+        </li>
+    </ul>
+
+</header>

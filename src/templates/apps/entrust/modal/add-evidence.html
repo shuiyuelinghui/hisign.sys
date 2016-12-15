@@ -1,0 +1,250 @@
+<div
+        class="panel popup-basic popup-lg panel-modal mnw1000"
+        id="add_evidence_modal"
+        data-panel-color="false"
+        data-panel-remove="false"
+        data-panel-title="false"
+        data-panel-collapse="false"
+        ng-controller="AddEvidenceController as addEvidence"
+>
+    <div class="panel-heading">
+        <span
+                class="panel-title fs18 text-dark-darker"
+                ng-if="addEvidence.dcService.mode === 'display'"
+        >添加物证</span>
+        <span
+                class="panel-title fs18 text-dark-darker"
+                ng-if="addEvidence.dcService.mode === 'edit'"
+        >编辑物证</span>
+    </div>
+    <div class="panel-body entrust-form-container admin-form theme-primary">
+        <div class="modal-top-bar">
+            <upload-comp
+                    class="ui-file-upload"
+                    viewport="#add_evidence_modal"
+                    flag="4"
+            ></upload-comp>
+        </div>
+
+        <form name="modalForm" id="add-evidence-form" class="add-evidence">
+            <div class="form-inline">
+                <div class="form-group col-sm-6">
+                    <label for="">物证编号：</label>
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            class="gui-input"
+                            placeholder=""
+                            ng-model="addEvidence.dcService.evidenceListItem.eviCode"
+                        />
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="">物证名称：</label>
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            class="gui-input"
+                            placeholder=""
+                            required
+                            ng-model="addEvidence.dcService.evidenceListItem.eviName"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-6">
+                    <label for="">物证类型：</label>
+                    <div class="section">
+                        <label class="field select mtn" style="width:40%">
+                            <select
+                                    class="form-control input-sm fl"
+                                    required
+                                    ng-change="addEvidence.getEviCategory()"
+                                    ng-model="addEvidence.dcService.evidenceListItem.eviType"
+                                    ng-options="item.dictKey as item.dictValue1 for item in addEvidence.dcService.dictData.EviTypeModel"
+                            >
+                                <option value="">请选择</option>
+                            </select>
+                            <i class="arrow"></i>
+                        </label>
+                    </div>
+                    <div class="input-wrapper" style="margin-left:275px;">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        required
+                                        ng-model="addEvidence.dcService.evidenceListItem.eviCategory"
+                                        ng-options="item.dictKey as item.dictValue1 for item in addEvidence.dcService.dictData.EviTypeCategoryModel"
+                                >
+                                    <option value="">请选择</option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="">数量/单位：</label>
+                    <!--<div class="input-wrapper">-->
+                        <input
+                                type="number"
+                                class="gui-input fl"
+                                placeholder=""
+                                style="width: 60px;"
+                                ng-pattern="addEvidence.patterIsPositiveFloat"
+                                ng-model="addEvidence.dcService.evidenceListItem.amount"
+                        />
+	                    <div 
+	                    	class="input-wrapper ui-input-select" 
+	                    	input-select
+	                    	style="margin-left: 150px;"
+	                        dict="addEvidence.dcService.dictData.MeaUnitModel">
+	                        <input
+	                            type="text"
+	                           	class="gui-input fl"
+	                            placeholder=""
+	                            ng-model="addEvidence.dcService.evidenceListItem.measuringUnit"
+	                        />
+	                    </div>
+                    <!--</div>-->
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-6">
+                    <label for="">提取人：</label>
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            class="gui-input"
+                            placeholder=""
+                            ng-model="addEvidence.dcService.evidenceListItem.collector"
+                        />
+                    </div>
+                </div>
+                <div class="form-group col-sm-6 form-icon-suffix">
+                    <label for="">提取时间：</label>
+                    <div class="input-wrapper">
+                        <input
+                                readonly
+                                type="text"
+                                class="gui-input bs-datetimepicker"
+                                placeholder=""
+                                ng-model="addEvidence.dcService.evidenceListItem.collectTimeStr"
+                        />
+                        <span class="fa fa-calendar form-control-icon"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-6">
+                    <label for="">提取部位：</label>
+                    <div class="input-wrapper">
+                        <input
+                                type="text"
+                                class="gui-input"
+                                placeholder=""
+                                ng-model="addEvidence.dcService.evidenceListItem.collectPart"
+                        />
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="">提取方法：</label>
+                    <div
+                            class="input-wrapper ui-input-select"
+                            input-select
+                            dict="addEvidence.dcService.dictData.CollectMethodModel"
+                    >
+                        <input
+                                type="text"
+                                class="gui-input"
+                                placeholder=""
+                                ng-model="addEvidence.dcService.evidenceListItem.collectMethod"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12">
+                    <label for="">包装情况：</label>
+                    <div
+                            class="input-wrapper ui-input-select"
+                            input-select
+                            dict="addEvidence.dcService.dictData.PackSituModel"
+                    >
+                        <input
+                            type="text"
+                            class="gui-input"
+                            placeholder=""
+                            ng-model="addEvidence.dcService.evidenceListItem.packing"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12">
+                    <label for="">性状/属性：</label>
+                    <div
+                            class="input-wrapper ui-input-select"
+                            input-select
+                            dict="addEvidence.dcService.dictData.CharacterModel"
+                    >
+                        <input
+                            type="text"
+                            class="gui-input"
+                            placeholder=""
+                            ng-model="addEvidence.dcService.evidenceListItem.characters"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="form-group col-sm-12">
+                    <label for="">主要特征：</label>
+                    <div class="input-wrapper ui-input-select">
+                        <div class="section">
+                            <label class="field">
+                                <textarea
+                                    class="gui-textarea"
+                                    ng-model="addEvidence.dcService.evidenceListItem.mainFeatures"
+                                ></textarea>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <file-slide-comp flag="4"></file-slide-comp>
+
+    </div>
+
+    <div class="panel-footer text-center">
+        <button
+                type="button"
+                class="btn btn-warning dark"
+                ng-click="addEvidence.updateEvidence()"
+                ng-disabled="modalForm.$invalid"
+        >保存</button>
+        <button
+                type="button"
+                class="btn btn-default"
+                ng-if="addEvidence.dcService.mode === 'display'"
+                ng-click="addEvidence.updateEvidence(true)"
+                ng-disabled="modalForm.$invalid"
+        >保存并新增</button>
+        <button
+                type="button"
+                class="btn btn-default"
+                ng-click="addEvidence.closeMagnificPopup()"
+        >取消</button>
+    </div>
+
+</div>

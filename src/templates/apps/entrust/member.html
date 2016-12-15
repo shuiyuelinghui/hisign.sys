@@ -1,0 +1,147 @@
+<div id="panel_member"></div>
+<div class="panel panel-default" ng-controller="MemberInfoController as memberInfo">
+
+    <div class="panel-body">
+        <div class="fs18 text-dark-darker fw600 pb20">人员信息
+
+            <span class="text-muted fs14 mr5" ng-if="memberInfo.dcService.summary.memberCount">
+                被鉴定人共<em class="text-warning p3">{{memberInfo.dcService.summary.memberCount}}</em>人
+            </span>
+            <span class="text-muted fs14 mr5" ng-if="memberInfo.dcService.summary.memberDNACount">
+                DNA案件人员共<em class="text-warning p3">{{memberInfo.dcService.summary.memberDNACount}}</em>人
+            </span>
+            <span class="text-muted fs14" ng-if="memberInfo.dcService.summary.relativesRelationCount">
+                DNA案件人员亲属共<em class="text-warning p3">{{memberInfo.dcService.summary.relativesRelationCount}}</em>人
+            </span>
+            <span class="text-muted fs14" ng-if="memberInfo.dcService.summary.nameLessCorpseCount">
+                无名尸共<em class="text-warning p3">{{memberInfo.dcService.summary.nameLessCorpseCount}}</em>具
+            </span>
+            <div class="nav navbar-nav navbar-right action-menu fs12 fw400 mrn">
+                <div class="dropdown">
+                <span class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <em class="fa fa-plus-square"></em>
+                    添加人员
+                    <em class="caret"></em>
+                </span>
+                    <ul class="dropdown-menu">
+                        <li
+                                ng-click="memberInfo.openAddMemberModal()"
+                                ng-if="((memberInfo.dcService.activeState === 'app.accept' || memberInfo.dcService.flag === '2') && memberInfo.dcService.submission.section !== '3') || memberInfo.dcService.activeState !== 'app.accept' && memberInfo.dcService.flag !== '2'"
+                        ><a href="#nogo">被鉴定人</a></li>
+                        <li
+                                ng-click="memberInfo.openAddDNAMemberModal()"
+                                ng-if="((memberInfo.dcService.activeState === 'app.accept' || memberInfo.dcService.flag === '2') && memberInfo.dcService.submission.section === '3') || memberInfo.dcService.activeState !== 'app.accept' && memberInfo.dcService.flag !== '2'"
+                        ><a href="#nogo">DNA人员</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="member-section" ng-if="memberInfo.dcService.memberList.length">
+            <div class="title-bar">
+                被鉴定人
+                <div class="operate-menu">
+                    <span ng-click="memberInfo.openAddMemberModal()">
+                        <em class="fa fa-plus-square"></em> 添加
+                    </span>
+                        &nbsp;&nbsp;
+                    <span
+                            ng-click="memberInfo.deleteMember('dt_member', 'memberList')"
+                            ng-if="memberInfo.dcService.activeState !== 'app.accept'"
+                    >
+                        <em class="fa fa-trash-o"></em> 删除
+                    </span>
+                </div>
+            </div>
+            <div class="dt-container">
+                <table
+                        id="dt_member"
+                        data-key="memberList"
+                        data-identity="dt_member"
+                        class="table table-striped table-bordered"
+                ></table>
+            </div>
+        </div>
+
+        <div class="member-section" ng-if="memberInfo.dcService.memberDNAList.length">
+            <div class="title-bar">
+                DNA案件人员
+                <div class="operate-menu">
+                    <span ng-click="memberInfo.openAddDNAMemberModal('memberDNAList')">
+                        <em class="fa fa-plus-square"></em> 添加
+                    </span>
+                    &nbsp;&nbsp;
+                    <span
+                            ng-click="memberInfo.deleteMember('dt_member_dna', 'memberDNAList')"
+                            ng-if="memberInfo.dcService.activeState !== 'app.accept'"
+                    >
+                        <em class="fa fa-trash-o"></em> 删除
+                    </span>
+                </div>
+            </div>
+            <div class="dt-container">
+                <table
+                        id="dt_member_dna"
+                        data-key="memberDNAList"
+                        data-identity="dt_member_dna"
+                        class="table table-striped table-bordered"
+                ></table>
+            </div>
+        </div>
+
+        <div class="member-section" ng-if="memberInfo.dcService.relativesRelationList.length">
+            <div class="title-bar">
+                DNA案件人员亲属
+                <div class="operate-menu">
+                    <span ng-click="memberInfo.openAddDNAMemberModal('relativesRelationList')">
+                        <em class="fa fa-plus-square"></em> 添加
+                    </span>
+                    &nbsp;&nbsp;
+                    <span
+                            ng-click="memberInfo.deleteMember('dt_member_relative', 'relativesRelationList')"
+                            ng-if="memberInfo.dcService.activeState !== 'app.accept'"
+                    >
+                        <em class="fa fa-trash-o"></em> 删除
+                    </span>
+                </div>
+            </div>
+            <div class="dt-container">
+                <table
+                        id="dt_member_relative"
+                        data-key="relativesRelationList"
+                        data-identity="dt_member_relative"
+                        class="table table-striped table-bordered"
+                ></table>
+            </div>
+        </div>
+
+        <div class="member-section" ng-if="memberInfo.dcService.nameLessCorpseList.length">
+            <div class="title-bar">
+                无名尸
+                <div class="operate-menu">
+                    <span
+                            ng-click="memberInfo.openAddDNAMemberModal('nameLessCorpseList')"
+                    >
+                        <em class="fa fa-plus-square"></em> 添加
+                    </span>
+                    &nbsp;&nbsp;
+                    <span
+                            ng-click="memberInfo.deleteMember('dt_member_nameless', 'nameLessCorpseList')"
+                            ng-if="memberInfo.dcService.activeState !== 'app.accept'"
+                    >
+                        <em class="fa fa-trash-o"></em> 删除
+                    </span>
+                </div>
+            </div>
+            <div class="dt-container">
+                <table
+                        id="dt_member_nameless"
+                        data-key="nameLessCorpseList"
+                        data-identity="dt_member_nameless"
+                        class="table table-striped table-bordered"
+                ></table>
+            </div>
+        </div>
+
+    </div>
+</div>

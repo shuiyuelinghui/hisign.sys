@@ -1,0 +1,122 @@
+
+<div class="row ph10">
+	<div class="row admin-form theme-primary">
+		<form name="docDraftForm">
+			<div class="panel">
+
+				<div class="panel-body pv10">
+					<div class="fs18 mv20"><span>目录信息</span></div>
+
+					<div class="row mb20">
+						<div class="col-md-1 text-center">序号</div>
+						<div class="col-md-2"><span class="fs16">目录名称</span></div>
+						<div class="col-md-2 text-center"><span class="fs16">页数</span></div>
+						<div class="col-md-2 text-center"><span class="fs16">起止页数</span></div>
+					</div>
+
+					<div class="row mb5" 
+						ng-repeat="item in confirmarchive.archiveData.filedCatalogList">
+						<div class="col-md-1 text-center">{{$index+1}}</div>
+						<div class="col-md-2">{{item.name}}</div>
+						<div class="col-md-2 text-center">{{item.page}}</div>
+						<div class="col-md-2 text-center">{{item.pageNumber}}</div>
+						<div class="col-md-3"></div>
+					</div>
+					
+					<div class="row mb5 mt10">
+						<div class="col-md-"></div>
+						<div class="col-md-3">
+							<label class="pull-left mt5">总页数:<label class="pl40 ml5">{{confirmarchive.archiveData.pages}}</label></label>
+						</div>
+						<div class="col-md-3">
+							<label class="pull-left mt5">总件数:<label class="pl30">{{confirmarchive.archiveData.numbers}}</label></label>
+						</div>
+
+						<div class="col-md-3"></div>
+					</div>
+
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="row admin-form theme-primary">
+	<form name="docDraftForm">
+		<div class="panel">
+
+			<div class="panel-body pv10">
+				<div class="fs18 mv20"><span>归档信息</span></div>
+
+				<div class="row mb10" ng-if="!confirmarchive.isTerminate">
+					<div class="col-md-4">
+						<label class="mt5">档案类型: <label class="pl10">{{confirmarchive.archiveData.archiveTypeName}}</label></label>
+
+					</div>
+				</div>
+				<div class="row mb10">
+					<div class="col-md-4">
+						<label class="mt5 pull-left">归档科室: <label class="pl10">{{confirmarchive.archiveData.acceptLabName}}</label></label>
+					</div>
+					<div class="col-md-4">
+						<label class="mt5 pull-left">归档人: <label class="pl25">{{confirmarchive.archiveData.filePersonName}}</label></label>
+					</div>
+					<div class="col-md-4">
+						<label class="mt5 pull-left">归档日期: <label class="pl10">{{confirmarchive.archiveData.fileDate|date:'yyyy-MM-dd'}}</label></label>
+					</div>
+
+				</div>
+				<div class="row mb10">
+					<div class="col-md-4">
+						<label class="mt5 pull-left">档案保存期限:<label class="pl10">{{confirmarchive.archiveData.archiveTermName}}</label></label>
+					</div>
+
+					<div class="col-md-4">
+						<label class="mt5 pull-left">是否发放：<label class="pl10">{{confirmarchive.archiveData.archivesEndFlagName}}</label></label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="row">
+	<div class="panel">
+		<div class="panel-heading">
+			<span class="panel-title">
+                <span class="fa fa-table"></span> 档案信息
+			</span>
+		</div>
+		<div class="panel-body pn">
+			<div class="bs-component">
+				<table class="table table-bordered mbn table-hover table-striped">
+					<thead>
+						<tr>
+							<th class="text-center" style="width: 30%">编号</th>
+							<th class="text-center" style="width: 20%">生成时间</th>
+							<th class="text-center" style="width: 20%">归档人</th>
+							<th class="text-center">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="text-center">
+							<td>{{confirmarchive.archiveData.bookCodes}}</td>
+							<td>{{confirmarchive.archiveData.insDate|date:'yyyy-MM-dd'}}</td>
+							<td>{{confirmarchive.archiveData.filePersonName}}</td>
+							<td class="text-center">
+								<span class="fa fa-photo cursor fs16 tooltipster mr10" title="预览" ng-click="docDraft.bulidIframeData(item.type)"></span>
+								<span class="fa fa-print cursor fs16 tooltipster mr10" title="打印" ng-click="docDraft.docDel(item.id)"></span>
+								<span class="fa fa-download cursor fs16 tooltipster mr10" title="下载"></span>
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!--<approve-comp ></approve-comp>-->
+<submit-comp config-data="confirmarchive.configData"></submit-comp>
+      

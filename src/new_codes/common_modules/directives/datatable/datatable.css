@@ -1,0 +1,18 @@
+.direct-datatable .dt-panelfooter {
+    background: none;
+    border-top: none;
+    padding-top: 14px;
+}
+.direct-datatable .dt-panelfooter .pagination {
+    margin-left: 150px;
+    margin-top: 0;
+    margin-bottom: 0;
+    float: left;
+}
+.direct-datatable .dt-panelfooter .goPage {
+    float: right;
+}
+.direct-datatable .dt-panelfooter .gui-input {
+    vertical-align: middle;
+}
+

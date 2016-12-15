@@ -1,0 +1,272 @@
+<h1 class="sample-dna-title">样本信息</h1>
+
+<div class="basic-info-list">
+    <div class="form-inline">
+
+        <div class="form-group col-sm-3">
+            <label for="">样本名称：</label>
+            <div class="input-wrapper">
+                <input
+                        type="text"
+                        class="gui-input"
+                        placeholder=""
+                        required
+                        ng-model="addDNA.dcService.relativesList2ndItem.sampleName"
+                        />
+            </div>
+        </div>
+
+        <div class="form-group col-sm-3">
+            <label for="">样本类型：</label>
+            <div class="input-wrapper">
+                <div class="section">
+                    <label class="field select mtn">
+                        <select
+                                class="form-control input-sm fl"
+                                required
+                                ng-model="addDNA.dcService.relativesList2ndItem.sampleType"
+                                ng-options="item.dictKey as item.dictValue1 for item in addDNA.dcService.dictData.SampleTypeModel"
+                                >
+                            <option value="">请选择</option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-3">
+            <label for="" class="long">是否FTA卡：</label>
+            <div class="input-wrapper long">
+                <div class="section">
+                    <label class="field select mtn">
+                        <select
+                                class="form-control input-sm fl"
+                                required
+                                ng-model="addDNA.dcService.relativesList2ndItem.isFta"
+                                ng-options="item.dictKey as item.dictValue1 for item in addDNA.dcService.dictData.IsNoModel"
+                                >
+                            <option value="">请选择</option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+		<div class="form-group col-sm-3">
+            <label for="">数量/单位：</label>
+            <input
+                    type="text"
+                    class="gui-input fl"
+                    placeholder=""
+                    style="width:60px"
+                    required
+                    ng-pattern="addDNA.patterIsPositiveFloat"
+                    ng-model="addDNA.dcService.relativesList2ndItem.amount"
+                    />
+            <div
+                    class="input-wrapper ui-input-select"
+                    style="margin-left:150px;"
+                    input-select
+                    dict="addDNA.dcService.dictData.MeaUnitModel"
+                    >
+                <input
+                        type="text"
+                        class="gui-input fl"
+                        placeholder=""
+                        required
+                        ng-model="addDNA.dcService.relativesList2ndItem.measuringUnit"
+                        />
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-inline">
+
+        <div class="form-group col-sm-3 form-icon-suffix">
+            <label for="">提取时间：</label>
+            <div class="input-wrapper">
+                <input
+                        readonly
+                        type="text"
+                        class="gui-input bs-datetimepicker"
+                        placeholder=""
+                        required
+                        ng-model="addDNA.dcService.relativesList2ndItem.collectTimeStr"
+                        />
+                <span class="fa fa-calendar form-control-icon"></span>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-3">
+            <label for="">提取人：</label>
+            <div class="input-wrapper">
+                <input
+                        type="text"
+                        class="gui-input"
+                        placeholder=""
+                        ng-model="addDNA.dcService.relativesList2ndItem.collector"
+                        />
+            </div>
+        </div>
+
+        <div class="form-group col-sm-3">
+            <label for="" class="long">提取部位：</label>
+            <div class="input-wrapper long">
+                <input
+                        type="text"
+                        class="gui-input"
+                        placeholder=""
+                        ng-model="addDNA.dcService.relativesList2ndItem.collectPart"
+                        />
+            </div>
+        </div>
+
+        <div class="form-group col-sm-3">
+            <label for="">提取方法：</label>
+
+            <div
+                    class="input-wrapper ui-input-select"
+                    input-select
+                    dict="addDNA.dcService.dictData.CollectMethodModel"
+                    >
+                <input
+                        type="text"
+                        class="gui-input fl"
+                        placeholder=""
+                        ng-model="addDNA.dcService.relativesList2ndItem.collectMethod"
+                        />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group col-sm-3">
+            <label for="">包装情况：</label>
+            <div
+                class="input-wrapper ui-input-select"
+                input-select
+                dict="addDNA.dcService.dictData.PackSituModel"
+            >
+            <input
+                type="text"
+                class="gui-input fl"
+                placeholder=""
+                ng-model="addDNA.dcService.relativesList2ndItem.packingSituation"
+            />
+            </div>
+        </div>
+        
+        <div class="form-group col-sm-3">
+            <label for="">是否补送：</label>
+            <div class="input-wrapper">
+                <div class="section">
+                    <label class="field select mtn" style="z-index: 0">
+                        <select
+                                class="form-control input-sm fl"
+                                ng-model="addDNA.dcService.relativesList2ndItem.isAppend"
+                                ng-options="item.dictKey as item.dictValue1 for item in addDNA.dcService.dictData.IsNoModel"
+                                >
+                            <option value="">请选择</option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group col-sm-6">
+            <label for="">送检目的：</label>
+            <div class="input-wrapper">
+                <input
+                        type="text"
+                        class="gui-input"
+                        placeholder=""
+                        ng-model="addDNA.dcService.relativesList2ndItem.testPurpose"
+                        />
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group col-sm-6">
+            <label for="" style="width:100px">关联系统编码：</label>
+            <div class="input-wrapper" style="margin-left:100px">
+                <input
+                        type="text"
+                        class="gui-input"
+                        placeholder=""
+                        ng-model="addDNA.dcService.relativesList2ndItem.crossSystemCode"
+                        />
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label for="" style="width:100px">关联系统名称：</label>
+            <div class="input-wrapper" style="margin-left:100px">
+                <input
+                        type="text"
+                        class="gui-input"
+                        placeholder=""
+                        ng-model="addDNA.dcService.relativesList2ndItem.crossSystemName"
+                        />
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="form-inline" ng-if="addDNA.activeType === 'memberDNA'">
+        <div class="form-group col-sm-12">
+            <label for="">包装方法：</label>
+            <div class="input-wrapper">
+                <textarea
+                        class="gui-textarea"
+                        ng-model="addDNA.dcService.relativesList2ndItem.packingMethod"
+                        ></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group col-sm-12">
+            <label for="">样本描述：</label>
+            <div class="input-wrapper">
+                <textarea
+                        class="gui-textarea"
+                        ng-model="addDNA.dcService.relativesList2ndItem.sampleDesc"
+                        placeholder=" 示例：标记“......血样”字样的物证袋1个，内装“...”1个"
+                        ></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" ng-if="addDNA.activeType === 'nameLessCorpse'">
+        <div class="form-group col-sm-12">
+            <label for="">尸体特征：</label>
+            <div class="input-wrapper">
+                <textarea
+                        class="gui-textarea"
+                        ng-model="addDNA.dcService.relativesList2ndItem.corpseCha"
+                        ></textarea>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-inline">
+        <div class="form-group col-sm-12">
+            <label for="">备注：</label>
+            <div class="input-wrapper">
+                <textarea
+                        class="gui-textarea"
+                        ng-model="addDNA.dcService.relativesList2ndItem.comments"
+                        ></textarea>
+            </div>
+        </div>
+    </div>
+</div>

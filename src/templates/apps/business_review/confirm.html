@@ -1,0 +1,18 @@
+<ul class="list-unstyled" ng-cloak>
+    <li><label>案（事）件名称：</label>{{businessReview.submissionData.caseName}}</li>
+    <li><label>专业：</label>{{businessReview.submissionData.sectionName}}</li>
+    <li><label>鉴定类别：</label>{{businessReview.submissionData.identifyCategoryName}}</li>
+    <li><label>要求完成日期：</label>{{businessReview.submissionData.agreedDate | date: 'yyyy-MM-dd'}}</li>
+    <!--if 延期审批-->
+    <li ng-if="businessReview.configData.resultMapping.actionType == 0">
+        <label>延期申请完成日期：</label>{{businessReview.reviewData.extralInfo.completeDate | date:'yyyy-MM-dd'}}
+    </li>
+    <li><label>申请人：</label>{{businessReview.reviewData.extralInfo.proposerName}}</li>
+    <!--if 主任审核-->
+    <li ng-if="!businessReview.configData.resultMapping.auditor">
+        <label>审核人：</label>{{businessReview.reviewData.extralInfo.kzsprName}}
+    </li>
+    <li class="mt20">
+        <label>确认提交吗？</label>
+    </li>
+</ul>

@@ -1,0 +1,299 @@
+<div
+        class="panel popup-basic popup-lg panel-modal mnw1000"
+        id="member_list_modal"
+        data-panel-color="false"
+        data-panel-remove="false"
+        data-panel-title="false"
+        data-panel-collapse="false"
+        ng-controller="AddMemberController as addMember"
+>
+    <div class="panel-heading">
+        <span class="panel-title" ng-if="addMember.dcService.mode === 'display'">添加被鉴定人</span>
+        <span class="panel-title" ng-if="addMember.dcService.mode === 'edit'">编辑被鉴定人</span>
+    </div>
+    <div class="panel-body">
+
+        <div class="modal-top-bar">
+            <h1>专业</h1>
+            <upload-comp
+                    class="ui-file-upload"
+                    viewport="#member_list_modal"
+                    flag="4"
+            ></upload-comp>
+        </div>
+
+        <pro-comp filterdna="true" isdna="false"></pro-comp>
+
+        <form name="modalForm" id="" class="entrust-form-container admin-form theme-primary">
+
+            <input
+                    type="hidden"
+                    ng-model="addMember.dcService.memberListItem.memberFlag"
+                    ng-init="addMember.dcService.memberListItem.memberFlag = '1'"
+            />
+
+            <div class="form-inline">
+                <div class="form-group col-sm-4">
+                    <label for="">姓名：</label>
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            class="gui-input"
+                            placeholder=""
+                            required
+                            ng-model="addMember.dcService.memberListItem.name"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-4">
+                    <label for="">国籍：</label>
+                    <div class="input-wrapper">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        required
+                                        ng-model="addMember.dcService.memberListItem.nationality"
+                                        ng-options="item.dictKey as item.dictValue1 for item in addMember.dcService.dictData.NationalityModel"
+                                        >
+                                    <option value="">请选择</option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+				<div class="form-group col-sm-4">
+                    <label for="">证件类型：</label>
+                    <div class="input-wrapper">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        required
+                                        ng-model="addMember.dcService.memberListItem.credentialType"
+                                        ng-options="item.dictKey as item.dictValue1 for item in addMember.dcService.dictData.PersonCreTypeModel"
+                                        >
+                                    <option value="">请选择</option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+
+                <div class="form-group col-sm-4" >
+                    <label for="">证件号码：</label>
+                    <div class="input-wrapper">
+                      
+                        <input
+                                type="text"
+                                class="gui-input"
+                                placeholder=""
+                                required
+                                ng-model="addMember.dcService.memberListItem.identityCardNumber"
+                                ng-pattern="addMember.entrustAcceptUtilService.isIdType(addMember.dcService.memberListItem.credentialType)"
+                                idcard
+                                id-val="{{addMember.dcService.memberListItem.identityCardNumber}}"
+                                key-str="memberListItem"
+                        />
+                    </div>
+                </div>
+                
+                <div class="form-group col-sm-4 form-icon-suffix">
+                    <label for="">出生日期：</label>
+                    <div class="input-wrapper">
+                        <input
+                                readonly
+                                type="text"
+                                class="gui-input input-sm bs-datetimepicker"
+                                placeholder=""
+                                required
+                                ng-model="addMember.dcService.memberListItem.birthStr"
+                        />
+                        <span class="fa fa-calendar form-control-icon"></span>
+                    </div>
+                </div>
+				
+				<div class="form-group col-sm-4">
+                    <label for="">年龄：</label>
+                    <div class="input-wrapper">
+                        <input
+                                type="number"
+                                max="999"
+                                class="gui-input"
+                                placeholder=""
+                                required
+                                ng-pattern="addMember.integerPattern"
+                                ng-model="addMember.dcService.memberListItem.age"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+
+				<div class="form-group col-sm-4">
+                    <label for="">人员性别：</label>
+                    <div class="input-wrapper">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        required
+                                        ng-model="addMember.dcService.memberListItem.sex"
+                                        ng-options="item.dictKey as item.dictValue1 for item in addMember.dcService.dictData.SexModel"
+                                        >
+                                    <option value="">请选择</option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group col-sm-4">
+                    <label for="">籍贯：</label>
+                    <div class="input-wrapper">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        ng-model="addMember.dcService.memberListItem.pob"
+                                        ng-options="item.dictKey as item.dictValue1 for item in addMember.dcService.dictData.NativePlaceModel"
+                                        >
+                                    <option value="">请选择</option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-4">
+                    <label for="">民族：</label>
+                    <div class="input-wrapper">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        ng-model="addMember.dcService.memberListItem.race"
+                                        ng-options="item.dictKey as item.dictValue1 for item in addMember.dcService.dictData.NationModel"
+                                        >
+                                    <option value="">请选择</option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-4">
+                    <label for="">文化程度：</label>
+                    <div class="input-wrapper">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        ng-model="addMember.dcService.memberListItem.education"
+                                        ng-options="item.dictKey as item.dictValue1 for item in addMember.dcService.dictData.EduDegreeModel"
+                                        >
+                                    <option value="">请选择</option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-4">
+                    <label for="">电话：</label>
+                    <div class="input-wrapper">
+                        <input
+                                type="text"
+                                class="gui-input"
+                                placeholder=""
+                                ng-model="addMember.dcService.memberListItem.telephone"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-4">
+                    <label for="">职业：</label>
+                    <div class="input-wrapper">
+                        <input
+                                type="text"
+                                class="gui-input"
+                                placeholder=""
+                                ng-model="addMember.dcService.memberListItem.career"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12">
+                    <label for="">工作单位：</label>
+                    <div class="input-wrapper">
+                        <input
+                                type="text"
+                                class="gui-input"
+                                placeholder=""
+                                ng-model="addMember.dcService.memberListItem.department"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12">
+                    <label for="">现住址：</label>
+                    <div class="input-wrapper">
+                        <input
+                                type="text"
+                                class="gui-input"
+                                placeholder=""
+                                ng-model="addMember.dcService.memberListItem.addressDetail"
+                        />
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <file-slide-comp flag="4"></file-slide-comp>
+
+    </div>
+
+    <div class="panel-footer text-center">
+        <button
+                type="button"
+                class="btn btn-warning dark"
+                ng-click="addMember.addMember()"
+                ng-disabled="modalForm.$invalid || !addMember.dcService.professionList.length"
+        >保存</button>
+
+        <button
+                ng-if="addMember.dcService.mode === 'display'"
+                type="button"
+                class="btn btn-default"
+                ng-click="addMember.addMember(true)"
+                ng-if="addMember.dcService.mode === 'display'"
+                ng-disabled="modalForm.$invalid || !addMember.dcService.professionList.length"
+        >保存并新增</button>
+
+        <button
+                type="button"
+                class="btn btn-default"
+                ng-click="addMember.closeMagnificPopup()"
+        >取消</button>
+    </div>
+
+</div>

@@ -1,0 +1,159 @@
+<div class="ph10" id="docDraft">
+    <div class="row">
+        <!-- Documentation Content -->
+
+        <div class="panel">
+
+            <div class="panel-body pv30">
+
+                <div class="row">
+                    <div class="col-xs-9">
+                         <button type="button" ng-click="docDraft.bulidWordData(docDraft.commonService.docType.examineRecord)" class="btn btn-primary dark mr5">
+                                检验记录
+                        </button>
+                        <button type="button" ng-click="docDraft.bulidWordData(docDraft.commonService.docType.bookConfirmation)" class="btn btn-primary dark mr5">
+                            鉴定受理登记表
+                        </button>
+                        <button type="button" ng-click="docDraft.bulidWordData(docDraft.commonService.docType.bookProxy)" class="btn btn-primary dark mr5">
+                            鉴定委托书
+                        </button>
+                        <button type="button" ng-click="docDraft.bulidWordData(docDraft.commonService.docType.sampleInfo)" class="btn btn-primary dark mr5">
+                            检材样本信息
+                        </button>
+                        <button type="button" ng-click="docDraft.bulidWordData(docDraft.commonService.docType.picture)" class="btn btn-primary dark mr5">
+                            图谱
+                        </button>
+                        <button type="button" class="btn btn-primary dark mr5" ng-click="docDraft.openFootPrintPopup()">
+                            留痕
+                        </button>
+
+                    </div>
+                    <div class="col-xs-3 text-right">
+                        
+                        <button type="button" 
+                                class="btn btn-primary dark mr5 text-right"
+                                ng-disabled="docDraft.isCreate"
+                                ng-click="docDraft.openBookPopup()">
+                            编制文书
+                        </button>
+                    </div>
+                 </div>
+             
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">
+                    <span class="fa fa-table"></span>
+                    鉴定文书列表
+                </span>
+            </div>
+            <div class="panel-body pn">
+                <div class="bs-component">
+                    <table class="table table-bordered mbn table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center" style="width: 5%">序号</th>
+                            <th class="text-center" style="width: 40%">发文号</th>
+                            <th class="text-center" style="width: 25%">生成日期</th>
+                            <th class="text-center">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>                      
+                            <tr class="text-center" ng-repeat="item in docDraft.docListData">
+                                <td>{{$index+1}}</td>
+                                <td>{{item.code}}</td>
+                                <td>{{item.insDate|date:'yyyy-MM-dd'}}</td>
+                                <td class="text-left">
+
+                                    <span class="fa fa-edit cursor fs16 tooltipster mr5" 
+                                          title="修改" 
+                                          ng-click="docDraft.bulidIframeData(item.type)">
+                                    </span>
+
+                                    <span class="fa fa-trash-o cursor fs16 tooltipster mr5" 
+                                          title="删除" 
+                                          ng-click="docDraft.docDel(item.id)">
+                                    
+                                    </span>
+                                    <span class="fa fa-cloud-upload cursor fs16 tooltipster mr5"
+                                          title="上传鉴定文书">
+                                    
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <div class="row" ng-if="docDraft.docListData.length>0">
+    	<div class="panel mt20 doc-draft-list p10 ptn">
+    		<span class="doclist ptn">案件附件列表</span>
+    		<div class="panel-body pn" id="doc_list_con">
+
+                <div
+						ng-repeat="(k, dict) in docDraft.dictData.DocumentTypeModel"
+                        class="chk"
+						ng-class="{true:'photodoc'}[docDraft.isShowImage(dict.dictKey) !== -1]"
+                        ng-if="docDraft.defaultDocuments[dict.dictKey].length != 0 || dict.dictValue2 === '1'"
+				>
+					<div class="option-group field admin-form theme-primary pt10 pb10 doctitle pl5">
+	    				<label class="option option-primary ml5">
+	                        <input type="checkbox"
+                                   ng-click="docDraft.selectAll($event, dict.dictKey, k)"/>
+	                        <span class="checkbox"></span>
+                            {{dict.dictValue1}}
+	                   	</label>
+
+                        <upload-comp
+                                class="ui-file-upload"
+                                viewport="#doc_list_con"
+                                flag="{{docDraft.getFlag(dict.dictKey)}}"
+                                ng-hide="dict.dictValue2 !== '1'"
+                        ></upload-comp>
+	               	</div>
+
+	               	<div
+                            class="option-group field admin-form theme-primary docontent"
+                            data-flag="{{docDraft.getFlag(dict.dictKey)}}"
+                            ng-class="{true:'pt10 pb10 pl40'}[dict.dictKey !== '5' && dict.dictKey !== '6' && dict.dictKey !== '7']"
+                    >
+
+						<label
+								class="option option-primary"
+								ng-repeat="(index, item) in docDraft.defaultDocuments[dict.dictKey]"
+                                ng-if="docDraft.isShowText(dict.dictKey) !== -1"
+						>
+	                        <input type="checkbox"
+                                   ng-click="docDraft.buildData(dict.dictKey, item.objectId, k, docDraft.defaultDocuments[dict.dictKey + index].subChecked); docDraft.isAllChecked($event, dict.dictKey)"
+                                   ng-model="docDraft.defaultDocuments[dict.dictKey + index].subChecked">
+	                        <span class="checkbox"></span>
+                            {{item.name}}.pdf
+	                   	</label>
+
+                        <file-slide-comp
+                                flag="{{docDraft.getFlag(dict.dictKey)}}"
+                                dc-service="docDraft.dcService"
+                                ng-hide="docDraft.isShowImage(dict.dictKey) === -1"
+                        ></file-slide-comp>
+	                   	
+	               	</div>
+               	</div>
+	            
+    		</div>
+    		
+    	</div>
+    </div>
+</div>
+
+<div class="row ml20">
+    <!--<approve-comp></approve-comp>-->
+	<submit-comp config-data="docDraft.configData"></submit-comp>
+</div>

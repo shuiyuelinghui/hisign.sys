@@ -1,0 +1,8 @@
+<section id="content" class="pn">
+    <div class="center-block mt50 mw800 animated fadeIn">
+        <h1 class="error-title"> {{error.status}}! </h1>
+        <h2 class="error-subtitle" ng-if="error.status === '500'">Internal Server Error.</h2>
+        <h2 class="error-subtitle" ng-if="error.status === '404'">Page Not Found.</h2>
+        <h2 class="error-subtitle" ng-if="error.status === '400'">Bad Request.</h2>
+    </div>
+</section>

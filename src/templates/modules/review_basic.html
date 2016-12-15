@@ -1,0 +1,53 @@
+<section class="ui-basic-info">
+    <dl >
+        <div class="row mb20">
+            <div class="col-xs-5 col-xs-offset-1">
+                <dt >受理编号：</dt>
+                <dd>{{review.reviewData.acceptCode}}</dd>
+            </div>
+            <div class="col-xs-5">
+                <dt >受理时间：</dt>
+                <dd >{{review.reviewData.slsj|date:'yyyy-MM-dd'}}</dd>
+            </div>
+        </div>
+
+        <div class="row mb20">
+            <div class="col-xs-10 col-xs-offset-1">
+                <dt >案（事）件名称：</dt>
+                <dd> {{review.reviewData.caseName}}</dd>
+            </div>
+        </div>
+
+        <div class="row mb20">
+            <div class="col-xs-5 col-xs-offset-1">
+                <dt >专业：</dt>
+                <dd >{{review.reviewData.sectionName}}</dd>
+            </div>
+            <div class="col-xs-5">
+                <dt >鉴定类别：</dt>
+                <dd >{{review.reviewData.identifyCategoryName}}</dd>
+            </div>
+        </div>
+
+        <div class="row mb20">
+            <div class="col-xs-10 col-xs-offset-1">
+                <dt >鉴定要求：</dt>
+                <dd class="mw600">{{review.reviewData.methodRequest}}</dd>
+            </div>
+        </div>
+
+        <div class="row mb20">
+            <div class="col-xs-10 col-xs-offset-1">
+                <dt >委托单位：</dt>
+                <dd >{{review.reviewData.departmentDetailName}}</dd>
+            </div>
+        </div>
+
+        <div class="row mb20">
+            <div class="col-xs-10 col-xs-offset-1">
+                <dt >要求完成日期：</dt>
+                <dd >{{review.reviewData.agreedDate|date:'yyyy-MM-dd'}}</dd>
+            </div>
+        </div>
+    </dl>
+</section>

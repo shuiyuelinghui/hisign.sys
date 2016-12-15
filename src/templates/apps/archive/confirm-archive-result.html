@@ -1,0 +1,44 @@
+<section class="hideBtn">
+    <div class="row ">
+        <div class="col-md-2 text-center">
+            <i class="fa fa-check-circle text-success fs70"></i>
+        </div>
+        <div class="col-md-10 mt5 text-left ">
+            <p><span class="text-dark fs20">恭喜您, 提交成功!</span></p>
+            <ul class="list-unstyled" ng-cloak>
+                <li class="mt5">受理编号:<span>{{confirmarchive.submissionData.acceptCode}}</span></li>
+                <li class="mt5">受理日期:<span>{{confirmarchive.submissionData.slsj | date: 'yyyy-MM-dd'}}</span></li>
+                <li class="mt5">委托编号:<span>{{confirmarchive.submissionData.submCode}}</span></li>
+                <li class="mt5">委托单位:<span>{{confirmarchive.submissionData.departmentDetailName}}</span></li>
+                <li class="mt5">总件数:<span>{{confirmarchive.numbers}}</span></li>
+                <li class="mt5">总页数:<span>{{confirmarchive.pages}}</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-2 text-left mt5">
+            <p>
+                您还没有对检材、样本做流转登记，现在就去做
+                <a href="#" ng-click="confirmarchive.closePopup()"><i class="fa fa-file-text-o"></i> 检材样本移交 </a> 一下吧。
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-2 text-left mt5" ng-if="!confirmarchive.hideTime">
+            <p>尊敬的用户,系统将在 <span style="color: #f00" class="fs16" ng-bind="confirmarchive.counter"> </span> 秒后自动跳转回 [<a ng-click="confirmarchive.commonService.skipUrl(confirmarchive.result)"> 个人待办事项一览 </a>] 页面</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-2 text-left mt5">
+            <p>您可以点击下面的链接, 跳转到相应页面:</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-2 text-left mt10">
+            <p class="col-sm-4"><a ng-click="confirmarchive.commonService.skipUrl(confirmarchive.result)" class="cursor">个人待办事项一览</a></p>
+            <p class="col-sm-4"><a ui-sref="app.task.done.personal" ng-click="confirmarchive.closePopup()" class="cursor">个人已办事项一览</a></p>
+            <p class="col-sm-4"><a href="#" ng-click="confirmarchive.doPrint()" class="cursor">打印确认归档所需材料</a></p>
+        </div>
+    </div>
+</section>

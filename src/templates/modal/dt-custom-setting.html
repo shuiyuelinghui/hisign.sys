@@ -1,0 +1,110 @@
+<div
+        class="panel popup-basic panel-modal"
+        id="modal_dt_custom_setting"
+        data-panel-color="false"
+        data-panel-remove="false"
+        data-panel-title="false"
+        data-panel-collapse="false"
+>
+    <div class="panel-heading">
+        <span class="panel-title">自定义列</span>
+    </div>
+
+    <div class="panel-body admin-form" ng-cloak>
+        <ul>
+            <li>
+                <span class="fa fa-check"></span>
+                <label class="block switch switch-primary">
+                    <input type="checkbox" checked disabled />
+                    <label data-on="显示" data-off="隐藏"></label>
+                </label>
+                <em>序号</em>
+            </li>
+        </ul>
+        <div id="dt_custom_setting_container">
+            <ul class="dt-custom-setting fixed-left">
+                <li
+                        ng-repeat="data in task.dtData"
+                        ng-class="{true:'unsortable'}[!data.editable]"
+                        ng-if="data.fixed && $index <= task.dtData.length / 2"
+                >
+                    <span class="fa fa-check" ng-class="{true:'disappear'}[!data.display]"></span>
+                    <label class="block switch switch-primary">
+                        <input
+                                type="checkbox"
+                                id={{data.key}}
+                                ng-checked="data.display"
+                                ng-disabled="!data.editable"
+                        />
+                        <label for={{data.key}} data-on="显示" data-off="隐藏"></label>
+                    </label>
+                    <em>
+                        {{task.commonService.getTitleNameByKey(task.dtTitleMapping, data.key, task.pageId)}}
+                    </em>
+                </li>
+            </ul>
+            <ul class="dt-custom-setting">
+                <li
+                        ng-repeat="data in task.dtData"
+                        ng-class="{true:'unsortable'}[!data.editable]"
+                        ng-if="!data.fixed"
+                >
+                    <span class="fa fa-check" ng-class="{true:'disappear'}[!data.display]"></span>
+                    <label class="block switch switch-primary">
+                        <input
+                                type="checkbox"
+                                id={{data.key}}
+                                ng-checked="data.display"
+                                ng-disabled="!data.editable"
+                        />
+                        <label for={{data.key}} data-on="显示" data-off="隐藏"></label>
+                    </label>
+                    <em>{{task.commonService.getTitleNameByKey(task.dtTitleMapping, data.key, task.pageId)}}</em>
+                </li>
+            </ul>
+            <ul class="dt-custom-setting fixed-right">
+                <li
+                        ng-repeat="data in task.dtData"
+                        ng-class="{true:'unsortable'}[!data.editable]"
+                        ng-if="data.fixed && $index > task.dtData.length / 2"
+                >
+                    <span class="fa fa-check" ng-class="{true:'disappear'}[!data.display]"></span>
+                    <label class="block switch switch-primary">
+                        <input
+                                type="checkbox"
+                                id={{data.key}}
+                                ng-checked="data.display"
+                                ng-disabled="!data.editable"
+                        />
+                        <label for={{data.key}} data-on="显示" data-off="隐藏"></label>
+                    </label>
+                    <em>{{task.commonService.getTitleNameByKey(task.dtTitleMapping, data.key, task.pageId)}}</em>
+                </li>
+            </ul>
+        </div>
+        <ul>
+            <li>
+                <span class="fa fa-check"></span>
+                <label class="block switch switch-primary">
+                    <input type="checkbox" checked disabled />
+                    <label data-on="显示" data-off="隐藏"></label>
+                </label>
+                <em>操作</em>
+            </li>
+        </ul>
+    </div>
+
+    <div class="panel-footer">
+        <button
+                type="button"
+                class="btn btn-primary"
+                ng-click="task.saveCustomSetting()"
+        >确认</button>
+        <button
+                type="button"
+                class="btn btn-default"
+                ng-click="task.cancelCustomSetting()"
+        >取消</button>
+    </div>
+
+</div>

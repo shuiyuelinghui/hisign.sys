@@ -1,0 +1,42 @@
+<div class="panel popup-basic common-modal panel-modal" id="pickup_modal">
+    <div class="panel-heading">
+        <span class="panel-title">提示</span>
+    </div>
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-2 text-center">
+                <i class="fa fa-info-circle text-warning fs70"></i>
+            </div>
+            <div class="col-md-10">
+                <ul class="list-unstyled" ng-cloak>
+                    <li>
+                        <label>案（事）件名称：</label>{{pickup.confirmData.caseName}}
+                    </li>
+                    <li>
+                        <label>专业：</label>{{pickup.confirmData.sectionName}}
+                    </li>
+                    <li>
+                        <label>鉴定类别：</label>{{pickup.confirmData.identifyCategoryName}}
+                    </li>
+                    <li>
+                        <label>检材样本的移交情况：</label>共移交{{pickup.confirmData.transCount}}项
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="panel-footer">
+        <button
+                type="button"
+                class="btn btn-primary"
+                ng-click="pickup.receiveSubmit()"
+        >确认</button>
+        <button
+                type="button"
+                class="btn btn-default"
+                ng-click="pickup.closeConfirmPopup()"
+        >取消</button>
+    </div>
+</div>

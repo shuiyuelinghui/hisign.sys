@@ -1,0 +1,106 @@
+<div class="ui-pageoffice-container">
+    <h1>选择照片/图谱</h1>
+
+    <div class="panel">
+        <div class="panel-heading">
+            <ul class="nav panel-tabs-border panel-tabs panel-tabs-left">
+                <li
+                        ng-class="{true:'active'}[pageofficeResource.docFlag === '1']"
+                        ng-click="pageofficeResource.switchDocTab('1')"
+                >
+                    <a data-target="#tab_case" data-toggle="tab" aria-expanded="true">案件相关</a>
+                </li>
+                <li
+                        ng-class="{true:'active'}[pageofficeResource.docFlag === '2']"
+                        ng-click="pageofficeResource.switchDocTab('2')"
+                >
+                    <a data-target="#tab_evidence" data-toggle="tab" aria-expanded="false">检材/样本相关</a>
+                </li>
+                <li
+                        ng-class="{true:'active'}[pageofficeResource.docFlag === '3']"
+                        ng-click="pageofficeResource.switchDocTab('3')"
+                >
+                    <a data-target="#tab_member" data-toggle="tab" aria-expanded="false">被鉴定人相关</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="panel-body">
+            <div class="tab-content admin-form theme-primary">
+                <div class="search-bar">
+                    <label class="field select mtn fl">
+                        <select
+                                class="form-control input-sm fl"
+                                ng-model="pageofficeResource.searchDocCategory"
+                                ng-init="pageofficeResource.searchDocCategory = 'name'"
+                        >
+                            <option value="name" ng-if="pageofficeResource.docFlag === '1'">名称</option>
+
+                            <option value="code" ng-if="pageofficeResource.docFlag === '2'">检材编号</option>
+                            <option value="sampleName" ng-if="pageofficeResource.docFlag === '2'">检材名称</option>
+                            <option value="name" ng-if="pageofficeResource.docFlag === '2'">图谱名称</option>
+
+                            <option value="code" ng-if="pageofficeResource.docFlag === '3'">人员编号</option>
+                            <option value="sampleName" ng-if="pageofficeResource.docFlag === '3'">人员名称</option>
+                            <option value="name" ng-if="pageofficeResource.docFlag === '3'">图谱名称</option>
+
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+
+                    <label class="field append-icon fl">
+                        <input
+                                type="text"
+                                class="gui-input"
+                                placeholder="请按回车键进行搜索"
+                                ng-model="pageofficeResource.searchDocContent"
+                                ng-keydown="pageofficeResource.handleSearchOnEnter($event)"
+                        />
+                        <label class="field-icon">
+                            <i class="fa fa-search"></i>
+                        </label>
+                    </label>
+                </div>
+
+                <div class="resource-list">
+                    <h2>共找到<span>{{pageofficeResource.docNum}}条</span>符合的记录</h2>
+                    <div class="unit-container">
+                        <div class="image-resource-unit" ng-repeat="item in pageofficeResource.docData">
+                            <h3 ng-if="pageofficeResource.docFlag === '2'">{{$index+1}}. 编号：{{item.acceptCode}}&nbsp;&nbsp;&nbsp;&nbsp;检材名称：{{item.name}}</h3>
+                            <h3 ng-if="pageofficeResource.docFlag === '3'">{{$index+1}}. 编号：{{item.acceptCode}}&nbsp;&nbsp;&nbsp;&nbsp;人员名称：{{item.name}}</h3>
+                            <div class="image-list">
+                                <figure ng-repeat="doc in item.documentList">
+                                    <img src="{{pageofficeResource.fileUrl+'/api/files/'+doc.path+'/thumbnail'}}" width="150" />
+                                    <figcaption>
+                                        <span>{{doc.name}}</span>
+                                    </figcaption>
+                                    <label class="option option-primary">
+                                        <input
+                                                type="checkbox"
+                                                ng-click="pageofficeResource.toggleInsertData($event, doc.path)"
+                                        />
+                                        <span class="checkbox"></span>
+                                    </label>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 ng-if="pageofficeResource.docNum > 0">已选择{{pageofficeResource.insertData.length}}张照片</h2>
+                </div>
+
+                <div class="tc bottom-bar" ng-if="pageofficeResource.docNum > 0">
+                    <button
+                            class="btn btn-warning"
+                            ng-disabled="!pageofficeResource.insertData.length"
+                            ng-click="pageofficeResource.insert()"
+                    >插入</button>
+                    <button
+                            class="btn btn-default"
+                            ng-click="pageofficeResource.setActiveState(pageofficeResource.activeState)"
+                    >取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

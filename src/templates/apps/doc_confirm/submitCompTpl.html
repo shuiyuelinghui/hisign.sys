@@ -1,0 +1,261 @@
+<div class="form-content">
+      <!--是否认可项目 -->
+    <div class="form-group" ng-if="submitComp.configData.isShowCnas">
+        <label class="col-sm-2 control-label">是否认可项目：</label>
+        <div class="col-sm-10">
+            <div class="option-group field">
+                <label class="option option-primary col-sm-2">
+                    <input type="radio"
+                           name="cnas"
+                           value="1"
+                           ng-model="submitComp.configData.formData.cnasFlag"/>
+                    <span class="radio"></span>是
+                </label>
+                <label class="option option-primary col-sm-2">
+                    <input type="radio"
+                           name="cnas"
+                           value="2"
+                           ng-model="submitComp.configData.formData.cnasFlag"/>
+                    <span class="radio"></span>否
+                </label>
+            </div>
+        </div>
+    </div>
+    <!--是否认定项目 -->
+    <div class="form-group" ng-if="submitComp.configData.isShowCma">
+        <label class="col-sm-2 control-label">是否认定项目：</label>
+        <div class="col-sm-10">
+            <div class="option-group field">
+                <label class="option option-primary col-sm-2">
+                    <input type="radio"
+                           name="cma"
+                           value="1"
+                           ng-model="submitComp.configData.formData.cmaFlag"/>
+                    <span class="radio"></span>是
+                </label>
+                <label class="option option-primary col-sm-2">
+                    <input type="radio"
+                           name="cma"
+                           value="2"
+                           ng-model="submitComp.configData.formData.cmaFlag"/>
+                    <span class="radio"></span>否
+                </label>
+            </div>
+        </div>
+    </div>
+    <!-- 结果:-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">审批结果：</label>
+        <div class="col-sm-10">
+            <div class="option-group field">
+                <label class="option option-primary fl" style="min-width: 16.66666667%">
+                    <input type="radio"
+                           name="result"
+                           value="1"
+                           ng-model="submitComp.configData.resultValue"
+                           ng-change="submitComp.configData.fetchApproveTpl(submitComp.configData.resultValue)"
+                            />
+                    <span class="radio"></span>通过
+                </label>
+                <label class="option option-primary" style="min-width: 16.66666667%">
+                    <input type="radio"
+                           name="result"
+                           value="2"
+                           ng-model="submitComp.configData.resultValue"
+                           ng-change="submitComp.configData.fetchApproveTpl(submitComp.configData.resultValue)"
+                            />
+                    <span class="radio"></span>退回
+                </label>
+            </div>
+        </div>
+    </div>
+    <!-- 意见:-->
+    <div class="form-group approve-suggestion-tpl mb5">
+        <label class="col-sm-2 control-label">审批意见：</label>
+        <div class="col-sm-10">
+            <ul class="tplScroller">
+                <li class="text-left tooltipster"
+                    ng-class="{true:'active'}[submitComp.configData.tplIndex === $index]"
+                    ng-repeat="item in submitComp.configData.tplData"
+                    ng-click="submitComp.chooseTpl($index, item.content)"
+                    title="{{item.content}}">
+                    {{item.content}}
+                </li>
+            </ul>
+                <textarea name="opinion"
+                          ng-model="submitComp.configData.formData.opinion"
+                          ng-required="submitComp.configData.exaOpinionWriteRule == 1 || (submitComp.configData.exaOpinionWriteRule == 2 && submitComp.configData.resultValue == 2)"
+                          maxlength="100">
+                </textarea>
+        </div>
+    </div>
+    <!--if !重新复核-->
+    <section ng-if="submitComp.configData.resultValue == '1' && submitComp.configData.isRepeatRechecked == '0'">
+        <div class="form-group approve-suggestion-tpl mb5">
+            <label class="col-sm-2 control-label pt5">工作转向：</label>
+            <div class="col-sm-10  mb15">
+                <div class="option-group ">
+                    <label class="option option-primary fl">
+                        <input type="radio"
+                               name="auditorType"
+                               ng-model="submitComp.configData.formData.auditorType"
+                               value="1"
+                                />
+                        <span class="radio"></span>指定授权人签字
+                    </label>
+                </div>
+                <div class="col-sm-3 input-wrapper">
+                    <label class="select">
+                        <select class="form-control input-sm fl text-center"
+                                name="appointAuditor"
+                                ng-model="submitComp.configData.grantPerson"
+                                ng-disabled="submitComp.configData.formData.auditorType != 1"
+                                ng-required="submitComp.configData.formData.auditorType == 1">
+                            <option value="">请选择</option>
+                            <option ng-repeat="item in submitComp.configData.grantPersonnelData"
+                                    value="{{item.userId}}">
+                                {{item.name}}
+                            </option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-sm-10 col-sm-offset-2">
+                <div class="option-group">
+                    <label class="option option-primary fl">
+                        <input type="radio"
+                               name="auditorType"
+                               value="2"
+                               ng-model="submitComp.configData.formData.auditorType"/>
+                        <span class="radio"></span>指定技术负责人
+                    </label>
+                </div>
+                <div class="col-sm-3 input-wrapper">
+                    <label class="select">
+                        <select class="form-control input-sm fl text-center"
+                                name="techAuditor"
+                                ng-model="submitComp.configData.techPerson"
+                                ng-disabled="submitComp.configData.formData.auditorType != 2"
+                                ng-required="submitComp.configData.formData.auditorType == 2">
+                            <option value="">请选择</option>
+                            <option ng-repeat="item in submitComp.configData.techPersonnelData"
+                                    value="{{item.userId}}">
+                                {{item.name}}
+                            </option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--if 重新复核-->
+    <section ng-if="submitComp.configData.resultValue == '1' && submitComp.configData.isRepeatRechecked == '1'">
+        <div class="form-group mbn">
+            <label class="col-sm-2 control-label">工作转向：</label>
+            <div class="col-sm-10  mb15">
+                <div class="option-group field">
+                    <label class="option option-primary col-sm-2">
+                        <input type="radio"
+                               name="repeatRechecked"
+                               ng-model="submitComp.configData.workHandOver"
+                               ng-click="submitComp.chooseWork()"
+                               value="1"
+                                />
+                        <span class="radio"></span>继续复核
+                    </label>
+                    <label class="option option-primary col-sm-2">
+                        <input type="radio"
+                               name="repeatRechecked"
+                               ng-model="submitComp.configData.workHandOver"
+                               value="2"
+                               ng-click="submitComp.chooseWork()"
+                                />
+                        <span class="radio"></span>提交审批
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mbn" ng-if="submitComp.configData.workHandOver=='1'">
+            <label class="col-sm-2 control-label pt5">复核人：</label>
+            <div class="col-sm-4">
+                <div class="input-wrapper" >
+                    <label class="select">
+                        <select class="form-control input-sm fl text-center"
+                                name="reviewPerson"
+                                ng-model="submitComp.configData.reviewPerson"
+                                required>
+                            <option value="">请选择</option>
+                            <option ng-repeat="item in submitComp.configData.repeatRecheckedList"
+                                    value="{{item.userId}}">
+                                {{item.name}}
+                            </option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mbn" ng-if="submitComp.configData.workHandOver=='2'" >
+            <div class="col-sm-10 col-sm-offset-2 mb15" >
+                <div class="option-group">
+                    <label class="option option-primary fl">
+                        <input type="radio"
+                               name="auditorType"
+                               ng-model="submitComp.configData.formData.auditorType"
+                               value="1"
+                                />
+                        <span class="radio"></span>指定授权人签字
+                    </label>
+                </div>
+                <div class="col-sm-3 input-wrapper">
+                    <label class="select">
+                        <select class="form-control input-sm fl text-center"
+                                name="appointAuditor"
+                                ng-model="submitComp.configData.grantPerson"
+                                ng-disabled="submitComp.configData.formData.auditorType != '1'"
+                                ng-required="submitComp.configData.formData.auditorType == '1'">
+                            <option value="">请选择</option>
+                            <option ng-repeat="item in submitComp.configData.grantPersonnelData"
+                                    value="{{item.userId}}">
+                                {{item.name}}
+                            </option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-sm-10 col-sm-offset-2">
+                <div class="option-group ">
+                    <label class="option option-primary fl">
+                        <input type="radio"
+                               name="auditorType"
+                               value="2"
+                               ng-model="submitComp.configData.formData.auditorType"/>
+                        <span class="radio"></span>指定技术负责人
+                    </label>
+                </div>
+                <div class="col-sm-3 input-wrapper">
+                    <label class="select">
+                        <select class="form-control input-sm fl text-center"
+                                name="techAuditor"
+                                ng-model="submitComp.configData.techPerson"
+                                ng-disabled="submitComp.configData.formData.auditorType !=  '2'"
+                                ng-required="submitComp.configData.formData.auditorType == '2'">
+                            <option value="">请选择</option>
+                            <option ng-repeat="item in submitComp.configData.techPersonnelData"
+                                    value="{{item.userId}}">
+                                {{item.name}}
+                            </option>
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

@@ -1,0 +1,149 @@
+@import '../partials/mixin';
+@import '../partials/reset';
+
+body {
+  background-color: #fff;
+  h1, h2, p {
+    margin: 0;
+  }
+}
+
+.header.register {
+  border-bottom:1px solid #e5e5e5;
+}
+
+.form-progress {
+  @include clearfix;
+  margin:0 0 35px;
+  height:38px;
+  line-height:38px;
+  background-color:#dbdbdb;
+  color:#adb2b6;
+  font-size:1.6rem;
+  padding-left:0;
+
+  em {
+    display:inline-block;
+    width:20px;
+    height:20px;
+    line-height:20px;
+    border-radius:40px;
+    background-color:#fff;
+    color:#dbdbdb;
+    margin-left:15px;
+    margin-right:10px;
+    font-size:1.2rem;
+    font-weight:bold;
+    font-style:normal;
+    text-align:center;
+  }
+
+  .arrow {
+    float:left;
+    display:inline-block;
+    width:23px;
+    height:38px;
+    &.arrow-register {
+      background:url('../../assets/register/arrow-register.png') no-repeat;
+    }
+    &.arrow-register-success {
+      background:url('../../assets/register/arrow-register-success.png') no-repeat;
+    }
+  }
+
+  &.active {
+    background-color:#00a796;
+    color:#fff;
+    em {
+      color:#00a796;
+    }
+  }
+}
+
+.register-content {
+  width:920px;
+  margin:0 auto;
+  padding:35px 0;
+
+  .register-form {
+    label {
+      sup {
+        vertical-align:-webkit-baseline-middle;
+      }
+    }
+    .form-error-msg {
+      color:#f00;
+      line-height:39px;
+    }
+    .password-level {
+      width:32.6%;
+      display:inline-block;
+      height:20px;
+      line-height:20px;
+      text-align:center;
+      background-color:#d8d8d8;
+      color:#fff;
+      margin-top:3px;
+
+      &.active {
+        background-color:#00a796;
+      }
+    }
+  }
+
+  .register-hint {
+    height:400px;
+    padding:0 20px;
+    border-left:1px solid #e5e5e5;
+
+    h1 {
+      font-size:1.4rem;
+      color:#f60;
+      margin-bottom:20px;
+    }
+
+    p {
+      line-height:2rem;
+      margin-bottom:5px;
+    }
+  }
+}
+
+.register-success {
+  width:85%;
+  margin:0 auto;
+  padding:60px 0;
+  text-align:center;
+  h1 {
+    font-size:2.4rem;
+    font-weight:normal;
+    color:#666;
+    padding-bottom:40px;
+    margin-bottom:15px;
+    border-bottom:1px dashed #e0e0e0;
+    .fa-check {
+      color:#f19a00;
+      font-size:6rem;
+      margin-right:10px;
+    }
+  }
+  p {
+    font-size:1.4rem;
+    line-height:30px;
+    color:#333;
+    span {
+      color:#00a796;
+      font-weight:bold;
+    }
+    em, a {
+      color:#f60;
+    }
+    em {
+      font-style:normal;
+    }
+  }
+}
+
+.append-icon.org-name {
+  top:10px;
+}

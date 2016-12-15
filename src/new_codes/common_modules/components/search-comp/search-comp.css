@@ -1,0 +1,14 @@
+.sample-search .history-search {
+    display:inline-block;
+    margin-right:5px;
+    padding:1px 1px 1px 1px;
+    border:1px solid #f7b07f;
+    line-height:18px;
+    color:#666;
+}
+.sample-search  .ui-filter-search .search-condition .dl-horizontal dt{
+    width: 120px;
+}
+.sample-search  .ui-filter-search .search-condition .dl-horizontal dd{
+    margin-left: 120px;
+}

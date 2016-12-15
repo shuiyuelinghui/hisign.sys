@@ -1,0 +1,33 @@
+<section>
+    <div class="saved-condition-per-day"
+         ng-repeat="(key, val) in search.condition[search.searchType]"
+         ng-if="val.length">
+
+        <h1>
+            <span class="fa fa-times ui-btn-delete"
+                  ng-click="search.deleteSavedCondition($index, key, true)">
+            </span>
+            {{key}}&nbsp;&nbsp;{{key | weekday}}
+        </h1>
+        <ul class="list-unstyled saved-condition">
+            <li ng-repeat="list in val track by $index"
+                ng-if="list.selectedCondition.length"
+                class="clearfix">
+                <section class="fl">
+                     <span class="fa fa-times ui-btn-delete"
+                           ng-click="search.deleteSavedCondition($index, key )"
+                     ></span>
+
+                    <span><em>{{list.timestamp}}</em></span>
+                </section>
+
+                <a class="cursor text-muted col-sm-11" ng-click="search.research(list.activeCondition)">
+                    <span ng-repeat="searchItem in list.selectedCondition track by $index"
+                          class="history-search mb5">
+                        <em class="mln ph5">{{searchItem.name}}{{searchItem.value}}</em>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>

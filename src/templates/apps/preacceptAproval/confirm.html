@@ -1,0 +1,17 @@
+<ul class="list-unstyled" ng-cloak>
+    <li><label class="text-dark-darker">委托单位：</label>{{preacceptApproval.submissionData.departmentDetailName}}</li>
+    <li><label>案（事）件名称：</label>{{preacceptApproval.submissionData.caseName}}</li>
+    <li><label>专业：</label>{{preacceptApproval.submissionData.sectionName}}</li>
+    <li><label>鉴定类别：</label>{{preacceptApproval.submissionData.identifyCategoryName}}</li>
+    <li ><label>预受理人：</label>{{preacceptApproval.opinionData.operatorName}}</li>
+    <li ><label>预受理时间：</label>{{preacceptApproval.opinionData.operateDate | date: 'yyyy-MM-dd'}}</li>
+    <li >
+        <label>预受理意见：</label>
+        <div style="width: 300px; display: inline-block; vertical-align: top">{{preacceptApproval.opinionData.opinion}}</div>
+    </li>
+    <li class="mt20">
+        您确认对此案件进行
+        <label ng-if="preacceptApproval.configData.resultValue==1">“预受理退回”</label>
+        <label ng-if="preacceptApproval.configData.resultValue==2">“预受理通过”</label>处理吗？
+    </li>
+</ul>

@@ -1,0 +1,15 @@
+<ul class="list-unstyled" ng-cloak>
+    <li><label>案（事）件名称：</label>{{docApprove.submissionData.caseName}}</li>
+    <li><label>文书编号：</label>{{docApprove.submissionData.bookCodes}}</li>
+    <li><label>专业：</label>{{docApprove.submissionData.sectionName}}</li>
+    <li><label>鉴定类别：</label>{{docApprove.submissionData.identifyCategoryName}}</li>
+    <li><label>要求完成日期：</label>{{docApprove.submissionData.agreedDate | date: 'yyyy-MM-dd'}}</li>
+    <li><label>检验人：</label>{{docApprove.submissionData.jyjdrName}}</li>
+    <li><label>拟稿人：</label>{{docApprove.submissionData.wsngrName}}</li>
+    <li ng-if="docApprove.configData.leaderApprove == '1' && docApprove.configData.resultValue == '1'">
+        <label>是否领导审批：</label>是
+    </li>
+    <li class="mt20">
+        <label>确认提交吗？</label>
+    </li>
+</ul>

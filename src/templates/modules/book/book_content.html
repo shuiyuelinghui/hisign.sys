@@ -1,0 +1,43 @@
+
+        <div id="viewerContainer"
+             ng-if="book.pageType == 'pdf' && !book.noPath">
+            <div id="viewer" class="pdfViewer"></div>
+        </div>
+
+		<div class="dociconedits"
+		     ng-if="!book.noMenu&&(book.panelType != book.commonService.panelType[3]&&book.panelType != book.commonService.panelType[5])">
+    		<i class="glyphicon glyphicon-edit fs18 tooltipster" title="编辑{{book.tooltipName}}" ng-click="book.edit()"></i>
+    	</div>
+			
+        <iframe style="width:100%;height:1350px; " 
+        		ng-if="book.pageType == 'doc' && book.source"
+                class="br-n" ng-src="{{book.source + '&timestamp=' + book.timestamp}}"
+        >
+             
+        </iframe>
+
+      <!--   <map-show-comp show-download="true" subm-id="book.id"  
+        			   ng-if="book.pageType == 'doc'">	
+        </map-show-comp> -->
+
+        <div style="width:100%;height:1350px;" ng-if="book.noPath"></div>
+      
+        
+        <div class="photodoc" ng-if="book.pageType === 'picture'"
+             style="width:100%;height:1350px;">
+            <div class="option-group field admin-form theme-primary pt10 pb10 doctitle pl5">
+                <label class="option option-primary ml5">
+                    {{book.title}}
+                </label>
+            </div>
+
+            <div class="option-group field admin-form theme-primary docontent">
+                <file-slide-comp
+                        flag="{{book.flag}}"
+                        dc-service="book.dcService"
+                        readonly="true"
+                ></file-slide-comp>
+                
+            </div>
+        </div>
+

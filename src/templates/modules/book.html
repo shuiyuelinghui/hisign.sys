@@ -1,0 +1,31 @@
+<div class="doccontainer">
+
+	<div class="row docContainerTitle" ng-if="book.noMenu">
+		<div class="col-md-12">
+			<div class="panel-heading">
+				<span class="panel-title">鉴定文书送审稿</span>
+				<i class="fa fa-close fs18" ng-click="book.goBack()"></i>
+			</div>
+		</div>
+	</div>
+
+	<div class="docs-container" ng-class="{'mt10':!book.noMenu,'mt50':book.noMenu}" id="docs">
+		<div class="row">
+			<!-- Documentation Nav -->
+			<div class="doc-left-sibebar docLeftSidebarShow" ng-if="book.showSidebar" ng-class="{'docLeftSidebarHidden':!book.docMenuShow,'docLeftSidebarShow':book.docMenuShow}">
+				<ng-include src=" './templates/modules/book/book_sidebar.html' "></ng-include>
+			</div>
+			<!-- Documentation Content -->
+			<div
+					class="doc-normal"
+					ng-class="{'doc-doc-menu-hide':!book.docMenuShow, 'doc-resource-menu-show':book.resourceMenuShow}"
+			>
+				<ng-include src=" './templates/modules/book/book_content.html' "></ng-include>
+			</div>
+			<!--sibebarRight-->
+			<pageoffice-resource-comp ng-if="book.noMenu"></pageoffice-resource-comp>
+
+		</div>
+	</div>
+
+</div>

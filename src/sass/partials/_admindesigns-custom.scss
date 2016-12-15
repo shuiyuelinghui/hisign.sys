@@ -1,0 +1,363 @@
+/* content padding on large resolutions */
+@media (min-width: 1100px) {
+    #content {
+        padding: 20px 20px 66px 21px;
+    }
+}
+
+/* header shadow */
+.navbar[class*='bg-'].navbar-shadow {
+    box-shadow: 1px 1px 10px 0px rgba(204, 204, 204, 0.5);
+}
+
+.navbar-branding {
+    width: 220px;
+}
+
+#sidebar_left {
+    width: 220px;
+    top:60px;
+    z-index:1031;
+    padding-top: 0px;
+
+}
+
+.sb-l-o #sidebar_left {
+    overflow: inherit;
+}
+
+.sb-l-o #content_wrapper {
+    margin-left: 220px;
+}
+/*left sidebar closed*/
+.sb-l-c #sidebar_left {
+    left: -220px;
+    overflow: hidden;
+}
+
+.sidebar-header {
+    top:0px;
+    position:fixed;
+    width:215px;
+    z-index: 1;
+    background-color: #30363e;
+    .avatar-widget {
+        padding-left: 73px;
+    }
+}
+.sidebar-widget.avatar-widget .media {
+    position:absolute;
+    top:-40px;
+}
+
+.sidebar-widget.avatar-widget .media-left img {
+    border: 2px solid #888;
+    border-radius: 50%;
+    max-width:80px;
+    background-color: white;
+}
+
+.sidebar-widget {
+    text-align:center;
+    height: auto;
+    &:last-of-type {
+        margin-bottom:20px;
+    }
+    .media-body {
+        display:block;
+    }
+}
+
+.sidebar-widget + .sidebar-widget {
+    margin-top:0;
+}
+
+.sidebar-menu > li > ul > li ul {
+    width: 220px;
+}
+
+.panel {
+    box-shadow: 1px 1px 10px 0px rgba(204,204,204,0.5);
+    &.no-shadow {
+        box-shadow:none;
+    }
+}
+
+body.sb-l-m .navbar.navbar-fixed-top {
+    .sidebar-widget.author-widget {
+        display: none;
+    }
+}
+.sidebar-menu {
+    margin-top: 190px;
+    margin-bottom:80px;
+    li {
+        a {
+            span:nth-child(2) {
+                font-weight: 400;
+            }
+        }
+        ul {
+            width: 220px;
+        }
+
+    }
+}
+
+body.sb-l-m {
+    #sidebar_left {
+        top:0;
+        padding-top:0;
+        .sidebar-menu {
+            margin-top:0;
+        }
+    }
+}
+
+.DTFC_RightBodyLiner {
+    overflow-x:hidden;
+}
+
+
+.docs-container {
+    box-shadow: 0 1px 1px rgba(0,0,0,0.25);
+    border: 1px solid #D9D9D9;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    background-color: #FFF;
+    position: relative;
+}
+
+/*===============================================
+   Left Column
+================================================= */
+.left-col {
+    vertical-align: top !important;
+    padding: 15px;
+    background: #fbfbfb;
+    border-right: 1px solid #dadada;
+}
+
+/* left col - minimized */
+body.left-col-hidden .left-col {
+    width: 50px;
+    overflow: hidden;
+    background-color: #f7f7f7;
+}
+body.left-col-hidden .left-col .panel,
+body.left-col-hidden .left-col .sidebar-title {
+    display: none;
+}
+/*adjust center column when left minimized*/
+body.left-col-hidden .center-col {
+    width: 100%;
+}
+
+/* left col - responsive styles */
+@media (max-width: 1400px) {
+    .left-col { padding: 20px; }
+    body.left-col-hidden #left-col-toggle {
+        right: 9px;
+    }
+}
+@media (max-width: 940px) {
+    .left-col { border-right: 0; }
+    body.left-col-hidden #left-col-toggle {
+        top: 9px;
+    }
+}
+
+/* changelog left col - responsive styles */
+@media (max-width: 940px) {
+    /* left col border */
+    .changelog-row .left-col {
+        border-top: 1px solid #DDD !important;
+        border-bottom: 0 !important;
+        padding: 10px 25px;
+    }
+    /* left col content */
+    body.left-col-hidden .changelog-row .left-col ul,
+    body.left-col-hidden .changelog-row .left-col .sidebar-title {
+        display: block;
+    }
+}
+
+
+/* left column toggle button */
+#left-col-toggle {
+    z-index: 5;
+    cursor: pointer;
+    position: absolute;
+    right: 14px;
+    top: 15px;
+    width: 20px;
+    height: 20px;
+    color: #AAA;
+    font-size: 21px;
+    -webkit-transition: color 0.2s ease;
+    transition: color 0.2s ease;
+}
+#left-col-toggle:hover { color: #666; }
+
+/* left col minimized toggle button */
+body.left-col-hidden #left-col-toggle {
+    color: #666;
+    right: 14px;
+}
+
+
+/*===============================================
+   Center Column
+================================================= */
+.center-col {
+    padding: 10px 15px;
+}
+.changelog-row .center-col {
+    padding: 30px 25px;
+}
+
+/*content styles*/
+
+/* CENTER COLUMN RESPONSIVE SETTINGS */
+@media (max-width: 1400px) {
+    .center-col {
+        padding: 30px 25px;
+    }
+}
+
+
+#sidebar_right {
+    position: absolute;
+    top: 0;
+    width: 40px;
+    height: 100%;
+    padding-top: 60px;
+    border-left: 1px solid #ddd;
+    background: #333;
+    right: 0;
+}
+
+/* Modify buttons inside contextuals navbars (bg-primary, etc) */
+.navbar[class*='bg-'] .navbar-btn.btn-group > .btn {
+    color: #325f9e;
+    border: none;
+    background-color: #ffffff;
+
+}
+.navbar[class*='bg-'] .navbar-btn.btn-group > .btn:hover {
+    color: #325f9e;
+}
+.navbar[class*='bg-'] .navbar-btn.btn-group.open > .btn,
+.navbar[class*='bg-'] .navbar-btn.btn-group > .btn.active {
+    color: #325f9e;
+}
+
+
+.panel-tabs > li > a:hover {
+    cursor: pointer;
+}
+
+/*============================================
+     Admin Form
+============================================== */
+
+.admin-form input,
+.admin-form button,
+.admin-form select,
+.admin-form textarea {
+    font-size: 12px;
+
+}
+
+.admin-form .gui-input,
+.admin-form .gui-textarea { padding: 5px 10px; }
+
+.admin-form .select,
+.admin-form .gui-input,
+.admin-form .select > select,
+.admin-form .gui-textarea,
+.admin-form .select-multiple select{
+    height: 30px;
+    line-height: 18px;
+}
+.admin-form .gui-textarea{
+    line-height: 20px;
+}
+
+.admin-form .select .arrow {
+    top: 3px;
+    right: 4px;
+    width: 15px;
+    height: 24px;
+    color:#9F9F9F;
+
+}
+
+.admin-form .select > select {
+    padding: 0px 5px;
+}
+
+.admin-form .section {
+    margin-bottom: 0px;
+}
+
+/*==============================
+    Timeline
+===============================*/
+ol.timeline-list li.timeline-item {
+    .timeline-icon {
+        left: 5px;
+        border:none;
+        line-height: 28px;
+        opacity: 1;
+        font-weight: 600;
+        &:focus {
+            text-decoration: none;
+        }
+    }
+
+}
+
+ol.timeline-list li.timeline-item + .timeline-item {
+    border-top: none;
+}
+
+ol.timeline-list li.timeline-item:after {
+    background: none;
+}
+
+
+/*========================================
+    Panel
+===========================================*/
+.panel-scroller {
+    height: 500px;
+}
+
+.daterangepicker .ranges {
+
+    width:172px;
+
+    .input-mini {
+        width:80px;
+    }
+}
+
+/* select2 */
+.select2-container .select2-selection--multiple {
+    min-height:32px;
+}
+/* fullscreen */
+.panel-fullscreen {
+    overflow-y: auto;
+}
+/*===============================================
+   Disabled style
+================================================= */
+.admin-form .gui-input[disabled], .admin-form .gui-textarea[disabled], .admin-form .select > select[disabled], .admin-form .select-multiple select[disabled], .admin-form .gui-input[disabled] ~ .input-footer, .admin-form .file .gui-file[disabled] + .gui-input, .admin-form .file .gui-file[disabled]:hover + .gui-input, .admin-form .gui-textarea[disabled] ~ .input-footer {
+    color: #626262;
+}
+.admin-form select[disabled], .admin-form .select > select[disabled] {
+    color: #626262 !important;
+}
+

@@ -1,0 +1,51 @@
+.doc-publish-form {
+  .form-inline {
+    margin-bottom:15px;
+
+    .form-group {
+      .label-span {
+        width:120px;
+        margin-top:5px;
+        text-align:right;
+        display:inline-block;
+      }
+
+      .select,
+      .gui-textarea,
+      .append-icon {
+        width:auto;
+      }
+
+      .append-icon {
+        .field-icon {
+          right:-8px;
+          top:-5px;
+        }
+      }
+
+      select,
+      textarea,
+      input[type="text"] {
+        width:200px;
+
+        &.long {
+          width:500px;
+        }
+
+        &.ex-long {
+          width:828px;
+        }
+      }
+    }
+
+  }
+}
+
+.dt-doc-publish {
+  .dataTables_scrollBody {
+    //overflow:initial !important;
+  }
+  .input-wrapper {
+    width:100px;
+  }
+}

@@ -1,0 +1,381 @@
+<div class="panel ui-filter-search mb25" ng-class="{true:'no-shadow'}[filter.noShadow]">
+    <div class="panel-heading">
+        <ul class="nav panel-tabs-border panel-tabs panel-tabs-left">
+            <li class="active">
+                <a data-target="#search_condition" data-toggle="tab" aria-expanded="true" ng-click="filter.handleTabClick($event)">查询条件</a>
+            </li>
+            <li>
+                <a data-target="#search_history" data-toggle="tab" aria-expanded="false" ng-click="filter.handleTabClick($event)">历史查询条件</a>
+            </li>
+            <li>
+                <a data-target="#saved_condition" data-toggle="tab" aria-expanded="false" ng-click="filter.handleTabClick($event)">已保存条件</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="panel-body" ng-class="{true:'saved-condition-panel'}[filter.savedConditionTabActive]">
+        <div class="tab-content pn br-n">
+            <div id="search_condition" class="tab-pane active search-condition">
+                <dl class="dl-horizontal search-list">
+                    <div ng-if="filter.hasSearchCondition('submCode') && (filter.defaultShowCondition.submCode||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>委托编号：</dt>
+                        <dd><input type="text" placeholder="请填写委托编号" class="form-control input-sm w200" ng-model="filter.inputData.submCode" /></dd>
+                    </div>
+
+                    <div ng-if="filter.hasSearchCondition('submDate') && (filter.defaultShowCondition.submCode||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>委托时间：</dt>
+                        <dd>
+                            <span
+                                    ng-class="{true:'active'}[filter.activeCondition['submDate'] === '不限']"
+                                    ng-click="filter.toggleActiveCondition($event, 'submDate', '不限')"
+                            >不限</span>
+                            <span
+                                    ng-repeat="time in filter.timeRange"
+                                    ng-class="{true:'active'}[filter.activeCondition['submDate'] === time]"
+                                    ng-click="filter.toggleActiveCondition($event, 'submDate', time);filter.setDateRangeTime('submDate', $index)"
+                            >{{time}}</span>
+
+                            <div>
+
+                                <input type="text" name="submDate"  id="submDate" class="form-control input-sm w200" placeholder="请选择时间范围" />
+                                <span class="daterange-icon" ng-click="filter.initDateRang('submDate')">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+
+                        </dd>
+                    </div>
+
+                    <div ng-if="filter.hasSearchCondition('acceptCode') && (filter.defaultShowCondition.acceptCode ||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>受理编号：</dt>
+                        <dd><input type="text" placeholder="请填写受理编号" class="form-control input-sm w200" ng-model="filter.inputData.acceptCode" /></dd>
+                    </div>
+
+                    <div ng-if="filter.hasSearchCondition('acceptDate')&& (filter.defaultShowCondition.acceptDate||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>受理时间：</dt>
+                        <dd>
+                            <span
+                                    ng-class="{true:'active'}[filter.activeCondition['acceptDate'] === '不限']"
+                                    ng-click="filter.toggleActiveCondition($event, 'acceptDate', '不限')"
+                            >不限</span>
+                            <span
+                                    ng-repeat="time in filter.timeRange"
+                                    ng-class="{true:'active'}[filter.activeCondition['acceptDate'] === time]"
+                                    ng-click="filter.toggleActiveCondition($event, 'acceptDate', time);filter.setDateRangeTime('acceptDate', $index)"
+                            >{{time}}</span>
+
+                            <div>
+
+                                <input type="text" name="acceptDate" id="acceptDate" class="form-control input-sm w200" placeholder="请选择时间范围" />
+                                <span class="daterange-icon" ng-click="filter.initDateRang('acceptDate')">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+
+                        </dd>
+                    </div>
+
+                    <div ng-if="filter.hasSearchCondition('applyCode') && (filter.defaultShowCondition.applyCode||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>申请编号：</dt>
+                        <dd><input type="text" placeholder="请填写申请编号" class="form-control input-sm w200" ng-model="filter.inputData.applyCode" /></dd>
+                    </div>
+
+
+                    <div ng-if="filter.hasSearchCondition('applyDate')&& (filter.defaultShowCondition.applyDate ||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>申请时间：</dt>
+                        <dd>
+                            <span
+                                    ng-class="{true:'active'}[filter.activeCondition['applyDate'] === '不限']"
+                                    ng-click="filter.toggleActiveCondition($event, 'applyDate', '不限')"
+                            >不限</span>
+                            <span
+                                    ng-repeat="time in filter.timeRange"
+                                    ng-class="{true:'active'}[filter.activeCondition['applyDate'] === time]"
+                                    ng-click="filter.toggleActiveCondition($event, 'applyDate', time);filter.setDateRangeTime('applyDate', $index)"
+                            >{{time}}</span>
+
+                            <div>
+
+                                <input type="text" name="applyDate" id="applyDate" class="form-control input-sm w200" placeholder="请选择时间范围" />
+                                <span class="daterange-icon" ng-click="filter.initDateRang('applyDate')">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+
+                        </dd>
+                    </div>
+
+                    <div ng-if="filter.hasSearchCondition('serverCode') && (filter.defaultShowCondition.serverCode ||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>鉴定机构：</dt>
+                        <dd>
+                            <span
+                                    ng-class="{true:'active'}[filter.activeCondition['serverCode'][0]['code'] === -1]"
+                                    ng-click="filter.toggleActiveCondition($event, 'serverCode', '不限', -1)"
+                            >不限</span>
+                            <span
+                                    ng-repeat="item in filter.authInstitutionData"
+                                    ng-class="{true:'active'}[filter.utilityService.findArrayIndexByObjValue(filter.activeCondition['serverCode'], 'code', item.orgCode) > -1]"
+                                    ng-click="filter.toggleActiveCondition($event, 'serverCode', item.name, item.orgCode);filter.fetchProfessionList($event, item.orgCode, true);filter.fetchStatus(item.orgCode)"
+                            >{{item.name}}</span>
+                        </dd>
+                    </div>
+
+                    <div ng-if="filter.hasSearchCondition('section') && (filter.defaultShowCondition.section ||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>专业：</dt>
+                        <dd>
+                            <span
+                                    ng-class="{true:'active'}[filter.activeCondition['section'][0]['code'] === -1]"
+                                    ng-click="filter.toggleActiveCondition($event, 'section', '不限', -1)"
+                            >不限</span>
+                            <span
+                                    ng-repeat="item in filter.professionData"
+                                    ng-class="{true:'active'}[filter.utilityService.findArrayIndexByObjValue(filter.activeCondition['section'], 'code', item.section) > -1]"
+                                    ng-click="filter.toggleActiveCondition($event, 'section', item.sectionName, item.section);filter.fetchIdentifyCategorysList($event, item.section)"
+                            >{{item.sectionName}}</span>
+                        </dd>
+                    </div>
+
+                    <div ng-if="filter.hasSearchCondition('identifyCategory') && (filter.defaultShowCondition.identifyCategory ||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>鉴定类别：</dt>
+                        <dd>
+                            <span
+                                    ng-class="{true:'active'}[filter.activeCondition['identifyCategory'][0]['code'] === -1]"
+                                    ng-click="filter.toggleActiveCondition($event, 'identifyCategory', '不限', -1)"
+                            >不限</span>
+                            <span
+                                    ng-repeat="item in filter.categoryData"
+                                    ng-class="{true:'active'}[filter.utilityService.findArrayIndexByObjValue(filter.activeCondition['identifyCategory'], 'code', item.numberCode) > -1]"
+                                    ng-click="filter.toggleActiveCondition($event, 'identifyCategory', item.name, item.numberCode)"
+                            >{{item.name}}</span>
+                        </dd>
+                    </div>
+
+                    <div ng-if="filter.hasSearchCondition('urgentLevel') && (filter.defaultShowCondition.urgentLevel ||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>紧急程度：</dt>
+                        <dd>
+                            <span
+                                    ng-class="{true:'active'}[filter.activeCondition['urgentLevel'][0]['code'] === -1]"
+                                    ng-click="filter.toggleActiveCondition($event, 'urgentLevel', '不限', -1)"
+                            >不限</span>
+                            <span
+                                    ng-repeat="item in filter.urgentLevelData"
+                                    ng-class="{true:'active'}[filter.utilityService.findArrayIndexByObjValue(filter.activeCondition['urgentLevel'], 'code', item.dictKey) > -1]"
+                                    ng-click="filter.toggleActiveCondition($event, 'urgentLevel', item.dictValue1, item.dictKey)"
+                            >{{item.dictValue1}}</span>
+                        </dd>
+                    </div>
+
+                    <div ng-if="filter.hasSearchCondition('expireState') && (filter.defaultShowCondition.expireState ||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>到期情况：</dt>
+                        <dd>
+                            <span
+                                    ng-class="{true:'active'}[filter.activeCondition['expireState'][0]['code'] === -1]"
+                                    ng-click="filter.toggleActiveCondition($event, 'expireState', '不限', -1)"
+                            >不限</span>
+                            <span
+                                    ng-repeat="item in filter.expireStateData"
+                                    ng-class="{true:'active'}[filter.utilityService.findArrayIndexByObjValue(filter.activeCondition['expireState'], 'code', item.dictKey) > -1]"
+                                    ng-click="filter.toggleActiveCondition($event, 'expireState', item.dictValue1, item.dictKey)"
+                            >{{item.dictValue1}}</span>
+                        </dd>
+                    </div>
+
+
+                    <div ng-if="filter.hasSearchCondition('submState') && (filter.defaultShowCondition.submState ||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>状态：</dt>
+                        <dd>
+                            <span
+                                    ng-class="{true:'active'}[filter.activeCondition['submState'][0]['code'] === -1]"
+                                    ng-click="filter.toggleActiveCondition($event, 'submState', '不限', -1)"
+                            >不限</span>
+                            <span
+                                    ng-repeat="item in filter.statusData"
+                                    ng-class="{true:'active'}[filter.utilityService.findArrayIndexByObjValue(filter.activeCondition['submState'], 'code', item.nodeCode) > -1]"
+                                    ng-click="filter.toggleActiveCondition($event, 'submState', item.nodeName, item.nodeCode)"
+                            >{{item.nodeName}}</span>
+                        </dd>
+                    </div>
+
+                    <div ng-if="filter.hasSearchCondition('caseName')&& (filter.defaultShowCondition.caseName ||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>案（事）件名称：</dt>
+                        <dd><input type="text" placeholder="请填写案（事）件名称" class="form-control input-sm w200" ng-model="filter.inputData.caseName" /></dd>
+                    </div>
+
+                    <div ng-if="filter.hasSearchCondition('orgName') && (filter.defaultShowCondition.orgName ||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>委托单位：</dt>
+                        <dd id="ztree_comp">
+                            <org-comp
+                                readonly="false"
+                                cname="form-control input-sm w200"
+                                model="filter.inputData.orgName"
+                            ></org-comp>
+                        </dd>
+                    </div>
+
+                    <div ng-if="filter.hasSearchCondition('investigationCode') && (filter.defaultShowCondition.investigationCode ||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>现勘编号：</dt>
+                        <dd><input type="text" placeholder="请填写现勘编号" class="form-control input-sm w200" ng-model="filter.inputData.investigationCode" /></dd>
+                    </div>
+              
+                    <div ng-if="filter.hasSearchCondition('actionCode') && (filter.defaultShowCondition.actionCode ||filter.detailSearchCondition||filter.detailShow)">
+                        <dt>申请类型：</dt>
+                        <dd>
+                            <span
+                                    ng-class="{true:'active'}[filter.activeCondition['actionCode'][0]['code'] === -1]"
+                                    ng-click="filter.toggleActiveCondition($event, 'actionCode', '不限', -1)"
+                            >不限</span>
+                            <span
+                                    ng-repeat="item in filter.actionCodeData"
+                                    ng-class="{true:'active'}[filter.utilityService.findArrayIndexByObjValue(filter.activeCondition['actionCode'], 'code', item.busOldActionCode) > -1]"
+                                    ng-click="filter.toggleActiveCondition($event, 'actionCode', item.busInsideNodeName, item.busOldActionCode)"
+                            >{{item.busInsideNodeName}}</span>
+                        </dd>
+                    </div>
+
+                </dl>
+
+                <div
+                        class="active-search-list"
+                        ng-if="!filter.utilityService.isObjectEqual(filter.defaultCondition, filter.activeCondition)"
+                >
+                    <label>已选条件：</label>
+                    <div
+                        ng-repeat="(key, val) in filter.activeCondition track by $index"
+                        ng-init="category = key"
+                    >
+                        <span
+                                class="active-search"
+                                ng-if="!filter.utilityService.isArray(val) && val !== '不限'"
+                        >
+                            {{val}}
+                            <em
+                                    class="fa fa-times ui-btn-delete"
+                                    ng-click="filter.deleteActiveCondition(category)"
+                            ></em>
+                        </span>
+
+                        <span
+                                class="active-search"
+                                ng-if="filter.utilityService.isArray(val) && item.code !== -1"
+                                ng-repeat="item in val track by $index"
+                        >
+                            {{item.name}}
+                            <em
+                                    class="fa fa-times ui-btn-delete"
+                                    ng-click="filter.deleteActiveCondition(category, item.code)"
+                            ></em>
+                        </span>
+
+                    </div>
+
+                    <span class="btn-save" ng-click="filter.asyncActiveCondition('savedActiveCondition')">
+                        <em class="fa fa-save"></em>
+                        <a href="#">保存该条件</a>
+                    </span>
+                </div>
+
+                <button class="btn btn-sm btn-warning dark w75" ng-click="filter.search()">查询</button>
+                <button class="btn btn-default light btn-sm w75" ng-click="filter.resetCondition()">重置</button>
+            </div>
+
+            <div id="search_history" class="tab-pane">
+                <div
+                        class="saved-condition-per-day"
+                        ng-repeat="(key, val) in filter.historyActiveCondition[filter.pageId]"
+                >
+
+                    <h1 ng-if="val.length">
+                        <span
+                                class="fa fa-times ui-btn-delete"
+                                ng-click="filter.deleteAsyncActiveCondition('historyActiveCondition', key, $index, true)"
+                        ></span>
+                        {{key}}&nbsp;&nbsp;{{key | weekday}}
+                    </h1>
+                    <ul class="list-unstyled saved-condition">
+                        <li
+                                ng-repeat="list in val track by $index"
+                                ng-if="!filter.utilityService.isObjectEqual(filter.defaultCondition, list.condition)"
+                        >
+                            <span
+                                class="fa fa-times ui-btn-delete"
+                                ng-click="filter.deleteAsyncActiveCondition('historyActiveCondition', key, $index)"
+                            ></span>
+                           
+                            <span><em>{{list.timestamp}}</em></span>
+                            <a class="cursor text-muted" ng-click="filter.research(list.condition, 1, key)">
+                                <span ng-repeat="(key, val) in list.condition track by $index">
+
+                                <em
+                                        ng-if="!filter.utilityService.isArray(val) && val !== '不限'"
+                                >
+                                    {{val}}
+                                </em>
+                                <em
+                                        ng-if="filter.utilityService.isArray(val) && item.name !== '不限'"
+                                        ng-repeat="item in val track by $index"
+                                >
+                                    {{item.name}}
+                                </em>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <div id="saved_condition" class="tab-pane">
+
+                <div
+                        class="saved-condition-per-day"
+                        ng-repeat="(key, val) in filter.savedActiveCondition[filter.pageId]"
+                >
+
+                    <h1 ng-if="val.length">
+                        <span
+                                class="fa fa-times ui-btn-delete"
+                                ng-click="filter.deleteAsyncActiveCondition('savedActiveCondition', key, $index, true)"
+                        ></span>
+                        {{key}}&nbsp;&nbsp;{{key | weekday}}
+                    </h1>
+                    <ul class="list-unstyled saved-condition">
+                        <li
+                                ng-repeat="list in val track by $index"
+                                ng-if="!filter.utilityService.isObjectEqual(filter.defaultCondition, list.condition)"
+                        >
+                        <span
+                                class="fa fa-times ui-btn-delete"
+                                ng-click="filter.deleteAsyncActiveCondition('savedActiveCondition', key, $index)"
+                        ></span>
+                            <span><em>{{list.timestamp}}</em></span>
+                            <a class="cursor text-muted" ng-click="filter.research(list.condition, 2)">
+                                <span ng-repeat="(key, val) in list.condition track by $index">
+                                <em
+                                        ng-if="!filter.utilityService.isArray(val) && val !== '不限'"
+                                >
+                                    {{val}}
+                                </em>
+                                <em
+                                        ng-if="filter.utilityService.isArray(val) && item.name !== '不限'"
+                                        ng-repeat="item in val track by $index"
+                                >
+                                    {{item.name}}
+                                </em>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui-dropdown-trigger" ng-if="filter.conditionCount > filter.conditionShowCount && !filter.detailShow">
+        <span
+                class="fa"
+                ng-class="{true:'fa-angle-up', false: 'fa-angle-down'}[filter.detailSearchCondition]"
+                ng-click="filter.toggleDetailSearchCondition()"
+        ></span>
+    </div>
+</div>

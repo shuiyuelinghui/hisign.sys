@@ -1,0 +1,47 @@
+<div
+        class="entrust-form-container admin-form theme-primary"
+        id="entrust_detail_evidence_info"
+        ng-if="entrustEvidenceInfo.ds.evidenceList.length"
+>
+    <div class="panel panel-default ">
+
+        <div class="panel-body">
+            <div class="fs18 text-dark-darker fw600 pb20">
+                物证信息
+                <span class="text-muted fs14 mr5" ng-if="entrustEvidenceInfo.ds.summary.evidenceCount">
+                    物证共<em class="text-warning p3">{{entrustEvidenceInfo.ds.summary.evidenceCount}}</em>件
+                </span>
+                <span class="text-muted fs14 mr5" ng-if="entrustEvidenceInfo.ds.summary.sampleList1Count">
+                    检材共<em class="text-warning p3">{{entrustEvidenceInfo.ds.summary.sampleList1Count}}</em>件
+                </span>
+                <span class="text-muted fs14" ng-if="entrustEvidenceInfo.ds.summary.sampleList2Count">
+                    样本共<em class="text-warning p3">{{entrustEvidenceInfo.ds.summary.sampleList2Count}}</em>件
+                </span>
+
+            </div>
+
+            <div
+                    class="evidence-item"
+                    ng-repeat="ev in entrustEvidenceInfo.ds.evidenceList track by $index"
+            >
+                <div class="tb-header">
+                    <nav>{{$index+1}}</nav>
+                    <span>物证编号：{{ev.eviCode}}</span>
+                    <span>物证名称：{{ev.eviName}}</span>
+                    <span>物证类别：{{ev.eviTypeName}}<em ng-if="ev.eviCategory"> | {{ev.eviCategoryName}}</em></span>
+
+                </div>
+
+                <div class="dt-container">
+                    <table
+                            id="dt_evidence_{{$index}}"
+                            data-identity="dt_evidence_{{$index}}"
+                            data-index="{{$index}}"
+                            data-key="evidenceList"
+                            class="table table-striped table-bordered"
+                    ></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

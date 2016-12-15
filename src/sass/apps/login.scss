@@ -1,0 +1,196 @@
+@import '../partials/mixin';
+@import '../partials/font';
+@import '../partials/_ui-component';
+@import '../partials/reset';
+
+@import '../../../library/normalize/normalize.css';
+@import '../../../node_modules/slick-carousel/slick/slick.scss';
+@import '../../../node_modules/tooltipster/dist/css/tooltipster.bundle.min';
+@import '../../../node_modules/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-borderless.min';
+
+body {
+    background-color:#fff;
+    h1, h2, p {
+        margin:0;
+    }
+}
+
+.alert-danger {
+    @include clearfix;
+    padding:6px;
+    border:1px solid rgba(0,0,0,0.1);
+    border-radius:1px;
+    border-left-color:#ce3118;
+    border-left-width:3px;
+    background-color:#ed7764;
+    color:#fff;
+    margin:-10px 0 10px;
+    font-size:12px;
+    display:none;
+
+    .fa,
+    p {
+        float:left;
+    }
+
+    p {
+        line-height:16px;
+    }
+
+    .fa {
+        font-size:16px;
+        margin-right:5px;
+    }
+}
+
+.login-content {
+    background-color:#038aca;
+
+    .slick-container {
+        width:1343px;
+        height:435px;
+        overflow:hidden;
+        margin:0 auto;
+        position:relative;
+
+        img {
+            height:435px;
+        }
+
+        .slick-pagination {
+            position:absolute;
+            width:92px;
+            bottom:10px;
+            left:625.5px;
+            padding:0;
+
+            li {
+                display:block;
+                float:left;
+                width:12px;
+                height:12px;
+                margin-right:12px;
+                border-radius:24px;
+                border:1px solid #fff;
+                cursor:pointer;
+                &:last-child {
+                    margin-right:0;
+                }
+                &.slick-active {
+                    background-color:#fff;
+                }
+                button {
+                    display:none;
+                }
+            }
+        }
+
+        .login-container {
+            display:none;
+            position:absolute;
+            top:62.5px;
+            left:760px;
+
+            .form-title {
+                width:325px;
+                height:72px;
+                line-height:72px;
+                padding-left:30px;
+                background:url(../../assets/login/icons/form-title.png) no-repeat;
+                font-size:20px;
+                font-weight:normal;
+                color:#fff;
+                position:relative;
+            }
+            .form-container {
+                background-color:#fff;
+                width:289px;
+                margin:-10px 0 0 18px;
+                padding:25px 20px;
+
+                .form-row {
+                    height:40px;
+                    margin-bottom:15px;
+                    position:relative;
+
+                    &.focus {
+                        .fa {
+                            color:#6398cc;
+                        }
+                    }
+
+                    .fa {
+                        position:absolute;
+                        top:11px;
+                        left:10px;
+                        font-size:20px;
+                        color:#333;
+                    }
+
+                    input {
+                        display:block;
+                        padding:13px 3% 13px 12%;
+                        height:14px;
+                        font-size:14px;
+                        color:#666;
+                        border:1px solid #b7b7b7;
+                        width:85%;
+
+                        &:focus {
+                            border-color:#6398cc;
+                        }
+                    }
+                }
+
+                .btn-login {
+                    width:289px;
+                    height:40px;
+                    background-color:#1f58b5;
+                    color:#fff;
+                    font-size:14px;
+                    border:none;
+                }
+
+                .register {
+                    margin:15px -20px 0;
+                    padding:15px 20px 0;
+                    border-top:1px dashed #e5e5e5;
+                    color:#999;
+                    a {
+                        color:#f90;
+                    }
+                }
+            }
+        }
+
+        .browser-download {
+            display:none;
+            width:260px;
+            height:135px;
+            padding:50px 35px;
+            background:rgba(255,255,255,.6);
+            border-radius:5px;
+            position:absolute;
+            top:100px;
+            left:760px;
+            box-shadow:1px 1px 2px 2px rgba(0,0,0,0.2);
+            h1 {
+                font-size:1.4rem;
+                font-weight:normal;
+                color:#f00;
+                line-height:25px;
+            }
+
+            p {
+                color:#666;
+                font-size:1.2rem;
+                line-height:20px;
+                margin-top:20px;
+
+                a {
+                    color:#06c;
+                }
+            }
+        }
+    }
+}

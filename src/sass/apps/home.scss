@@ -1,0 +1,31 @@
+.icon-nav {
+  padding-top:40px;
+
+  > div {
+    text-align:center;
+    font-size:1.4rem;
+    margin-bottom:40px;
+    .fa {
+      position:relative;
+      padding:15px;
+      margin-bottom:5px;
+      border-radius:5px;
+      font-size:4.8rem;
+      color:#fff;
+      .unread {
+        position:absolute;
+        width:20px;
+        height:20px;
+        background-color:#f16446;
+        border:1px solid #fff;
+        border-radius:40px;
+        text-align:center;
+        line-height:20px;
+        font-size:1.2rem;
+        font-style:normal;
+        top:10px;
+        right:-11px;
+      }
+    }
+  }
+}

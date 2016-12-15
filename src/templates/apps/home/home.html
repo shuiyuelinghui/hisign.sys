@@ -1,0 +1,41 @@
+
+    <!--<ng-include src="'./templates/apps/home/toolbox.html'"></ng-include>-->
+    <div class="row icon-nav">
+        <div class="col-md-2 col-xs-3" ng-repeat="item in home.iconNavData">
+            <a ui-sref="{{item.link}}">
+                <span class="fa fa-{{item.icon}}" ng-style="{'background-color': '#{{item.bgcolor}}'}">
+                    <em class="unread" ng-if="item.unread">{{item.unread}}</em>
+                </span>
+            </a>
+            <p>{{item.title}}</p>
+
+        </div>
+    </div>
+
+    <div class="admin-panels fade-onload">
+        <div class="row">
+            <div class="col-md-6 col-lg-6 admin-grid">
+                <!-- Stats Top Graph Bot -->
+                <div class="panel" id="p7">
+                    <div class="panel-heading">
+                        <span class="panel-title">2016年各专业受理检材数量统计</span>
+                    </div>
+                    <div class="panel-body pt30">
+                        <div id="chart1" style="width: 100%; margin: 0 auto"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 admin-grid">
+                <!-- Stats Top Graph Bot -->
+                <div class="panel" id="p8">
+                    <div class="panel-heading">
+                        <span class="panel-title">2016年各专业受理检验鉴定数量统计</span>
+                    </div>
+                    <div class="panel-body pt30">
+                        <div id="chart2" style="width: 100%; margin: 0 auto"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

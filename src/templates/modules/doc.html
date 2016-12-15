@@ -1,0 +1,40 @@
+<!-- Start: Right Sidebar -->
+<!-- <aside id="sidebar_right" class="nano affix">
+
+    <div class="sidebar-right-content nano-content">
+
+        <div class="tab-block sidebar-block br-n">
+            <a href="#" class="pl5">
+                <i class="fa fa-sign-in fs22 text-primary"></i>
+                <span class="badge badge-danger badge-hero">3</span>
+            </a>
+        </div>
+
+    </div>
+</aside> -->
+<!-- End: Right Sidebar -->
+<div ng-class="{'container':doc.showSidebar ==  true,'ph30':doc.showSidebar == false}">
+    <div class="row ">
+        <div class="col-xs-12 docclose">
+            <h3 class="pb10 br-b br-primary bw2">{{doc.title}}
+                <span class="ml10 fs12 text-muted" ng-if="doc.showSidebar">{{doc.code}}</span>
+            </h3>
+        </div>
+    </div>
+
+    <div class="docs-container mt20" id="docs">
+	
+        <div class="row table-layout">
+
+            <!-- Documentation Nav -->
+            <div class="col-xs-3 left-col" ng-if="doc.showSidebar">
+                <ng-include src=" './templates/modules/doc/doc_sidebar.html' "></ng-include>
+            </div>
+
+            <!-- Documentation Content -->
+            <div class="col-xs-12 center-col va-t">
+              <ng-include src=" './templates/modules/doc/doc_content.html' "></ng-include>
+            </div>
+        </div>
+    </div>
+</div>

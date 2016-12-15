@@ -1,0 +1,88 @@
+<div class="panel popup-basic common-modal panel-modal" id="confirm_modal">
+    <div class="panel-heading">
+        <span class="panel-title">提示</span>
+    </div>
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-2 text-center">
+                <i class="fa fa-info-circle text-warning fs70"></i>
+            </div>
+            <div class="col-md-10">
+                <ul class="list-unstyled" ng-cloak>
+                    <!--ng-if 跨级审批 ||预受理 || 预受理审核-->
+                    <li ng-if="approve.type.isPreaccept"><label >委托单位：</label>{{approve.approveDetailData.departmentName}}</li>
+                    <!--ng-if 跨级审批 ||预受理 -->
+                    <li ng-if="approve.submResult=='0201' || approve.submResult=='0301' "><label class="text-dark-darker">鉴定机构：</label>{{approve.submissionData.serverName}}</li>
+                    <!--ng-if 跨级审批||预受理||预受理审核||受理|| 科长 || 主任-->
+                    <li><label>案（事）件名称：</label>{{approve.submissionData.caseName}}</li>
+                    <!--ng-if 文书拟稿 || 文书相关-->
+                    <li ng-if="approve.submResult=='0802' || approve.resultIndex.nodeType == 4"><label>文书编号：</label>{{approve.confirmData.docCode}}</li>
+                    <!--ng-if 文书相关-->
+                    <li ng-if="approve.resultIndex.nodeType == 4 && approve.submResult !== '0901'">
+                        <label>是否认可项目：</label>
+                        <span ng-if="approve.formData.cnasFlag == '1'">是</span>
+                        <span ng-if="approve.formData.cnasFlag == '2'">否</span>
+                    </li>
+                    <li><label>专业：</label>{{approve.submissionData.sectionName}}</li>
+                    <li><label>鉴定类别：</label>{{approve.submissionData.identifyCategoryName}}</li>
+                    <!--ng-if 文书相关-->
+                    <div ng-if="approve.resultIndex.nodeType == 4">
+                        <li><label>要求完成日期：</label>{{approve.submissionData.agreedDate | date: 'yyyy-MM-dd'}}</li>
+                        <li><label>检验人：</label>{{approve.submissionData.jyjdrName}}</li>
+                        <li><label>拟稿人：</label>{{approve.submissionData.wsngrName}}</li>
+                    </div>
+                    <!--ng-if 文书相关-->
+                    <li ng-if="approve.submResult=='1101' && approve.leaderApprove == '1'">
+                        <label>是否领导审批：</label>
+                        <span >是</span>
+                    </li>
+                    <!--ng-if 文书拟稿-->
+                    <li ng-if="approve.submResult=='0802'"><label>{{approve.personType}}</label>{{approve.personName}}</li>
+                    <li ng-if="approve.submResult=='0201' || approve.submResult=='0301' "><label>送检材料：</label>检材{{approve.approveDetailData.sampleCount}}项，样本{{approve.approveDetailData.exampleCount}}项, 被鉴定人{{approve.approveDetailData.memberCount}}项</li>
+                    <!--ng-if 预受理审核-->
+                    <li ng-if="approve.submResult=='0401'"><label>预受理人：</label>{{approve.opinionData.operatorName}}</li>
+                    <li ng-if="approve.submResult=='0401'"><label>预受理时间：</label>{{approve.opinionData.operateDate | date: 'yyyy-MM-dd'}}</li>
+                    <li ng-if="approve.submResult=='0401'">
+                        <label>预受理意见：</label>
+                        <div style="width: 300px; display: inline-block; vertical-align: top">{{approve.opinionData.opinion}}</div>
+                    </li>
+
+                    <!--ng-if 主任|| 科长-->
+                    <li ng-if="approve.resultIndex.approveType==5 || approve.resultIndex.approveType==6"><label>要求完成日期：</label>{{approve.basicInfo.agreedDate |  date:'yyyy-MM-dd'}}</li>
+                    <!--ng-if 延期审批-->
+                    <li ng-if="approve.resultIndex.index == 1 &&  approve.resultIndex.actionType == 1"><label>延期申请完成日期：</label>{{approve.extralInfo.completeDate |  date:'yyyy-MM-dd'}}</li>
+                    <!--ng-if 主任|| 科长-->
+                    <li ng-if="approve.resultIndex.approveType==5 || approve.resultIndex.approveType==6"><label>申请人：</label>{{approve.extralInfo.proposerName}}</li>
+                    <!--ng-if 主任-->
+                    <li ng-if="approve.resultIndex.approveType==6"><label>审核人：</label>{{approve.extralInfo.kzsprName}}</li>
+
+
+                    <!--ng-if 预受理审核-->
+                    <li ng-if="approve.submResult=='0401'" class="mt20">
+                        您确认对此案件进行
+                        <label ng-if="approve.resultValue==1">“预受理退回”</label>
+                        <label ng-if="approve.resultValue==2">“预受理通过”</label>处理吗？
+                    </li>
+
+                    <li ng-if="approve.submResult!=='0401'" class="mt20">
+                        <label>确认提交吗？</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="panel-footer">
+        <button
+                type="button"
+                class="btn btn-primary"
+                ng-click="approve.submitApprove()"
+        >确认</button>
+        <button
+                type="button"
+                class="btn btn-default"
+                ng-click="approve.closePopup()"
+        >取消</button>
+    </div>
+</div>

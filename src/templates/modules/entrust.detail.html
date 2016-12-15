@@ -1,0 +1,34 @@
+<div class="theme-primary ">
+
+    <div class="panel mbn">
+        <div class="panel-heading">
+            <ul class="nav panel-tabs-border panel-tabs panel-tabs-left ">
+                <li class="active" ng-click="entrustDetail.setActiveTab('book')">
+                    <a data-target="#book" data-toggle="tab" class="ph50 fs14">鉴定委托书</a>
+                </li>
+                <li ng-click="entrustDetail.setActiveTab('entrust-info')">
+                    <a data-target="#entrust-info" data-toggle="tab" class="ph50 fs14" ng-click="entrustDetail.redrawDt()">详情</a>
+                </li>
+                <!--<li>-->
+                    <!--<a class="ph50 fs14" ng-click="entrustDetail.openFootPrintPopup()">留痕</a>-->
+                <!--</li>-->
+            </ul>
+        </div>
+
+        <div class="panel-body bg-dark pn">
+            <div class="tab-content pn br-n" id="entrust_container">
+                <div id="book" class="tab-pane active">
+                    <div id="viewerContainer">
+                        <div id="viewer" class="pdfViewer mv40"></div>
+                    </div>
+                </div>
+                <div id="entrust-info" class="tab-pane mv50 mh30">
+                    <ng-include src="'/templates/modules/entrust/entrust.info.html'"></ng-include>
+                    <ng-include src="'/templates/modules/entrust/case.info.html'"></ng-include>
+                    <entrust-member-info-comp ds="entrustDetail.dcService"></entrust-member-info-comp>
+                    <entrust-evidence-info-comp ds="entrustDetail.dcService"></entrust-evidence-info-comp>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

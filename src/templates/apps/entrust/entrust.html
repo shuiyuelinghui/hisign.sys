@@ -1,0 +1,667 @@
+<div id="panel_entrust"></div>
+<div class="panel panel-default" ng-controller="EntrustInfoController as entrustInfo">
+    <div class="panel-body">
+        <div class="fs18 text-dark-darker fw600 pb20">委托信息</div>
+
+        <form name="entrustInfo.form" id="form_entrust" class="admin-form theme-primary">
+
+            <div class="form-inline" ng-if="entrustInfo.dcService.activeState === 'app.accept'|| entrustInfo.dcService.isAppend">
+                <div class="form-group col-sm-6 pln form-icon-suffix">
+                    <label for="">专业：</label>
+                    <div class="input-wrapper">
+                        <p class="form-control-static">{{entrustInfo.dcService.submission.sectionName}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6 prn">
+                    <label for="">鉴定类别：</label>
+                    <div class="input-wrapper">
+                        <p class="form-control-static entrust_type">{{entrustInfo.dcService.submission.identifyCategoryName}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-5 pln form-icon-suffix">
+                    <label for="">委托时间：</label>
+                    <div class="input-wrapper">
+                        <input
+                            readonly
+                            type="text"
+                            class="gui-input bs-datetimepicker"
+                            placeholder=""
+                            data-options='{"minDate": true}'
+                            required
+                            ng-model="entrustInfo.dcService.submission.submitDateStr"
+                        />
+                        <span class="fa fa-calendar form-control-icon"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-7 prn">
+                    <label >委托理由：</label>
+                    <div class="input-wrapper ui-textarea-select"
+                         dict="entrustInfo.dcService.dictMapping.submitReasonList"
+
+                         textarea-select>
+                        <textarea class="gui-textarea"
+                                  placeholder=""
+                                  required
+                                  ng-disabled="entrustInfo.dcService.isAppend"
+                                  ng-model="entrustInfo.dcService.submission.submitReason"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table">
+                <tr>
+                    <td class="title">委托单位</td>
+                    <td>
+
+                        <div class="form-inline">
+                            <div class="form-group col-sm-12">
+                                <label for="" class="short">名称：</label>
+                                <div class="input-wrapper short ztree-input">
+                                    <input
+                                        type="text"
+                                        class="gui-input"
+                                        required
+                                        readonly = "true"
+                                        ng-if="entrustInfo.userInfo.userType == 0"
+                                        ng-model="entrustInfo.dcService.submission.departmentDetailName"
+                                    />
+                                    <input
+                                        type="text"
+                                        class="gui-input"
+                                        required
+                                        ng-if="entrustInfo.userInfo.userType == 1"
+                                        ng-model="entrustInfo.dcService.submission.departmentDetailName"
+                                        ng-disabled="entrustInfo.dcService.isAppend"
+                                    />
+                                    <org-comp
+                                            readonly="true"
+                                            cname="gui-input"
+                                            ng-if="entrustInfo.userInfo.userType == 2"
+                                            model="entrustInfo.dcService.submission.departmentDetailName"
+                                            ng-disabled="entrustInfo.dcService.isAppend"
+                                    ></org-comp>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-inline">
+                            <div class="form-group col-sm-4">
+                                <label for="" class="short">电话：</label>
+                                <div class="input-wrapper short">
+                                    <input
+                                        type="text"
+                                        class="gui-input"
+                                        placeholder=""
+                                        required
+                                        ng-disabled="entrustInfo.dcService.isAppend"
+                                        ng-model="entrustInfo.dcService.submission.departmentPhone"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-4">
+                                <label for="" class="short">传真：</label>
+                                <div class="input-wrapper short">
+                                    <input
+                                        type="text"
+                                        class="gui-input"
+                                        ng-disabled="entrustInfo.dcService.isAppend"
+                                        placeholder=""
+                                        ng-model="entrustInfo.dcService.submission.departmentFaxno"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-4">
+                                <label for="" class="short">邮编：</label>
+                                <div class="input-wrapper short">
+                                    <input
+                                        type="text"
+                                        class="gui-input"
+                                        ng-disabled="entrustInfo.dcService.isAppend"
+                                        placeholder=""
+                                        ng-model="entrustInfo.dcService.submission.departmentPostno"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-inline mbn">
+                            <div class="form-group col-sm-12">
+                                <label for="" class="short">地址：</label>
+                                <div class="input-wrapper short">
+                                    <input
+                                        type="text"
+                                        class="gui-input"
+                                        ng-disabled="entrustInfo.dcService.isAppend"
+                                        ng-model="entrustInfo.dcService.submission.departmentAddress"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="title">送检人</td>
+                    <td>
+                        <div class="form-inline">
+                            <div class="form-group col-sm-2">
+                                <label for="" class="short">姓名：</label>
+                                <div class="input-wrapper ui-input-select short" input-select
+                                     dict="entrustInfo.dcService.dictMapping.submittedByInfo">
+                                    <input
+                                         id="submittedBy"
+                                         type="text"
+                                         class="gui-input"
+                                         placeholder=""
+                                         required
+                                         ng-change="entrustInfo.getUserInfo('submittedBy')"
+                                         ng-model="entrustInfo.dcService.submission.submittedBy"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-3">
+                                <label for="">联系方式：</label>
+                                <div class="input-wrapper">
+                                    <input
+                                        type="text"
+                                        class="gui-input"
+                                        placeholder=""
+                                        required
+                                        ng-model="entrustInfo.dcService.submission.contact"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-2">
+                                <label for="" class="short">职务：</label>
+                                <div class="input-wrapper mln">
+                                    <div class="section ml50">
+                                        <label class="field select mtn">
+                                            <select
+                                                    class="form-control input-sm fl"
+                                                    required
+                                                    ng-model="entrustInfo.dcService.submission.position"
+                                                    ng-options="item.dictKey as item.dictValue1 for item in entrustInfo.dcService.dictData.PositionModel"
+                                            >
+                                                <option value="">请选择</option>
+                                            </select>
+                                            <i class="arrow"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-5">
+                                <label for="" class="w125">证件类型/号码：</label>
+                                <div class="section">
+                                    <label class="field select mtn">
+                                        <select
+                                                class="form-control input-sm fl"
+                                                required
+                                                ng-model="entrustInfo.dcService.submission.credentialType"
+                                                ng-options="item.dictKey as item.dictValue1 for item in entrustInfo.dcService.dictData.CreTypeModel"
+                                        >
+                                            <option value="">请选择</option>
+                                        </select>
+                                        <i class="arrow"></i>
+                                    </label>
+                                    <div class="input-wrapper" style="margin-left:200px">
+                                        <input
+                                                type="text"
+                                                class="gui-input"
+                                                placeholder=""
+                                                required
+                                                ng-model="entrustInfo.dcService.submission.credentialNumber"
+                                        />
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-inline mbn">
+                            <div class="form-group col-sm-2">
+                                <label for="" class="short">姓名：</label>
+                                <div class="input-wrapper ui-input-select short" input-select
+                                     dict="entrustInfo.dcService.dictMapping.submittedByInfo">
+                                    <input
+                                         id="otherSubmittedBy"
+                                         type="text"
+                                         class="gui-input"
+                                         placeholder=""
+                                         required
+                                         ng-change="entrustInfo.getUserInfo('otherSubmittedBy')"
+                                         ng-model="entrustInfo.dcService.submission.otherSubmittedBy"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-3">
+                                <label for="">联系方式：</label>
+                                <div class="input-wrapper">
+                                    <input
+                                        type="text"
+                                        class="gui-input"
+                                        placeholder=""
+                                        required
+                                        ng-model="entrustInfo.dcService.submission.otherContact"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-2">
+                                <label for="" class="short">职务：</label>
+                                <div class="input-wrapper mln">
+
+                                    <div class="section ml50">
+                                        <label class="field select mtn">
+                                            <select
+                                                    class="form-control input-sm fl"
+                                                    required
+                                                    ng-model="entrustInfo.dcService.submission.otherPosition"
+                                                    ng-options="item.dictKey as item.dictValue1 for item in entrustInfo.dcService.dictData.PositionModel"
+                                            >
+                                                <option value="">请选择</option>
+                                            </select>
+                                            <i class="arrow"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-5">
+                                <label for="" class="w125">证件类型/号码：</label>
+                                <div class="section">
+                                    <label class="field select mtn">
+                                        <select
+                                                class="form-control input-sm fl"
+                                                required
+                                                ng-model="entrustInfo.dcService.submission.otherCredentialType"
+                                                ng-options="item.dictKey as item.dictValue1 for item in entrustInfo.dcService.dictData.CreTypeModel"
+                                        >
+                                            <option value="">请选择</option>
+                                        </select>
+                                        <i class="arrow"></i>
+                                    </label>
+                                    <div class="input-wrapper" style="margin-left:200px">
+                                        <input
+                                                type="text"
+                                                class="gui-input"
+                                                placeholder=""
+                                                required
+                                                ng-model="entrustInfo.dcService.submission.otherCredentialNumber"
+                                        />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12 pln prn">
+                    <label style="width:170px;">委托方对鉴定方法的要求：</label>
+                    <div class="input-wrapper ui-textarea-select"
+                         style="margin-left:170px;"
+                         dict="entrustInfo.dcService.dictData.TestMethodRequestModel"
+                         append="true"
+                         textarea-select>
+                        <textarea class="gui-textarea"
+                                  placeholder=""
+                                  required
+                                  ng-disabled="entrustInfo.dcService.isAppend"
+                                  ng-model="entrustInfo.dcService.submission.methodRequest"></textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-6 pln">
+                    <label class="text-left" for="" style="width:130px;">鉴定文书发出形式：</label>
+                    <div class="input-wrapper" style="margin-left:135px;">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        ng-model="entrustInfo.dcService.submission.sendBookType"
+                                        required
+                                        ng-disabled="entrustInfo.dcService.isAppend"
+                                        ng-options="item.dictKey as item.dictValue1 for item in entrustInfo.dcService.dictData.IdenBookSendTypeModel"
+                                >
+                                    <option value="">请选择</option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6 prn">
+                    <label for="" style="width:130px;">剩余检材处理意见：</label>
+                    <div class="input-wrapper" style="margin-left:135px;">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        ng-model="entrustInfo.dcService.submission.surplusSampleOpinion"
+                                        required
+                                        ng-disabled="entrustInfo.dcService.isAppend"
+                                        ng-options="item.dictKey as item.dictValue1 for item in entrustInfo.dcService.dictData.SurSampleOpModel"
+                                >
+                                    <option value="">请选择</option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline">
+
+                <span for="" style="width:130px;">原鉴定情况</span>
+                <a href="" class="ml10 fs12" ng-click="entrustInfo.toggleOrigIdentityState()">
+                    <span ng-if="!entrustInfo.showOrgIdentity">>显示</span>
+                    <span ng-if="entrustInfo.showOrgIdentity">>隐藏</span>
+                </a>
+            </div>
+
+            <table id="orig_identity" class="table" ng-hide="!entrustInfo.showOrgIdentity">
+                <tr>
+                    <td rowspan="3" class="title">原鉴定情况</td>
+                    <td class="title">市</td>
+                    <td>
+                        <div class="form-inline">
+
+                            <div class="col-sm-3">
+                                <div class="section">
+
+                                    <div class="option-group field">
+                                        <label class="option option-primary" ng-repeat="item in entrustInfo.dcService.dictData.OldIdentifiedTypeModel">
+                                            <input
+                                                    type="radio"
+                                                    name="cityIdentifiedType"
+                                                    value="{{item.dictKey}}"
+                                                    ng-init="entrustInfo.dcService.submission.cityIdentifiedType = entrustInfo.dcService.submission.cityIdentifiedType || entrustInfo.dcService.dictData.OldIdentifiedTypeModel[0].dictKey"
+                                                    ng-model="entrustInfo.dcService.submission.cityIdentifiedType"
+                                            />
+                                            <span class="radio"></span>{{item.dictValue1}}
+
+                                            <span ng-if="$index === 0">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+                                    </div>
+                                    <!-- end .option-group section -->
+                                </div>
+                            </div>
+
+                            <div
+                                    class="form-group col-sm-4"
+                                    ng-if="entrustInfo.dcService.submission.cityIdentifiedType === entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                            >
+                                <label for="" style="width:100px;">鉴定机构名称：</label>
+                                <div class="input-wrapper" style="margin-left:105px;">
+                                    <input
+                                        type="text"
+                                        class="gui-input"
+                                        placeholder=""
+                                        required
+                                        ng-model="entrustInfo.dcService.submission.cityIdentifiedServerName"
+                                    />
+                                </div>
+                            </div>
+
+                            <div
+                                    class="form-group col-sm-4 form-icon-suffix"
+                                    ng-if="entrustInfo.dcService.submission.cityIdentifiedType === entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                            >
+                                <label for="" style="width:100px;">检验鉴定时间：</label>
+                                <div class="input-wrapper" style="margin-left:105px;">
+                                    <input
+                                        readonly
+                                        type="text"
+                                        class="gui-input bs-datetimepicker"
+                                        placeholder=""
+                                        required
+                                        ng-model="entrustInfo.dcService.submission.cityIdentifiedDateStr"
+                                    />
+                                    <span class="fa fa-calendar form-control-icon"></span>
+                                </div>
+                            </div>
+
+                            <div
+                                    class="form-group col-sm-1 pn"
+                                    ng-if="entrustInfo.dcService.submission.cityIdentifiedType === entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                            >
+                                <upload-comp
+                                        class="ui-file-upload"
+                                        viewport="#orig_identity"
+                                        flag="1"
+                                ></upload-comp>
+                            </div>
+
+                        </div>
+
+                        <div
+                                class="form-group col-sm-12 mbn"
+                                ng-if="entrustInfo.dcService.submission.cityIdentifiedType === entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                        >
+                            <div class="section">
+                                <label class="field">
+                                    <textarea
+                                            class="gui-textarea"
+                                            required
+                                            ng-model="entrustInfo.dcService.submission.cityOriconClusion"
+                                    ></textarea>
+                                </label>
+                            </div>
+                        </div>
+
+                        <file-slide-comp flag="1"
+                            ng-hide="entrustInfo.dcService.submission.cityIdentifiedType !== entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                        ></file-slide-comp>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">县</td>
+                    <td>
+                        <div class="form-inline">
+                            <div class="col-sm-3">
+                                <div class="section">
+
+                                    <div class="option-group field">
+                                        <label class="option option-primary" ng-repeat="item in entrustInfo.dcService.dictData.OldIdentifiedTypeModel">
+                                            <input
+                                                    type="radio"
+                                                    name="countyIdentifiedType"
+                                                    value="{{item.dictKey}}"
+                                                    ng-init="entrustInfo.dcService.submission.countyIdentifiedType = entrustInfo.dcService.submission.countyIdentifiedType || entrustInfo.dcService.dictData.OldIdentifiedTypeModel[0].dictKey"
+                                                    ng-model="entrustInfo.dcService.submission.countyIdentifiedType"
+                                            />
+                                            <span class="radio"></span>{{item.dictValue1}}
+                                            <span ng-if="$index === 0">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+
+                                    </div>
+                                    <!-- end .option-group section -->
+                                </div>
+                            </div>
+
+                            <div
+                                    class="form-group col-sm-4"
+                                    ng-if="entrustInfo.dcService.submission.countyIdentifiedType === entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                            >
+                                <label for="" style="width:100px;">鉴定机构名称：</label>
+                                <div class="input-wrapper" style="margin-left:105px;">
+                                    <input
+                                        type="text"
+                                        class="gui-input"
+                                        placeholder=""
+                                        required
+                                        ng-model="entrustInfo.dcService.submission.countyIdentifiedServerName"
+                                    />
+                                </div>
+                            </div>
+
+                            <div
+                                    class="form-group col-sm-4 form-icon-suffix"
+                                    ng-if="entrustInfo.dcService.submission.countyIdentifiedType === entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                            >
+                                <label for="" style="width:100px;">检验鉴定时间：</label>
+                                <div class="input-wrapper" style="margin-left:105px;">
+                                    <input
+                                        readonly
+                                        type="text"
+                                        class="gui-input bs-datetimepicker"
+                                        placeholder=""
+                                        required
+                                        ng-model="entrustInfo.dcService.submission.countyIdentifiedDateStr"
+                                    />
+                                    <span class="fa fa-calendar form-control-icon"></span>
+                                </div>
+                            </div>
+
+                            <div
+                                    class="form-group col-sm-1 pn"
+                                    ng-if="entrustInfo.dcService.submission.countyIdentifiedType === entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                            >
+                                <upload-comp
+                                        class="ui-file-upload"
+                                        viewport="#orig_identity"
+                                        flag="2"
+                                ></upload-comp>
+                            </div>
+
+                        </div>
+
+                        <div
+                                class="form-group col-sm-12 mbn"
+                                ng-if="entrustInfo.dcService.submission.countyIdentifiedType === entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                        >
+                            <div class="section">
+                                <label class="field">
+                                    <textarea
+                                            class="gui-textarea"
+                                            required
+                                            ng-model="entrustInfo.dcService.submission.countyOriconClusion"
+                                    ></textarea>
+                                </label>
+                            </div>
+                        </div>
+
+                        <file-slide-comp flag="2"
+                            ng-hide="entrustInfo.dcService.submission.countyIdentifiedType !== entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                        ></file-slide-comp>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">其他</td>
+                    <td>
+                        <div class="form-inline">
+                            <div class="col-sm-3">
+                                <div class="section">
+
+                                    <div class="option-group field">
+                                        <label class="option option-primary" ng-repeat="item in entrustInfo.dcService.dictData.OldIdentifiedTypeModel">
+                                            <input
+                                                    type="radio"
+                                                    name="otherIdentifiedType"
+                                                    value="{{item.dictKey}}"
+                                                    ng-init="entrustInfo.dcService.submission.otherIdentifiedType = entrustInfo.dcService.submission.otherIdentifiedType || entrustInfo.dcService.dictData.OldIdentifiedTypeModel[0].dictKey"
+                                                    ng-model="entrustInfo.dcService.submission.otherIdentifiedType"
+                                            />
+                                            <span class="radio"></span>{{item.dictValue1}}
+                                            <span ng-if="$index === 0">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+
+                                    </div>
+                                    <!-- end .option-group section -->
+                                </div>
+                            </div>
+
+                            <div
+                                    class="form-group col-sm-4"
+                                    ng-if="entrustInfo.dcService.submission.otherIdentifiedType === entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                            >
+                                <label for="" style="width:100px;">鉴定机构名称：</label>
+                                <div class="input-wrapper" style="margin-left:105px;">
+                                    <input
+                                        type="text"
+                                        class="gui-input"
+                                        placeholder=""
+                                        required
+                                        ng-model="entrustInfo.dcService.submission.otherIdentifiedServerName"
+                                    />
+                                </div>
+                            </div>
+
+                            <div
+                                    class="form-group col-sm-4 form-icon-suffix"
+                                    ng-if="entrustInfo.dcService.submission.otherIdentifiedType === entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                            >
+                                <label for="" style="width:100px;">检验鉴定时间：</label>
+                                <div class="input-wrapper" style="margin-left:105px;">
+                                    <input
+                                        readonly
+                                        type="text"
+                                        class="gui-input bs-datetimepicker"
+                                        placeholder=""
+                                        required
+                                        ng-model="entrustInfo.dcService.submission.otherIdentifiedDateStr"
+                                    />
+                                    <span class="fa fa-calendar form-control-icon"></span>
+                                </div>
+                            </div>
+
+                            <div
+                                    class="form-group col-sm-1 pn"
+                                    ng-if="entrustInfo.dcService.submission.otherIdentifiedType === entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                            >
+                                <upload-comp
+                                        class="ui-file-upload"
+                                        viewport="#orig_identity"
+                                        flag="3"
+                                ></upload-comp>
+                            </div>
+                        </div>
+
+                        <div
+                                class="form-group col-sm-12 mbn"
+                                ng-if="entrustInfo.dcService.submission.otherIdentifiedType === entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                        >
+                            <div class="section">
+                                <label class="field">
+                                    <textarea
+                                            class="gui-textarea"
+                                            required
+                                            ng-model="entrustInfo.dcService.submission.otherOriconClusion"
+                                    ></textarea>
+                                </label>
+                            </div>
+                        </div>
+
+                        <file-slide-comp flag="3"
+                            ng-hide="entrustInfo.dcService.submission.otherIdentifiedType !== entrustInfo.dcService.dictData.OldIdentifiedTypeModel[1].dictKey"
+                        ></file-slide-comp>
+                    </td>
+                </tr>
+            </table>
+
+        </form>
+    </div>
+</div>

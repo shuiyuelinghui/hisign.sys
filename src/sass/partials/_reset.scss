@@ -1,0 +1,32 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+input:focus {
+  border-color: #6398cc;
+}
+
+:focus {
+  outline:none;
+}
+
+button {
+  cursor:pointer;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+ul, ol {
+  list-style-type:none;
+}
+
+.dataTable td {
+  max-width: 200px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

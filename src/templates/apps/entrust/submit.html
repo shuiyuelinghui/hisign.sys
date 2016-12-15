@@ -1,0 +1,43 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="admin-form theme-primary" name="entrust.form">
+            <div class="form-inline">
+
+                <div class="section mv15">
+                    <div class="option-group field">
+                        <label class="option option-primary">
+                            <input
+                                    type="checkbox"
+                                    required
+                                    ng-model="entrust.trust"
+                                    ng-init="entrust.trust = true"
+                            />
+                            <span class="checkbox"></span>
+                            我单位向你鉴定机构介绍的情况客观真实, 提交的检材和样本来源清楚可靠。
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <hr class="short alt">
+
+            <div class="form-inline text-center">
+                <button
+                        type="button"
+                        class="btn btn-default btn-lg w100"
+                        ng-disabled="entrust.isSubmitPending"
+                        ng-click="entrust.saveTemporaryData()"
+                >暂存</button>
+                <button
+                        type="button"
+                        class="btn btn-warning btn-lg w100"
+                        ng-click="entrust.checkDataCompleteness()"
+                        ng-disabled="
+                            entrust.dcService.entrustForm.$invalid ||
+                            entrust.dcService.caseForm.$invalid ||
+                            entrust.dcService.containerForm.$invalid
+                        "
+                >提交</button>
+            </div>
+        </form>
+    </div>
+</div>

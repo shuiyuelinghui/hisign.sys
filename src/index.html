@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>刑事技术综合实验信息管理平台</title>
+    <meta name="description" content="刑事技术综合实验信息管理平台">
+    <meta name="author" content="HiSign">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/" />
+    <!-- AdminDesigns -->
+    <link rel="stylesheet" href="../library/admindesigns/theme/assets/skin/default_skin/css/theme.css" />
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="../library/admindesigns/theme/vendor/jquery/jquery_ui/jquery-ui.min.css" />
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="../library/admindesigns/theme/vendor/plugins/magnific/magnific-popup.css" />
+    <!-- Data Table -->
+   <!-- <link rel="stylesheet" href="../library/datatables/datatables/media/css/jquery.dataTables.min.css" />-->
+    <link rel="stylesheet" href="../library/datatables/datatables.net-fixedcolumns-dt/css/fixedColumns.dataTables.css" />
+    <!-- Datatables CSS -->
+    <link rel="stylesheet" type="text/css" href="../library/admindesigns/theme/vendor/plugins/datatables/media/css/dataTables.bootstrap.css">
+    <!-- Datatables Addons CSS -->
+    <link rel="stylesheet" type="text/css" href="../library/admindesigns/theme/vendor/plugins/datatables/media/css/dataTables.plugins.css">
+
+    <!-- Data Range Picker -->
+    <link rel="stylesheet" href="../library/bootstrap/daterangepicker/daterangepicker.css" />
+
+    <!-- Tooltipster -->
+    <link rel="stylesheet" href="../library/jquery_plugins/tooltipster/dist/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" href="../library/jquery_plugins/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-borderless.min.css" />
+    <!-- Admin Forms CSS -->
+    <link rel="stylesheet" type="text/css" href="../library/admindesigns/theme/assets/admin-tools/admin-forms/css/admin-forms.css">
+    <!-- Slick Slide -->
+    <link rel="stylesheet" type="text/css" href="../library/admindesigns/theme/vendor/plugins/slick/slick.css" />
+    <!-- ZTree -->
+    <link rel="stylesheet" href="../library/jquery_plugins/zTree_v3/css/metroStyle/metroStyle.css" />
+    <!-- Bootstrap Datepicker -->
+    <link rel="stylesheet" href="../library/admindesigns/theme/vendor/plugins/datepicker/css/bootstrap-datetimepicker.css" />
+    <!-- Select 2 -->
+    <link rel="stylesheet" href="../library/admindesigns/theme/vendor/plugins/select2/css/core.css" />
+    <link rel="stylesheet" href="../library/admindesigns/theme/vendor/plugins/select2/css/theme/classic/layout.css" />
+    <!-- Fonts -->
+    <link rel="stylesheet" href="./stylesheets/vendor/font-awesome/font-awesome.css" />
+    <!-- PDFJS Plugin -->
+    <link rel="stylesheet" href="../library/pdfjs/web/pdf_viewer.css">
+    <!-- Lightbox2 -->
+    <link rel="stylesheet" href="../library/jquery_plugins/lightbox2/css/lightbox.min.css" />
+
+    <link rel="stylesheet" href="./stylesheets/app.css" />
+    <link rel="stylesheet" href="./stylesheets/new_style.css" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./assets/favicon.ico">
+</head>
+
+<body ng-app="hisign" ng-controller="AppController" class="dashboard-page">
+
+    <div id="main" ui-view></div>
+
+    <!-- jQuery -->
+    <script src="../library/admindesigns/theme/vendor/jquery/jquery-1.11.1.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="../library/admindesigns/theme/vendor/jquery/jquery_ui/jquery-ui.min.js"></script>
+    <!-- jQuery tmpl -->
+    <script src="../library/jquery_plugins/tmpl/jquery.tmpl.min.js"></script>
+    <!-- AdminDesigns -->
+    <script src="../library/admindesigns/theme/assets/js/utility/utility.js"></script>
+
+    <!-- Magnific Popup -->
+    <script src="../library/admindesigns/theme/vendor/plugins/magnific/jquery.magnific-popup.js"></script>
+    <!-- Data Table -->
+    <script src="../library/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../library/datatables/datatables.net-fixedcolumns/js/dataTables.fixedColumns.js"></script>
+
+    <!-- Datatables Tabletools addon -->
+    <script src="../library/admindesigns/theme/vendor/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
+    <!-- Datatables Bootstrap Modifications  -->
+    <script src="../library/admindesigns/theme/vendor/plugins/datatables/media/js/dataTables.bootstrap.js"></script>
+
+    <!-- Date Range Picker -->
+    <script src="../library/moment/moment-with-locales.min.js"></script>
+    <!--<script src="../library/admindesigns/theme/vendor/plugins/daterange/daterangepicker.js"></script>-->
+    <!-- Tooltipster -->
+    <script src="../library/jquery_plugins/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+    <!-- Slick Slide -->
+    <script src="../library/admindesigns/theme/vendor/plugins/slick/slick.min.js"></script>
+
+    <!-- NProgress Plugin -->
+    <script src="../library/admindesigns/theme/vendor/plugins/nprogress/nprogress.js"></script>
+
+    <!-- ZTree -->
+    <script src="../library/jquery_plugins/zTree_v3/js/jquery.ztree.core.min.js"></script>
+    <script src="../library/jquery_plugins/zTree_v3/js/jquery.ztree.exhide.min.js"></script>
+    <script src="../library/jquery_plugins/zTree_v3/js/jquery.ztree.excheck.min.js"></script>
+
+    <!-- Bootstrap Datepicker -->
+    <script src="../library/admindesigns/theme/vendor/plugins/datepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+    <!-- Select 2 -->
+
+    <script src="../library/admindesigns/theme/vendor/plugins/select2/select2.full.min.js"></script>
+
+    <!-- Admin Panel -->
+    <script src="../library/admindesigns/theme/assets/js/utility/adminpanels/adminpanels.js"></script>
+
+    <!-- Lightbox2 -->
+    <script src="../library/jquery_plugins/lightbox2/js/lightbox.min.js"></script>
+
+    <!-- for legacy browsers -->
+    <script src="../library/pdfjs/web/compatibility.js"></script>
+    <script src="../library/bootstrap/daterangepicker/daterangepicker.js"></script>
+    <!-- store -->
+    <script src="../library/jquery_plugins/store/store.min.js"></script>
+
+    <script src="./scripts/new.root.module.js"></script>
+    <script src="./scripts/app.bundle.js"></script>
+    <script src="./scripts/new_codes.js"></script>
+
+</body>
+</html>

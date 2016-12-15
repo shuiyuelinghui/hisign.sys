@@ -1,0 +1,81 @@
+<div class="panel popup-basic common-modal panel-modal" id="pre_submit_info_modal">
+    <div class="panel-heading">
+        <span class="panel-title">提示</span>
+    </div>
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-2 text-center">
+                <i class="fa fa-info-circle text-warning fs70"></i>
+            </div>
+            <div class="col-md-10">
+                <ul class="list-unstyled" ng-cloak>
+                    <li>
+                        <label>鉴定机构：</label>
+                        {{accept.dcService.submission.serverName}}
+                    </li>
+                    <li>
+                        <label>案(事)件名称：</label>
+                        {{accept.dcService.caseInfo.caseName}}
+                    </li>
+                    <li>
+                        <label>专业：</label>
+                        {{accept.dcService.submission.sectionName}}
+
+                    </li>
+                    <li>
+                        <label>鉴定类别：</label>
+                        {{accept.dcService.submission.identifyCategoryName}}
+                    </li>
+                    <li ng-if="accept.dcService.summary.memberCount">
+
+                        <label class="pull-left">被鉴定人：</label>
+                        <div>
+
+                            <span class="mr5">共{{accept.dcService.summary.memberCount}}人</span>
+
+                        </div>
+
+                    </li>
+
+
+                    <li style="clear:both" ng-if="accept.dcService.summary.sampleList1AcceptCount || accept.dcService.summary.sampleList1RejectCount">
+
+                        <label class="pull-left">检材处理情况：</label>
+                        <div>
+
+                            <span class="mr5" ng-if="accept.dcService.summary.sampleList1AcceptCount">受理{{accept.dcService.summary.sampleList1AcceptCount}}项</span>
+                            <span class="mr5" ng-if="accept.dcService.summary.sampleList1RejectCount">不受理{{accept.dcService.summary.sampleList1RejectCount}}项</span>
+                        </div>
+
+
+                    </li>
+                    <li style="clear:both" ng-if="accept.dcService.summary.sampleList2AcceptCount || accept.dcService.summary.sampleList2RejectCount">
+
+                        <label class="pull-left">样本处理情况：</label>
+                        <div>
+
+                            <span class="mr5" ng-if="accept.dcService.summary.sampleList2AcceptCount">受理{{accept.dcService.summary.sampleList2AcceptCount}}项</span>
+                            <span class="mr5" ng-if="accept.dcService.summary.sampleList2RejectCount">不受理{{accept.dcService.summary.sampleList2RejectCount}}项</span>
+                        </div>
+
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="panel-footer">
+        <button
+                type="button"
+                class="btn btn-primary"
+                ng-click="accept.submitAccept()"
+        >确认</button>
+        <button
+                type="button"
+                class="btn btn-default"
+                ng-click="accept.admindesignsService.closeMagnificPopup()"
+        >取消</button>
+    </div>
+</div>

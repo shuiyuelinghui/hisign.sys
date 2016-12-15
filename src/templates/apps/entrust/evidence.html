@@ -1,0 +1,51 @@
+<div id="panel_evidence"></div>
+<div class="panel panel-default"  ng-controller="EvidenceInfoController as evidenceInfo">
+    <div class="panel-body">
+        <div class="fs18 text-dark-darker fw600 pb20">
+            物证信息
+            <span class="text-muted fs14 mr5" ng-if="evidenceInfo.dcService.summary.evidenceCount">
+                物证共<em class="text-warning p3">{{evidenceInfo.dcService.summary.evidenceCount}}</em>件
+            </span>
+            <span class="text-muted fs14 mr5" ng-if="evidenceInfo.dcService.summary.sampleList1Count">
+                检材共<em class="text-warning p3">{{evidenceInfo.dcService.summary.sampleList1Count}}</em>件
+            </span>
+            <span class="text-muted fs14" ng-if="evidenceInfo.dcService.summary.sampleList2Count">
+                样本共<em class="text-warning p3">{{evidenceInfo.dcService.summary.sampleList2Count}}</em>件
+            </span>
+            <div class="action-menu fs12 fw400" ng-click="evidenceInfo.addEvidence()">
+                <span class="fa fa-plus-square"></span>
+                <span>添加物证</span>
+            </div>
+        </div>
+
+        <form class="admin-form theme-primary" name="evidenceInfo.form">
+            <div
+                class="evidence-item"
+                ng-repeat="ev in evidenceInfo.dcService.evidenceList track by $index"
+            >
+                <div class="tb-header">
+                    <nav>{{$index+1}}</nav>
+                    <span>物证编号：{{ev.eviCode}}</span>
+                    <span>物证名称：{{ev.eviName}}</span>
+                    <span>物证类别：{{evidenceInfo.dcService.dictMapping['EviTypeModel'][ev.eviType]}}<em ng-if="ev.eviCategory"> | {{evidenceInfo.dcService.dictMapping['EviTypeCategoryModel'][ev.eviCategory]}}</em></span>
+
+                    <evidence-menu-comp
+                        context="evidenceInfo"
+                        index="$index"
+                    ></evidence-menu-comp>
+                </div>
+
+                <div class="dt-container">
+                    <table
+                            id="dt_evidence_{{$index}}"
+                            data-identity="dt_evidence_{{$index}}"
+                            data-index="{{$index}}"
+                            data-key="evidenceList"
+                            class="table table-striped table-bordered"
+                    ></table>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

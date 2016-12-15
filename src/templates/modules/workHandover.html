@@ -1,0 +1,42 @@
+<div class="panel">
+    <div class="panel-heading">
+        交接
+    </div>
+   
+        <div class="panel-body p25 admin-form theme-primary" style="min-height: 160px" ng-cloak >
+            <form name="handoverForm">
+                <div class="section mb30 row">
+                    <div class="col-xs-10 col-xs-offset-2">
+                        <label class="mr20">转交工作职工：</label>
+                        <label>{{workHandover.userInfo.userName}}</label>
+                    </div>
+                </div>
+                <div class="section row">
+                    <div class="col-xs-10 col-xs-offset-2">
+                        <label class="mt5 mr20">接受工作职工：</label>
+                        <label class="w100 select">
+                            <select id="receiver"
+                                    class="form-control input-sm"
+                                    required
+                                    ng-options="item.userId as item.name for item in  workHandover.handoverUserData"
+                                    ng-model="workHandover.receiver">
+                                <option value="">请选择</option>
+                            </select>
+                            <i class="arrow"></i>
+                        </label>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    
+
+    <div class="panel-footer text-center">
+        <button type="button" 
+                class="btn btn-sm btn-primary" 
+                ng-disabled="handoverForm.$invalid"
+                ng-click="workHandover.save()"
+        >保存</button>
+        <button type="reset" class="btn btn-sm" ng-click="workHandover.close()"> 关闭</button>
+    </div>
+</div>

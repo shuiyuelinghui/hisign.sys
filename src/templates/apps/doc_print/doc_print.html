@@ -1,0 +1,117 @@
+<div class="ui-examine">
+    <div class="panel">
+        <div class="panel-body pv30">
+            <div class="row">
+                <div class="col-xs-8">
+                    <a class="btn btn-info ph15" 
+                       ng-click="docPrint.bulidIframeData(docPrint.commonService.docType.bookProxy)">
+                       <i class="fa fa-coffee"></i> 鉴定委托书</a>
+                    <a class="btn btn-info  ph15" 
+                       ng-click="docPrint.bulidIframeData(docPrint.commonService.docType.bookConfirmation)">
+                       <i class="fa fa-coffee"></i> 鉴定受理登记表</a>
+                    <a class="btn btn-info  ph15" 
+                       ng-click="docPrint.bulidIframeData(docPrint.commonService.docType.examineRecord)">
+                       <i class="fa fa-coffee"></i> 检验记录</a>
+                    <a class="btn btn-info  ph15"  ng-click="docPrint.bulidIframeData(docPrint.commonService.docType.picture)"> <i class="fa fa-coffee"></i> 图谱</a>
+                    <a class="btn btn-info  ph15" ng-click="docPrint.openFootPrintPopup()"><i class="fa fa-coffee"></i> 留痕</a>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <button class="btn btn-primary  ph15" type="button" ng-disabled="examineResult.$invalid"  ng-click="docPrint.finishPrint()"><i class="fa fa-coffee"></i> 打印完成</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--鉴定文书列表-->
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title">
+                <span class="fa fa-table"></span>
+                鉴定文书列表
+            </span>
+        </div>
+        <div class="panel-body pn">
+            <div class="bs-component">
+                <table class="table table-bordered mbn table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center" style="width: 10%">序号</th>
+                        <th class="text-center" style="width: 20%">文书类型</th>
+                        <th class="text-center" style="width: 20%">发文号</th>
+                        <th class="text-center" style="width: 20%">生成时间</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="text-center"
+                        ng-repeat="item in docPrint.docListData track by $index">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.typeName}}</td>
+                        <td>{{item.code}}</td>
+                        <td>{{item.insDate | date:'yyyy-MM-dd'}}</td>
+                        <td class="text-left pl30" >
+                                <a ng-click="docPrint.bulidIframeData(docPrint.commonService.docType.bookAppraisal, 1390)" 
+                                class="mr5 text-primary cursor">
+                                    <i class="fa fa-print fs16 cursor tooltipster tooltipstered mr5" title="打印正本"></i>打印正本
+                                </a>
+
+                                <a ng-click="docPrint.bulidIframeData(docPrint.commonService.docType.bookDraft, 1391)" class="mr5 text-primary cursor">
+                                    <i class="fa fa-print fs16 cursor tooltipster tooltipstered mr5" title="打印草稿"></i>打印草稿
+                                </a>
+
+                                <a ng-click="docPrint.bulidIframeData(docPrint.commonService.docType.bookApproval, 1392)" class="mr5 text-primary cursor">
+                                    <i class="fa fa-print fs16 cursor tooltipster tooltipstered mr5" title="打印审批单"></i>打印审批单
+                                </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--历史文书草稿列表-->
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title">
+                <span class="fa fa-table"></span>
+                历史文书草稿列表
+            </span>
+        </div>
+        <div class="panel-body pn">
+            <div class="admin-form theme-primary">
+                <form action="#" name="docHistoryList" novalidate>
+                    <div class="bs-component commission-form-container ">
+                        <table class="table table-bordered mbn table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-center" style="width: 10%">序号</th>
+                                <th class="text-center" style="width: 20%">文书类型</th>
+                                <th class="text-center" style="width: 20%">工作名称</th>
+                                <th class="text-center" style="width: 20%">完成时间</th>
+                                <th class="text-center" style="width: 15%">编写人</th>
+                                <th class="text-center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="text-center"
+                                ng-repeat="item in docPrint.historyList track by $index">
+                                <td>{{$index+1}}</td>
+                                <td>{{item.typeName}}</td>
+                                <td>{{item.nodeCodeName}}</td>
+                                <td>{{item.insDate | date:'yyyy-MM-dd'}}</td>
+                                <td>{{item.insUserName}}</td>
+                                <td class="text-left pl30" >
+                                    <a ng-href="#" class="mr5 text-primary">
+                                        <i class="fa fa-print fs16 cursor tooltipster tooltipstered mr5" title="打印正本"></i>鉴定文书
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>

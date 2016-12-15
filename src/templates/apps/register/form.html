@@ -1,0 +1,234 @@
+<form name="registerForm" class="form-horizontal register-form" role="form">
+    <!-- 用户姓名 -->
+    <div class="form-group"
+         ng-class="{
+            'has-success':registerForm.userName.$dirty && registerForm.userName.$valid,
+            'has-error':registerForm.userName.$dirty && registerForm.userName.$invalid
+         }"
+    >
+        <label for="userName" class="col-md-2 control-label"><sup>*</sup>用户姓名：</label>
+        <div class="col-md-7">
+            <form-icon-comp field="registerForm.userName"></form-icon-comp>
+            <input
+                type="text"
+                name="userName"
+                id="userName"
+                class="form-control"
+                placeholder="请输入用户姓名"
+                required
+                ng-model="register.formData.userName"
+            />
+        </div>
+
+        <form-error-msg-comp
+            field="registerForm.userName"
+            required="请正确填写用户姓名"
+        ></form-error-msg-comp>
+    </div>
+
+    <!-- 身份证号码 -->
+    <div class="form-group"
+         ng-class="{
+            'has-success':registerForm.cid.$dirty && registerForm.cid.$valid,
+            'has-error':registerForm.cid.$dirty && registerForm.cid.$invalid
+         }"
+    >
+        <label for="cid" class="col-md-2 control-label"><sup>*</sup>身份证号码：</label>
+        <div class="col-md-7">
+            <form-icon-comp field="registerForm.cid"></form-icon-comp>
+            <input
+                type="text"
+                id="cid"
+                name="cid"
+                class="form-control"
+                placeholder="请输入身份证号码"
+                required
+                ng-pattern="register.isId"
+                async-validator url="/users/cid"
+                ng-model="register.formData.cid"
+            />
+        </div>
+        <form-error-msg-comp
+            field="registerForm.cid"
+            required="请正确填写身份证号码"
+            async="身份证号已被注册"
+        ></form-error-msg-comp>
+    </div>
+
+    <!-- 警员编号 -->
+    <div class="form-group"
+         ng-class="{
+            'has-success':registerForm.policeId.$dirty && registerForm.policeId.$valid,
+            'has-error':registerForm.policeId.$dirty && registerForm.policeId.$invalid
+         }"
+    >
+        <label for="policeId" class="col-md-2 control-label"><sup>*</sup>警员编号：</label>
+        <div class="col-md-7">
+            <form-icon-comp field="registerForm.policeId"></form-icon-comp>
+            <input
+                type="text"
+                id="policeId"
+                name="policeId"
+                class="form-control"
+                placeholder="请输入警员编号"
+                required
+                ng-pattern="register.isPoliceId"
+                async-validator url="/users/policeId"
+                ng-model="register.formData.policeId"
+            />
+        </div>
+        <form-error-msg-comp
+            field="registerForm.policeId"
+            required="请正确填写警员编号"
+            async="警员编号已被注册"
+            pattern="1-6位数字字母"
+        ></form-error-msg-comp>
+    </div>
+
+    <!-- 联系方式 -->
+    <div class="form-group"
+         ng-class="{
+            'has-success':registerForm.contact.$dirty && registerForm.contact.$valid,
+            'has-error':registerForm.contact.$dirty && registerForm.contact.$invalid
+         }"
+    >
+        <label for="contact" class="col-md-2 control-label"><sup>*</sup>联系方式：</label>
+        <div class="col-md-7">
+            <form-icon-comp field="registerForm.contact"></form-icon-comp>
+            <input
+                type="text"
+                id="contact"
+                name="contact"
+                class="form-control"
+                placeholder="请输入联系方式"
+                required
+                ng-model="register.formData.contact"
+            />
+        </div>
+        <form-error-msg-comp
+            field="registerForm.contact"
+            required="请正确填写联系方式"
+        ></form-error-msg-comp>
+    </div>
+
+    <!-- 登录账号 -->
+    <div class="form-group"
+         ng-class="{
+            'has-success':registerForm.account.$dirty && registerForm.account.$valid,
+            'has-error':registerForm.account.$dirty && registerForm.account.$invalid
+         }"
+    >
+        <label for="account" class="col-md-2 control-label"><sup>*</sup>登录账号：</label>
+        <div class="col-md-7">
+            <form-icon-comp field="registerForm.account"></form-icon-comp>
+            <input
+                type="text"
+                id="account"
+                name="account"
+                class="form-control"
+                placeholder="请输入登录账号"
+                required
+                async-validator url="/users/account"
+                ng-model="register.formData.account"
+            />
+        </div>
+        <form-error-msg-comp
+            field="registerForm.account"
+            required="请正确填写登录账号"
+            async="登录账号已被注册"
+        ></form-error-msg-comp>
+    </div>
+
+    <!-- 设置密码 -->
+    <div class="form-group"
+         ng-class="{
+            'has-success':registerForm.pass.$dirty && registerForm.pass.$valid,
+            'has-error':registerForm.pass.$dirty && registerForm.pass.$invalid
+         }"
+    >
+        <label for="pass" class="col-md-2 control-label"><sup>*</sup>设置密码：</label>
+        <div class="col-md-7">
+            <form-icon-comp field="registerForm.pass"></form-icon-comp>
+            <input
+                type="password"
+                id="pass"
+                name="pass"
+                class="form-control"
+                placeholder="请设置账号登录密码"
+                required
+                ng-model="register.formData.pass"
+                ng-keyup="register.checkPwdLevel($event)"
+            />
+            <span class="password-level" ng-class="{true:'active'}[register.pwdLevel >= 1]">弱</span>
+            <span class="password-level" ng-class="{true:'active'}[register.pwdLevel >= 2]">中</span>
+            <span class="password-level" ng-class="{true:'active'}[register.pwdLevel === 3]">强</span>
+        </div>
+        <form-error-msg-comp
+            field="registerForm.pass"
+            required="请正确设置密码"
+        ></form-error-msg-comp>
+    </div>
+
+    <!-- 确认密码 -->
+    <div class="form-group"
+         ng-class="{
+            'has-success':registerForm.pass2.$dirty && registerForm.pass2.$valid,
+            'has-error':registerForm.pass2.$dirty && registerForm.pass2.$invalid
+         }"
+    >
+        <label for="pass2" class="col-md-2 control-label"><sup>*</sup>确认密码：</label>
+        <div class="col-md-7">
+            <form-icon-comp field="registerForm.pass2"></form-icon-comp>
+            <input
+                type="password"
+                id="pass2"
+                name="pass2"
+                class="form-control"
+                placeholder="请再次输入账号登录密码"
+                required
+                ng-model="register.pass2"
+                confirm-password pwd="register.formData.pass"
+            />
+        </div>
+        <form-error-msg-comp
+            field="registerForm.pass2"
+            required="两次输入的密码不一致"
+        ></form-error-msg-comp>
+    </div>
+
+    <!-- 委托单位 -->
+    <div class="form-group"
+         ng-class="{
+            'has-success':registerForm.orgName.$dirty && registerForm.orgName.$valid,
+            'has-error':registerForm.orgName.$dirty && registerForm.orgName.$invalid
+         }"
+    >
+        <label for="orgName" class="col-md-2 control-label"><sup>*</sup>委托单位：</label>
+        <div class="col-md-7">
+            <org-comp
+                readonly="true"
+                cname="form-control"
+                id="orgName"
+                name="orgName"
+                required="true"
+                model="register.orgName"
+                on-click="registerForm.orgName.$setDirty()"
+            ></org-comp>
+        </div>
+
+        <form-error-msg-comp
+            field="registerForm.orgName"
+            required="请正确填写委托单位"
+        ></form-error-msg-comp>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+            <button
+                class="btn btn-warning"
+                ng-disabled="registerForm.$invalid || registerForm.$pending"
+                ng-click="register.add()"
+            >立即注册</button>
+        </div>
+    </div>
+</form>

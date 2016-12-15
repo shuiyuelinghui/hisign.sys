@@ -1,0 +1,387 @@
+<div class="panel popup-basic popup-xl panel-modal "
+     id="modal_examine_add"
+     ng-cloak>
+    <div class="panel-heading">
+        <span class="panel-title" ng-if="!examine.addRecordData.id">添加检验记录</span>
+        <span class="panel-title" ng-if="examine.addRecordData.id">修改检验记录</span>
+    </div>
+    <div class="panel-body admin-form pl25">
+
+        <form class="entrust-form-container admin-form theme-primary"
+              name="addExamineForm"
+              novalidate >
+
+            <div class="form-inline">
+                <div class="form-group w320">
+                    <label class="long">鉴定类型：</label>
+
+                    <div class="input-wrapper long text-left pl10 pt5" style="height: 30px" >
+                            {{examine.submissionData.identifyCategoryName}}
+                    </div>
+                </div>
+
+                <div class="form-group w300 ml20">
+                    <label>主检人：</label>
+
+                    <div class="input-wrapper text-left pl5">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select name="analystAssigned"
+                                        class="form-control input-sm fl"
+                                        ng-model="examine.addRecordData.analystAssigned"
+                                        required
+                                        >
+                                    <option value="">请选择</option>
+                                    <option ng-repeat="item in examine.addRecordDictionary.testUser" value="{{item.userId}}">
+                                        {{item.name}}
+                                    </option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group w300">
+                    <label>复检验人：</label>
+
+                    <div class="input-wrapper text-left pl5">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select name="analystAssociate"
+                                        class="form-control input-sm fl"
+                                        ng-model="examine.addRecordData.analystAssociate"
+                                        required
+                                        >
+                                    <option value="">请选择</option>
+                                    <option ng-repeat="item in examine.addRecordDictionary.testUser" value="{{item.userId}}">
+                                        {{item.name}}
+                                    </option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group w320">
+                    <label class="long">检验人三：</label>
+
+                    <div class="input-wrapper long text-left pl5">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        ng-model="examine.addRecordData.analystThird"
+                                        >
+                                    <option value="">请选择</option>
+                                    <option ng-repeat="item in examine.addRecordDictionary.testUser" value="{{item.userId}}">
+                                        {{item.name}}
+                                    </option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group w300 ml20">
+                    <label>检验人四：</label>
+
+                    <div class="input-wrapper text-left pl5">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        ng-model="examine.addRecordData.analystFourth"
+                                        >
+                                    <option value="">请选择</option>
+                                    <option ng-repeat="item in examine.addRecordDictionary.testUser" value="{{item.userId}}">
+                                        {{item.name}}
+                                    </option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group w300">
+                    <label>检验人五：</label>
+
+                    <div class="input-wrapper text-left pl5">
+                        <div class="section">
+                            <label class="field select mtn">
+                                <select
+                                        class="form-control input-sm fl"
+                                        ng-model="examine.addRecordData.analystFifth"
+                                        >
+                                    <option value="">请选择</option>
+                                    <option ng-repeat="item in examine.addRecordDictionary.testUser" value="{{item.userId}}">
+                                        {{item.name}}
+                                    </option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group w320">
+                	<label class="long">开始时间：</label>
+                    <div class="input-wrapper long text-left pl5">
+                        <div class="input-group  input-group-sm append-icon">
+                            <input type="text"
+                                   class="gui-input text-center bs-datetimepickers"
+                                   placeholder="请选择时间范围"
+                                   ng-model="examine.addRecordData.startDateStr"
+                                   id="examinestartDate"
+                                   required/>
+                                <span class="field-icon cursor" style="width: 30px; height: 30px; line-height: 30px" ng-click="examine.triggerDateRang('examineDate')">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group w300 ml20">
+                	<label>结束时间：</label>
+                    <div class="input-wrapper text-left pl5">
+                        <div class="input-group input-group-sm append-icon">
+                            <input type="text"
+                                   class="gui-input text-center bs-datetimepickers"
+                                   placeholder="请选择时间范围"
+                                   id="examineendtDate"
+                                   ng-model="examine.addRecordData.completeDateStr"
+                                   />
+                                <span class="field-icon cursor" style="width: 30px; height: 30px; line-height: 30px" ng-click="examine.triggerDateRang('examineDate')">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group w300 ">
+                    <label>检验地点：</label>
+                    <div class="input-wrapper text-left pl5">
+                        <div class="input-group input-group-sm section">
+                        		<input type="text"
+                               class="form-control input-sm"
+                               ng-model="examine.addRecordData.place">
+                    	</div>
+                	</div>
+            	</div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12 pln ">
+                    <label class="long">检验方法：</label>
+                    <div class="input-wrapper long text-left pl5">
+                        <div class="section" style="width:  790px">
+                            <select id="protocols"
+                                    multiple="multiple"
+                                    class="gui-input input-sm"
+                                    ng-model="examine.protocols"
+                                    select2
+                                    required
+                                    default="examine.modifyData.protocolData">
+
+                                <option ng-repeat="item in examine.protocolsArray track by $index"
+                                         value="{{item}}">
+                                 {{item}}
+                                </option>
+                                <option ng-repeat="item in examine.addRecordDictionary.protocolsList"
+                                        value="{{examine.JSON.stringify({protocolId:item.id})}}">
+                                    {{item.code ? item.code + '：' : ''}}{{item.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12 pln">
+                    <label class="long">记录模板：</label>
+
+                    <div class="input-wrapper long text-left pl5">
+                        <div class="section" style="width: 300px">
+                            <label class="field select mtn">
+                                <select class="form-control input-sm fl"
+                                        name="type"
+                                        ng-model="examine.addRecordData.type"
+                                        required>
+                                    <option value="">请选择</option>
+                                    <option ng-repeat="item in examine.addRecordDictionary.tplList" value="{{item.id}}">
+                                        {{item.name}}
+                                    </option>
+                                </select>
+                                <i class="arrow"></i>
+                            </label>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12 pln" ng-if="!((examine.submissionData.section == '2' || examine.submissionData.section == '10') && examine.addRecordDictionary.sampleList == false)">
+                    <label class="long">检验检材/样本：</label>
+                    <div class="input-wrapper long text-left pl5">
+                        <div class="section" style="width:  790px">
+                            <select
+                                    multiple="multiple"
+                                    class="gui-input input-sm"
+                                    ng-model="examine.sampleId"
+                                    select2
+                                    options="{tags:false}"
+                                    default="examine.modifyData.sampleData"
+                                    ng-required="!(examine.submissionData.section == '2' || examine.submissionData.section == '10')">
+                                <option ng-repeat="item in examine.addRecordDictionary.sampleList" value="{{item.sampleId}}">
+                                    {{item.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12 pln">
+                    <label class="long">检验仪器：</label>
+
+                    <div class="input-wrapper long text-left pl5">
+                        <div class="section" style="width:790px">
+                            <select
+                                    multiple="multiple"
+                                    class="gui-input input-sm"
+                                    ng-model="examine.devicesObj"
+                                    select2
+                                    default="examine.modifyData.devicesData">
+                                <option ng-repeat="item in examine.deviceArray track by $index"
+                                        value="{{item}}">
+                                    {{item}}
+                                </option>
+                                <option ng-repeat="item in examine.addRecordDictionary.devicesList"
+                                        value="{{examine.JSON.stringify({deviceId:item.id})}}">
+                                    {{item.code ? item.code + '：' : ''}}{{item.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12 pln">
+                    <label class="long">检验环境：</label>
+
+                    <div class="input-wrapper long text-left pl5">
+                        <div class="form-group col-sm-4 ">
+                            <label style="width: 45px">检验室</label>
+                            <div class="input-wrapper text-left pl10" style="margin-left: 45px">
+                                <div class="input-group input-group-sm" style="width: 174px">
+                                    <input type="text"
+                                           class="form-control input-sm"
+                                           name="labRoom"
+                                           ng-model="examine.addRecordData.labRoom">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label style="width: 45px">温度：</label>
+                            <div class="input-wrapper text-left pl10" style="margin-left: 0">
+                                <div class="input-group">
+                                    <input type="number"
+                                           class="form-control input-sm w50"
+                                           ng-model="examine.addRecordData.labTemp"
+                                           name="spinner"/>
+                                    <span class="fl mt5 ml5"> ℃</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class=" form-group col-md-2">
+                            <label style="width: 45px">湿度：</label>
+                            <div class="input-wrapper text-left pl10" style="margin-left: 0px">
+                                <div class="input-group ">
+                                    <input  type="number"
+                                            class="form-control input-sm w50"
+                                            name="labHumidity"
+                                            ng-model="examine.addRecordData.labHumidity"
+                                            step="1"
+                                            min="0">
+                                    <span class="fl mt5 ml5"> %</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12 pln">
+                    <label class="long">检验过程：</label>
+
+                    <div class="input-wrapper long text-left pl5">
+                        <div class="section" style="width: 790px">
+                            <label class="field">
+                                <textarea class="gui-textarea"
+                                name="process"
+                                ng-model="examine.addRecordData.process" ></textarea>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12 pln">
+                    <label class="long">论证/分析说明：</label>
+
+                    <div class="input-wrapper long text-left pl5">
+                        <div class="section" style="width: 790px">
+                            <label class="field">
+                                <textarea class="gui-textarea"
+                                          name="argument"
+                                          ng-model="examine.addRecordData.argument"></textarea>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group col-sm-12 pln">
+                    <label class="long">结论：</label>
+
+                    <div class="input-wrapper long text-left pl5">
+                        <div class="section" style="width: 790px">
+                            <label class="field">
+                                <textarea class="gui-textarea"
+                                          name="result"
+                                          ng-model="examine.addRecordData.result" style=""></textarea>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="panel-footer text-center">
+        <button class="btn btn-primary btn-sm"
+                type="button"
+                ng-click="examine.makeRecord()"
+                ng-disabled="addExamineForm.$invalid">
+            <span ng-if="!examine.addRecordData.id">生成检验记录</span>
+            <span ng-if="examine.addRecordData.id">修改检验记录</span>
+        </button>
+        <button class="btn btn-default btn-sm" type="button" ng-click="examine.closePopup()">关闭</button>
+    </div>
+</div>

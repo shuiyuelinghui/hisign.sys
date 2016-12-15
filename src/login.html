@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../library/admindesigns/theme/assets/fonts/font-awesome/font-awesome.css" />
+    <link rel="stylesheet" href="./stylesheets/apps/login.css" />
+    <link rel="shortcut icon" href="./assets/favicon.ico">
+</head>
+<body>
+<div id="header" class="header">
+    <div class="header-content">
+        <div class="logo">
+            <img src="./assets/images/national-emblem.png" />
+            <div id="org" class="title">
+                <h1 id="orgName"></h1>
+                <h2 id="platformName"></h2>
+            </div>
+        </div>
+        <div class="icon">
+            <span class="fa fa-check-square-o tooltip" title="运行环境检查"></span>
+            <span class="fa fa-video-camera tooltip" title="视频演示"></span>
+            <span class="fa fa-pagelines tooltip" title="用户指南"></span>
+            <a href="#nogo" class="fa fa-weixin tooltip-template" title="微信"></a>
+        </div>
+    </div>
+</div>
+
+<div id="login_content" class="login-content">
+    <div class="slick-container">
+        <div class="slider">
+            <div><img src="./assets/login/pic_01.jpg" /></div>
+            <div><img src="./assets/login/pic_02.jpg" /></div>
+            <div><img src="./assets/login/pic_03.jpg" /></div>
+            <div><img src="./assets/login/pic_04.jpg" /></div>
+        </div>
+
+        <div id="login_container" class="login-container">
+            <h1 class="form-title">用户登录</h1>
+            <div class="form-container">
+                <form >
+                    <div id="error_msg" class="alert-danger">
+                        <span class="fa fa-times-circle"></span>
+                        <p></p>
+                    </div>
+                    <div class="form-row" tabindex="-1">
+                        <span class="fa fa-user"></span>
+                        <input id="account" type="text" placeholder="请输入用户名" />
+                    </div>
+                    <div class="form-row" tabindex="-1">
+                        <span class="fa fa-lock"></span>
+                        <input id="password" type="password" placeholder="请输入密码" />
+                    </div>
+
+                    <button class="btn-login" id="login">立即登录</button>
+                </form>
+                <p class="register">还没有账号? <a href="/register">立即注册</a></p>
+            </div>
+        </div>
+
+        <div id="browser_download" class="browser-download">
+            <h1>平台不支持IE及其它浏览器，请先下载、安装Google浏览器并使用Google浏览器登录平台。</h1>
+            <p>平台仅支持Google版本浏览器，为了达到最佳的使用效果，<a href="#">点击下载Google浏览器</a></p>
+        </div>
+    </div>
+</div>
+
+<div id="footer" class="footer">
+    <div class="footer-content">
+        <img id="platformLogo" src="" />
+        <p>
+            <span id="companyName"></span><br />
+            <span id="copyrights"></span>
+        </p>
+    </div>
+</div>
+
+
+<div class="tooltipster-template">
+    <div id="wechat_content">
+        <img src="./assets/qr-code.jpg" width="130" />
+        <p>关注海鑫科金官方微信<br />微信：Hisign_1998</p>
+    </div>
+</div>
+
+
+<script src="./scripts/login.bundle.js"></script>
+
+</body>
+</html>

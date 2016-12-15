@@ -1,0 +1,102 @@
+<div id="pro_popover" class="admin-form theme-primary">
+    <form class="entrust-form-container" name="proListForm">
+        <div
+                class="form-inline"
+                ng-repeat="proItem in pro.proData track by $index"
+                ng-init="outerIndex = $index"
+                ng-if="!pro.editMode || (pro.editMode && pro.editProData.profession.code === proItem.section) "
+        >
+            <div class="form-group col-sm-2 ">
+                <label class="option option-primary long text-left mn" style="width: 100px">
+                    <input
+                            type="checkbox"
+                            data-pro="{{pro.JSON.stringify({name:proItem.sectionName, code:proItem.section})}}"
+                            data-category="{{proCate}}"
+                            data-require="{{proRequire}}"
+                            ng-model="proSection"
+                            ng-true-value="1"
+                            ng-false-value="0"
+                            ng-checked="
+                                pro.editMode &&
+                                pro.editProData.profession.code === proItem.section ||
+                                pro.dcService.activeState === 'app.accept' ||
+                                pro.dcService.flag === '2'
+                            "
+                            ng-disabled="
+                                pro.editMode ||
+                                pro.dcService.activeState === 'app.accept' ||
+                                pro.dcService.flag === '2'
+                            "
+                            ng-click="pro.calculateProSelectCount($event)"
+                    />
+                    <span class="checkbox"></span>
+                    {{proItem.sectionName}}
+                </label>
+            </div>
+            
+            <div class="form-group col-sm-4">
+                <label class="long">鉴定类别：</label>
+                <div class="input-wrapper long">
+                    <div class="section">
+                        <label class="field select mtn">
+                            <select class="gui-select"
+                                    ng-model="proCate"
+                                    ng-init="
+                                        proCate = pro.editMode ? ( pro.editProData.category.code === null ? '-1' : pro.JSON.stringify(pro.editProData.category) ) : ( ( (pro.dcService.activeState === 'app.accept' || pro.dcService.flag === '2') && pro.dcService.submission.identifyCategory !== null) ? pro.JSON.stringify({name:pro.dcService.submission.identifyCategoryName,code:pro.dcService.submission.identifyCategory}) : '-1')
+                                    "
+                                    ng-change="pro.handleProCategoryChange(outerIndex, pro.JSON.parse(proCate).code)"
+                                    ng-disabled="
+                                        pro.editMode ||
+                                        !pro.categoryData[outerIndex].length ||
+                                        pro.dcService.activeState === 'app.accept' ||
+                                        pro.dcService.flag === '2'
+                                    "
+                            >
+                                <option value="-1">请选择</option>
+                                <option ng-repeat="cate in pro.categoryData[outerIndex] track by $index"
+                                        value="{{pro.JSON.stringify({name:cate.name, code:cate.numberCode})}}">
+                                    {{cate.name}}
+                                </option>
+                            </select>
+                            <i class="arrow"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="long">鉴定要求：</label>
+                <div class="input-wrapper long">
+                    <select
+                            multiple="multiple"
+                            class="form-control input-sm"
+                            id="pro_require_{{outerIndex}}"
+                            ng-required="proSection === 1"
+                            ng-model="proRequire"
+
+                            select2
+                            list="pro.requireData[outerIndex]"
+                            default="pro.editDefaultRequireData"
+                    >
+                        <option
+                                ng-repeat="require in pro.requireData[outerIndex]"
+                                value="{{pro.JSON.stringify({name:require.value, code:require.id})}}"
+                        >
+                            {{require.value}}
+                        </option>
+                        <option ng-repeat="item in pro.editCustomRequireData track by $index" value="{{item}}">
+                            {{item}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="tc mt10">
+            <button class="btn btn-primary"
+                    ng-click="pro.updateProfession()"
+                    ng-disabled="proListForm.$invalid"
+            >保存</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-default" ng-click="pro.closePopover()">取消</button>
+        </div>
+    </form>
+</div>

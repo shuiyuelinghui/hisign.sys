@@ -1,0 +1,21 @@
+<div class="admin-form theme-info" id="logout">
+
+    <div class="panel panel-primary popup-basic mt10 br-n text-center">
+
+
+            <div class="panel-body bg-white light h-120">
+                <div>
+                    <img src="{{header.userInfo.avatar}}" class="img-responsive">
+                </div>
+
+                <h3 class="mbn">确认退出吗?</h3>
+            </div>
+
+
+            <div class="panel-footer bg-white clearfix p10 ph15">
+                <button type="button" class="button btn-primary w100 mr10" ng-click="header.logout()">确定</button>
+                <button type="button" class="button btn-default w100 mr10" ng-click="header.closeMagnificPopup()">取消</button>
+            </div>
+
+    </div>
+</div>

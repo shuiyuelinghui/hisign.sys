@@ -1,0 +1,75 @@
+<div class="panel popup-basic common-modal panel-modal" id="pre_submit_info_modal">
+    <div class="panel-heading">
+        <span class="panel-title">提示</span>
+    </div>
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-2 text-center">
+                <i class="fa fa-info-circle text-warning fs70"></i>
+            </div>
+            <div class="col-md-10">
+                <ul class="list-unstyled" ng-cloak>
+                    <li>
+                        <label>鉴定机构：</label>
+                        {{entrust.dcService.submission.serverName}}
+                    </li>
+                    <li>
+                        <label>案(事)件名称：</label>
+                        {{entrust.dcService.caseInfo.caseName}}
+                    </li>
+                    <li>
+
+                        <div class="panel text-center mt10">
+                            <div class="panel-body pn">
+                                <div class="bs-component">
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center w50">专业</th>
+                                            <th class="text-center w100">鉴定类别</th>
+                                            <th class="text-center">送检材料</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in entrust.dcService.summary.sectionSummary">
+                                            <td>{{item.sectionName}}</td>
+                                            <td>{{item.identifyCategoryName}}</td>
+                                            <td class="text-left">
+                                                <span class="mr5" ng-if="item.sampleList1Count">检材共{{item.sampleList1Count}}项</span>
+                                                <span class="mr5" ng-if="item.sampleList2Count">样本共{{item.sampleList2Count}}项</span>
+                                                <span class="mr5" ng-if="item.memberCount">被鉴定人共{{item.memberCount}}人</span>
+                                                <span class="mr5" ng-if="item.memberDNACount">DNA案件人员共{{item.memberDNACount}}人</span>
+                                                <span class="mr5" ng-if="item.relativesRelationCount">DNA案件人员亲属共{{item.relativesRelationCount}}人</span>
+                                                <span class="mr5" ng-if="item.nameLessCorpse">无名尸共{{item.nameLessCorpse}}具</span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </li>
+
+                </ul>
+                <label class="mt30">确认提交吗？</label>
+            </div>
+        </div>
+
+    </div>
+    <div class="panel-footer">
+        <button
+                type="button"
+                class="btn btn-primary"
+                ng-click="entrust.submitentrust()"
+                ng-disabled="entrust.isSubmitPending"
+        >确认</button>
+        <button
+                type="button"
+                class="btn btn-default"
+                ng-click="entrust.admindesignsService.closeMagnificPopup()"
+                ng-disabled="entrust.isSubmitPending"
+        >取消</button>
+    </div>
+</div>

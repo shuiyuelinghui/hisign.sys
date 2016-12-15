@@ -1,0 +1,27 @@
+
+ <filter-comp
+ ></filter-comp>
+<div class="admin-panels">
+    <div class="panel sort-disable mb50" id="dt_container" data-panel-remove="false" data-panel-title="false" data-panel-collapse="false">
+        <div class="panel-heading">
+                <span class="panel-icon">
+                    <i class="fa fa-search"></i>
+                </span>
+            <span class="panel-title">查询结果 <em>共找到<i>{{task.totalRecords}}条</i>符合的记录</em></span>
+
+             <span class="panel-icon pull-right mr10">
+                <a href="#">
+                    <i class="fa fa-gears fs16 tooltipster cursor"
+                        title="自定义列"
+                        ng-click="task.showCustomSettingPopup('dt-custom-setting.html')"
+                    ></i>
+                </a>
+            </span>
+        </div>
+        <div class="panel-body">
+            <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%"></table>
+
+            <ng-include src="'/templates/apps/task/task.pagination.html'"></ng-include>
+        </div>
+    </div>
+</div>

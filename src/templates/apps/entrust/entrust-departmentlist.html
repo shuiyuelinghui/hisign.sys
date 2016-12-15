@@ -1,0 +1,104 @@
+<div class="row mb10" style="margin-left: 0px; margin-right: 0px;">
+    <!--<div class="hidden-sm col-md-1">
+
+    </div>-->
+
+    <div class="fl entrust-list-sty">
+        <div class="panel bg-warning of-h mb10">
+            <div class="pn pl20 p5">
+                <div class="icon-bg">
+                    <i class="fa fa-envelope fs80"></i>
+                </div>
+                <h2 class="mt15 lh15">
+                    <b>{{task.categoryInfo.issuedNum}}</b>
+                </h2>
+                <h5 class="text-muted">已发放</h5>
+            </div>
+        </div>
+    </div>
+    <div class="fl entrust-list-sty">
+        <div class="panel bg-success light of-h mb10">
+            <div class="pn pl20 p5">
+                <div class="icon-bg">
+                    <i class="fa fa-check fs80"></i>
+                </div>
+                <h2 class="mt15 lh15">
+                    <b>{{task.categoryInfo.acceptedNum}}</b>
+                </h2>
+                <h5 class="text-muted">已受理</h5>
+            </div>
+        </div>
+    </div>
+    <div class="fl entrust-list-sty">
+        <div class="panel bg-alert light of-h mb10">
+            <div class="pn pl20 p5">
+                <div class="icon-bg">
+                    <i class="fa fa-twitter fs80"></i>
+                </div>
+                <h2 class="mt15 lh15">
+                    <b>{{task.categoryInfo.notAcceptedNum}}</b>
+                </h2>
+                <h5 class="text-muted">未受理</h5>
+            </div>
+        </div>
+    </div>
+    <div class="fl entrust-list-sty">
+        <div class="panel bg-danger light of-h mb10">
+            <div class="pn pl20 p5">
+                <div class="icon-bg">
+                    <i class="fa fa-twitter fs80"></i>
+                </div>
+                <h2 class="mt15 lh15">
+                    <b>{{task.categoryInfo.notGiveAcceptedNum}}</b>
+                </h2>
+                <h5 class="text-muted">不予受理</h5>
+            </div>
+        </div>
+    </div>
+    <div class="fl entrust-list-sty" style="margin-right: 0px;">
+        <div class="panel bg-info of-h mb10">
+            <div class="pn pl20 p5">
+                <div class="icon-bg">
+                    <i class="fa fa-envelope fs80"></i>
+                </div>
+                <h2 class="mt15 lh15">
+                    <b>{{task.categoryInfo.invalidNum}}</b>
+                </h2>
+                <h5 class="text-muted">失效</h5>
+            </div>
+        </div>
+    </div>
+   
+    <!--<div class="hidden-sm col-md-1">
+
+    </div>-->
+</div>
+
+<filter-comp
+     
+ ></filter-comp>
+<div class="admin-panels">
+
+    <div class="panel sort-disable mb50" id="dt_container" data-panel-remove="false" data-panel-title="false" data-panel-collapse="false">
+        <div class="panel-heading">
+                <span class="panel-icon">
+                    <i class="fa fa-search"></i>
+                </span>
+            <span class="panel-title">查询结果 <em>共找到<i>{{task.totalRecords}}条</i>符合的记录</em></span>
+
+            <span class="panel-icon pull-right mr10">
+                <a href="#">
+                    <i
+                            class="fa fa-gears fs16 tooltipster cursor"
+                            title="自定义列"
+                            ng-click="task.showCustomSettingPopup('dt-custom-setting.html')"
+                    ></i>
+                </a>
+            </span>
+        </div>
+        <div class="panel-body">
+            <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%"></table>
+            <ng-include src="'/templates/apps/task/task.pagination.html'"></ng-include>
+        </div>
+    </div>
+</div>

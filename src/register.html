@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="hisign" ng-controller="RegisterHeaderController" ng-cloak>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="刑事技术综合实验信息管理平台">
+    <meta name="author" content="HiSign">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/" />
+    <link rel="stylesheet" href="../library/admindesigns/theme/assets/skin/default_skin/css/theme.css" />
+    <link rel="stylesheet" href="../library/jquery_plugins/zTree_v3/css/metroStyle/metroStyle.css" />
+    <link rel="stylesheet" href="../library/jquery_plugins/tooltipster/dist/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" href="../library/jquery_plugins/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-borderless.min.css" />
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="../library/admindesigns/theme/vendor/plugins/magnific/magnific-popup.css" />
+
+    <link rel="stylesheet" href="./stylesheets/apps/register.css" />
+    <link rel="shortcut icon" href="./assets/favicon.ico">
+</head>
+<body>
+
+    <div id="header" class="header register">
+        <div class="header-content">
+            <div class="logo">
+                <a href="/login" target="_self">
+                    <img src="./assets/images/national-emblem.png" />
+                </a>
+                <div class="title">
+                    <!--<a href="login.html" style="text-decoration: none;">-->
+                        <h1>{{orgName}}</h1>
+                        <h2>{{platformName}}</h2>
+                    <!--</a>-->
+                </div>
+            </div>
+            <div class="icon">
+                <span class="fa fa-check-square-o tooltipster" title="运行环境检查"></span>
+                <span class="fa fa-video-camera tooltipster" title="视频演示"></span>
+                <span class="fa fa-pagelines tooltipster" title="用户指南"></span>
+                <a href="#nogo" class="fa fa-weixin tooltipster-template" title="微信"></a>
+            </div>
+        </div>
+    </div>
+
+    <div
+        id="register_content"
+        class="register-content"
+        ui-view
+    ></div>
+
+    <div id="footer" class="footer">
+        <div class="footer-content">
+            <img ng-src="{{platformLogo}}" />
+            <p>
+                <span>{{companyName}}</span><br />
+                <span ng-bind-html="copyrights"></span>
+            </p>
+        </div>
+    </div>
+
+    <div class="tooltipster-template">
+        <div id="wechat_content">
+            <img src="./assets/qr-code.jpg" width="130" />
+            <p>关注海鑫科金官方微信<br />微信：Hisign_1998</p>
+        </div>
+    </div>
+
+    <script src="../library/admindesigns/theme/vendor/jquery/jquery-1.11.1.min.js"></script>
+    <script src="../library/admindesigns/theme/vendor/jquery/jquery_ui/jquery-ui.min.js"></script>
+    <script src="../library/admindesigns/theme/assets/js/utility/utility.js"></script>
+    <script src="../library/jquery_plugins/zTree_v3/js/jquery.ztree.core.min.js"></script>
+    <script src="../library/jquery_plugins/zTree_v3/js/jquery.ztree.exhide.min.js"></script>
+    <script src="../library/jquery_plugins/zTree_v3/js/jquery.ztree.excheck.min.js"></script>
+    <script src="../library/jquery_plugins/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+
+    <!-- Magnific Popup -->
+    <script src="../library/admindesigns/theme/vendor/plugins/magnific/jquery.magnific-popup.js"></script>
+
+    <!-- NProgress Plugin -->
+    <script src="../library/admindesigns/theme/vendor/plugins/nprogress/nprogress.js"></script>
+
+    <script src="./scripts/app.bundle.js"></script>
+
+</body>
+</html>

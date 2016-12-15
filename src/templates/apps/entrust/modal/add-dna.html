@@ -1,0 +1,130 @@
+<div
+        class="panel popup-basic popup-lg panel-modal mnw1000"
+        id="add_dna_modal"
+        data-panel-color="false"
+        data-panel-remove="false"
+        data-panel-title="false"
+        data-panel-collapse="false"
+        ng-controller="AddDNAController as addDNA"
+>
+    <div class="panel-heading">
+        <span class="panel-title" ng-if="addDNA.dcService.mode === 'display'">添加DNA人员</span>
+        <span class="panel-title" ng-if="addDNA.dcService.mode === 'edit'">编辑DNA人员</span>
+    </div>
+    <div class="panel-body">
+
+        <div class="modal-top-bar">
+            <h1>专业</h1>
+            <upload-comp
+                    class="ui-file-upload"
+                    viewport="#add_dna_modal"
+                    flag="4"
+            ></upload-comp>
+        </div>
+
+        <pro-comp isdna="true" filterdna="true"></pro-comp>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <ul class="nav panel-tabs-border panel-tabs panel-tabs-left" ng-cloak>
+                    <li
+                            ng-class="{true:'active'}[addDNA.activeType === 'memberDNA']"
+                            ng-click="addDNA.setActiveType('memberDNA')"
+                            ng-if="addDNA.dcService.activeMemberType === 'memberDNAList' || !addDNA.dcService.activeMemberType"
+                    >
+                        <a data-target="#memberDNA" data-toggle="tab" aria-expanded="true">案件人员</a>
+                    </li>
+                    <li
+                            ng-class="{true:'active'}[addDNA.activeType === 'relativesRelation']"
+                            ng-click="addDNA.setActiveType('relativesRelation')"
+                            ng-if="addDNA.dcService.activeMemberType === 'relativesRelationList' || !addDNA.dcService.activeMemberType"
+                    >
+                        <a data-target="#relativesRelation" data-toggle="tab" aria-expanded="false">案件人员亲属</a>
+                    </li>
+                    <li
+                            ng-class="{true:'active'}[addDNA.activeType === 'nameLessCorpse']"
+                            ng-click="addDNA.setActiveType('nameLessCorpse')"
+                            ng-if="addDNA.dcService.activeMemberType === 'nameLessCorpseList' || !addDNA.dcService.activeMemberType"
+                    >
+                        <a data-target="#nameLessCorpse" data-toggle="tab" aria-expanded="false">无名尸</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="panel-body">
+                <div class="tab-content">
+
+                    <form name="modalForm" class="entrust-form-container admin-form theme-primary add-member">
+
+                        <div id="memberDNA" class="tab-pane active" ng-if="addDNA.activeType === 'memberDNA'">
+                            <ng-include src="'./templates/apps/entrust/modal/dna-basic-info.html'"></ng-include>
+                            <ng-include src="'./templates/apps/entrust/modal/dna-sample-info.html'"></ng-include>
+                        </div>
+
+                        <div id="relativesRelation" class="tab-pane" ng-if="addDNA.activeType === 'relativesRelation'">
+                            <ng-include src="'./templates/apps/entrust/modal/relation-info.html'"></ng-include>
+                            <div ng-if="addDNA.dcService.relativesRelationListItem.relationship === '1'">
+                                <ng-include src="'./templates/apps/entrust/modal/dna-basic-info.html'"></ng-include>
+                                <ng-include src="'./templates/apps/entrust/modal/dna-sample-info.html'"></ng-include>
+                            </div>
+                            <div
+                                    ng-cloak
+                                    ng-if="addDNA.dcService.relativesRelationListItem.relationship && addDNA.dcService.relativesRelationListItem.relationship !== '1'"
+                            >
+                                <h1 class="relatives-relation-title">第一亲属人</h1>
+                                <ng-include src="'./templates/apps/entrust/modal/dna-basic-info.html'"></ng-include>
+                                <ng-include src="'./templates/apps/entrust/modal/dna-sample-info.html'"></ng-include>
+                                <h1 class="relatives-relation-title">第二亲属人</h1>
+                                <ng-include src="'./templates/apps/entrust/modal/dna-basic-info-2nd.html'"></ng-include>
+                                <ng-include src="'./templates/apps/entrust/modal/dna-sample-info-2nd.html'"></ng-include>
+                            </div>
+                        </div>
+
+                        <div id="nameLessCorpse" class="tab-pane" ng-if="addDNA.activeType === 'nameLessCorpse'">
+                            <ng-include src="'./templates/apps/entrust/modal/dna-basic-info.html'"></ng-include>
+                            <ng-include src="'./templates/apps/entrust/modal/dna-sample-info.html'"></ng-include>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <file-slide-comp flag="4"></file-slide-comp>
+
+    </div>
+
+    <div class="panel-footer text-center">
+        <button
+                ng-if="addDNA.dcService.mode === 'display'"
+                type="button"
+                class="btn btn-warning dark"
+                ng-click="addDNA.addDNA()"
+                ng-disabled="modalForm.$invalid || !addDNA.dcService.professionList.length"
+        >保存</button>
+
+         <button
+                ng-if="addDNA.dcService.mode === 'edit'"
+                type="button"
+                class="btn btn-warning dark"
+                ng-click="addDNA.addDNA()"
+                ng-disabled="modalForm.$invalid"
+        >更新</button>
+
+        <button
+                ng-if="addDNA.dcService.mode === 'display'"
+                type="button"
+                class="btn btn-default"
+                ng-click="addDNA.addDNA(true)"
+                ng-if="addDNA.dcService.mode === 'display'"
+                ng-disabled="modalForm.$invalid || !addDNA.dcService.professionList.length"
+        >保存并新增</button>
+
+        <button
+                type="button"
+                class="btn btn-default"
+                ng-click="addDNA.closeMagnificPopup()"
+        >取消</button>
+    </div>
+
+</div>

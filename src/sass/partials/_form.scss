@@ -1,0 +1,11 @@
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  &.ng-invalid.ng-dirty {
+    border-color:#ed7764;
+  }
+  &.ng-invalid.ng-pristine {
+    background-color:antiquewhite;
+  }
+}

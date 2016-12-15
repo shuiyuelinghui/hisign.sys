@@ -1,0 +1,82 @@
+//add extract-modal style
+
+.extract-modal {
+  max-width: 990px;
+
+  form.entrust-form-container {
+    height: 500px;
+    overflow: auto;
+
+    .DNA-message .form-group {
+      label {
+        width: 94px;
+      }
+      .input-wrapper {
+        margin-left: 94px;
+      }
+    }
+    //.basic-message .form-group {
+    //  label {
+    //    width: 74px;
+    //  }
+    //  .input-wrapper {
+    //    margin-left: 74px;
+    //  }
+    //}
+
+    .item-header {
+      .panel-title {
+        font-size: 1.6rem;
+      }
+
+      .panel-controls {
+        .fa {
+          color: #FF991C;
+        }
+        a {
+          font-size: 1.2rem;
+          width: auto;
+          color: #666666;
+        }
+        .count {
+          color: #FF0000;
+        }
+      }
+    }
+
+    .item-body {
+      padding: 15px;
+
+      .input-wrapper {
+        position: relative;
+
+        .date-icon {
+          position: absolute;
+          top: 0px;
+          right: 0px;
+          padding: 6px;
+          color: #626262;
+        }
+      }
+
+      #form_count {
+        div:first-child, div:last-child {
+          padding-left: 0;
+          padding-right: 0;
+        }
+        div:first-child {
+          padding-right: 5px;
+        }
+      }
+    }
+  }
+}
+.section {
+  .holder-icon {
+    padding: 20px 0;
+    font-size: 70px;
+  }
+  .col-sm-2 {
+    padding-left: 0;
+  }
+}

@@ -1,0 +1,24 @@
+<section class="sample-search">
+    <div class="panel ui-filter-search mb25 " ng-class="{true:'no-shadow'}[search.noShadow]">
+        <div class="panel-heading">
+            <ul class="nav panel-tabs-border panel-tabs panel-tabs-left">
+                <li ng-repeat="item in search.configData"
+                    ng-class="{true: 'active'}[search.tabIndex == $index]"
+                    ng-click="search.toggleTable($index)">
+                    <a data-target="{{item.target}}" data-toggle="tab" aria-expanded="{{item.expanded}}">{{item.headContent}}</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="panel-body">
+            <div class="tab-content pn br-n">
+                <div ng-repeat="item in search.configData"
+                     id={{item.target}}
+                     ng-class="{true: 'tab-pane active', false: 'tab-pane'}[search.tabIndex == $index]"
+                     ng-include="item.tplUrl"
+                ></div>
+            </div>
+        </div>
+    </div>
+</section>
+

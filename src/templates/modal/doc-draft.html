@@ -1,0 +1,142 @@
+<div
+        class="panel popup-basic panel-modal"
+        id="modal_foot_print"
+        data-panel-color="false"
+        data-panel-remove="false"
+        data-panel-title="false"
+        data-panel-collapse="false"
+        style="max-width:70%"
+>
+        <form name="docDraftForm">
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <span class="panel-title">鉴定文书编制</span>
+                </div>
+
+                <div class="panel-body  admin-form theme-primary pv30">
+                    <div class="row mb10">
+                        <div class="col-md-6">
+                            <label class="pull-left mt5">文书类型<span class="text-danger">*</span>：</label>
+                            <div class="section" style="margin-left:70px">
+
+                                <div class="option-group field">
+                                    <label class="option option-primary" ng-repeat="dict in docDraft.dictData.BookTypeModel">
+                                        <input
+                                                type="radio"
+                                                name="bookType"
+                                                required
+                                                value="{{dict.dictKey}}"
+                                                ng-model="docDraft.docSubmitData.type"
+                                        />
+                                        <span class="radio"></span>{{dict.dictValue1}}
+                                    </label>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="pull-left mt5">发文数量:</label>
+                            <div class="section" style="margin-left:70px;">
+                                <input type="number" 
+                                       min="0" 
+                                       class="gui-input" 
+                                       name="reportAmount"
+                                       ng-model="docDraft.docSubmitData.reportAmount">
+                            </div>
+
+                        </div>
+                    </div>
+                  
+                    <div class="row mb10">
+                        <div class="col-md-12">
+                            <label class="pull-left mt5">检验记录：</label>
+                            <div class="section" style="margin-left:70px;">
+                                <label class="field">
+                                    <select
+                                            multiple="multiple"
+                                            class="gui-input input-sm"
+                                            options="{tags:false}"
+                                            ng-model="docDraft.docSubmitData.testgroups"
+                                            style="width: 100%"
+                                            select2
+                                            default="docDraft.idArrayModel"
+                                            >
+                                        <option
+                                                ng-repeat="require in docDraft.testRecordListData"
+                                                value="{{require.id}}"
+                                                >
+                                            {{require.typeName}}
+                                        </option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb10">
+                        <div class="col-md-12">
+                            <label class="pull-left mt5">检验过程：</label>
+                            <div class="section" style="margin-left:70px;">
+
+                                <label class="field">
+                                        <textarea
+                                                class="gui-textarea"
+                                                ng-model="docDraft.docSubmitData.process"
+                                        ></textarea>
+                                </label>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row mb10">
+                        <div class="col-md-12">
+                            <label class="pull-left mt5">论证：</label>
+                            <div class="section" style="margin-left:70px;">
+
+                                <label class="field">
+                                        <textarea
+                                                class="gui-textarea"
+                                                ng-model="docDraft.docSubmitData.argument"
+                                        ></textarea>
+                                </label>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row mb10">
+                        <div class="col-md-12">
+                            <label class="pull-left mt5">鉴定意见：</label>
+                            <div class="section" style="margin-left:70px;">
+
+                                <label class="field">
+                                        <textarea
+                                                class="gui-textarea"
+                                                ng-model="docDraft.docSubmitData.result"
+                                        ></textarea>
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-primary btn-lg"
+                                    ng-click="docDraft.docSubmit()"
+                                    ng-disabled="docDraftForm.$invalid||docDraft.isCreate"
+                            >生成文书</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </form>
+</div>
+
+   
